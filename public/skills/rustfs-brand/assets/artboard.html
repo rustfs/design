@@ -1,0 +1,115 @@
+<!doctype html>
+<!--
+  RustFS artboard starter (rustfs-brand skill)
+  1. Copy this file, set data-w / data-h on .ab (and the --w / --h variables) to the target size.
+  2. Pick a surface class on .ab: t-ink (default stage), t-paper, t-white or t-signal.
+  3. Compose inside .frame using the presets below. Sizes are in u (1/100 of the short side): calc(var(--u) * 8).
+  4. Render: node scripts/render.mjs artboard.html out.png
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RustFS artboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap">
+<style>
+  :root {
+    --font-display: "Archivo", "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-sans: "Geist", "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    --font-mono: "Geist Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  html, body { margin: 0; background: #2B313A; }
+  body { padding: 40px; }
+
+  /* Artboard: 1u = short side / 100, safe margin 7u */
+  .ab {
+    --w: 1200px; --h: 630px;
+    --u: calc(min(var(--w), var(--h)) / 100);
+    --m: calc(var(--u) * 7);
+    position: relative; width: var(--w); height: var(--h); overflow: hidden;
+    background: var(--bg); color: var(--fg); font-family: var(--font-sans);
+    font-size: calc(var(--u) * 3); line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Surfaces */
+  .t-ink    { --bg: #0B0E14; --fg: #FFFFFF; --fg-2: #C4C9D2; --muted: #9AA0AC; --line: rgba(255,255,255,.14); --data: #0062FF; --parity: #FF5E14; --empty: rgba(255,255,255,.16); --logo: #FFFFFF; --brand: #5C99FF; }
+  .t-paper  { --bg: #F4F6F9; --fg: #0B0E14; --fg-2: #424853; --muted: #5A616D; --line: rgba(11,14,20,.14); --data: #0062FF; --parity: #FF5E14; --empty: rgba(11,14,20,.16); --logo: #0062FF; --brand: #0062FF; }
+  .t-white  { --bg: #FFFFFF; --fg: #0B0E14; --fg-2: #424853; --muted: #5A616D; --line: rgba(11,14,20,.12); --data: #0062FF; --parity: #FF5E14; --empty: rgba(11,14,20,.14); --logo: #0062FF; --brand: #0062FF; }
+  .t-signal { --bg: #0062FF; --fg: #FFFFFF; --fg-2: rgba(255,255,255,.86); --muted: rgba(255,255,255,.74); --line: rgba(255,255,255,.3); --data: #FFFFFF; --parity: #0B0E14; --empty: rgba(255,255,255,.3); --logo: #FFFFFF; --brand: #FFFFFF; }
+
+  /* Presets */
+  .frame   { position: absolute; inset: var(--m); display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 3); }
+  .row     { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 3); }
+  .logo    { display: block; height: calc(var(--u) * 4.25); width: auto; align-self: flex-start; fill: var(--logo); }
+  .label   { font: 500 calc(var(--u) * 2.25)/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .label b { color: var(--fg); font-weight: 500; }
+  .display { font-family: var(--font-display); font-stretch: 125%; font-weight: 800; line-height: .96; letter-spacing: -.02em; }
+  .head    { font-family: var(--font-display); font-stretch: 112%; font-weight: 750; line-height: 1.06; letter-spacing: -.01em; text-wrap: balance; }
+  .zh      { font-family: var(--font-display); font-weight: 800; line-height: 1.18; letter-spacing: 0; }
+  .body    { font-size: calc(var(--u) * 3.25); line-height: 1.5; color: var(--fg-2); }
+  .url     { font: calc(var(--u) * 2.5)/1.2 var(--font-mono); letter-spacing: .02em; color: var(--fg-2); }
+  .stripe  { display: inline-flex; gap: .32em; font-size: calc(var(--u) * 1.75); }
+  .stripe i { width: 1em; height: 1em; background: var(--data); }
+  .stripe i.p { background: var(--parity); }
+  .matrix  { position: absolute; }
+  .matrix svg { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+
+<!-- Example: release cover, 1200 × 630, Ink -->
+<div class="ab t-ink" data-w="1200" data-h="630" style="--w:1200px;--h:630px">
+  <div class="matrix" style="top:0;bottom:0;right:0;width:36%" data-matrix='{"cols":6,"rows":12,"k":4,"m":2,"seed":21,"mode":"tone","fit":"slice"}'></div>
+  <div class="frame" style="right:calc(36% + var(--m))">
+    <div class="row">
+      <svg class="logo" viewBox="0 0 360 60.6" role="img" aria-label="RustFS"><path d="M39.9374 19.4745C39.9374 22.5978 38.8765 24.8943 36.6031 26.1804C34.6328 27.3746 31.6772 28.0176 27.888 28.2013V37.663C30.0099 37.8467 31.9046 38.3978 33.3444 40.7863L42.6655 60.077H61.2323L52.0627 41.7048C49.2588 35.8258 46.5306 34.5397 41.3016 33.1618C49.0314 31.9677 55.776 27.3746 55.776 16.9024C55.776 12.3094 54.033 6.98144 50.547 4.13374C47.1369 1.28605 42.514 0 36.8304 0H27.888V11.207H29.4793C32.8644 11.207 35.4917 11.8807 37.3607 13.228C39.1039 14.514 39.9374 16.535 39.9374 19.4745ZM27.888 28.2013C27.5345 28.2013 27.2059 28.2013 26.903 28.2013H15.8385V11.207H27.888V0H0V60.077H16.2933V37.663H25.5387C26.2966 37.663 27.2059 37.663 27.888 37.663V28.2013Z"/><path d="M120.385 41.3843V0L105.128 3.46598V37.2015C105.128 41.8515 104.461 44.6294 102.477 46.6752C100.494 48.8142 96.8898 49.5635 92.5416 49.5635C88.0409 49.5635 84.7418 48.7211 82.6058 46.6752C80.6223 44.7223 80.0311 40.6031 80.0311 36.0462V0L64.6982 3.46598V40.5474C64.6982 48.0801 67.063 53.0092 71.5637 55.7991C76.0644 58.589 82.93 60.077 92.5416 60.077C101.772 60.077 108.637 58.589 113.291 55.7991C118.02 53.0092 120.385 48.1732 120.385 41.3843Z"/><path d="M178.845 41.4293C178.845 37.162 177.152 33.428 173.765 30.4942C170.556 27.6493 164.525 25.4563 155.671 23.9153C152.997 23.3817 150.591 23.0262 148.63 22.4928C135.528 19.5589 137.399 12.1799 150.323 12.1799C157.275 12.1799 163.96 14.3136 170.556 15.4693C171.537 15.6472 171.893 15.736 171.982 15.736L173.408 2.93384C166.456 0.800138 158.256 0 151.126 0C142.48 0 135.795 1.51137 131.071 4.44521C126.347 7.37905 123.852 13.3356 123.852 19.0255C123.852 23.9153 125.634 27.6493 129.378 30.4942C133.032 33.1614 139.628 35.295 149.165 36.9841C152.106 37.5176 154.513 37.8732 156.384 38.4065C158.286 38.9401 159.682 39.4438 160.573 39.9179C162.267 40.8071 163.158 42.1406 163.158 43.563C163.158 45.43 162.089 46.8525 159.95 47.8306C153.621 50.8531 135.795 48.9861 128.665 45.7856L125.634 57.2543C126.436 57.3433 127.773 57.6099 129.378 57.8766C142.48 59.9215 159.593 62.5885 171.269 55.2096C176.26 52.0979 178.845 47.6526 178.845 41.4293Z"/><path d="M244.61 13.5036V0H182.311V13.5036H203.599V60.077H223.414V13.5036H244.61Z"/><path d="M297.728 26.0884H267.978V13.5036H291.604L293.453 0H248.164V60.077H267.978V37.663H299.68L297.728 26.0884Z"/><path d="M360 41.492C360 37.059 358.249 33.3354 354.841 30.4983C351.525 27.7205 345.291 25.563 336.14 24.0264C333.285 23.4945 330.888 22.9625 328.769 22.6078C328.677 22.6078 328.585 22.6078 328.585 22.5192V25.9768L314.49 17.377L328.585 8.8658V12.2348C329.199 12.2348 329.844 12.2348 330.519 12.2348C337.705 12.2348 344.616 14.4513 351.525 15.6038C352.447 15.6925 352.814 15.6925 352.907 15.6925L354.381 2.92573C347.287 0.88658 338.719 0 331.348 0C322.413 0 315.504 1.50719 310.804 4.52156C305.737 7.53595 303.158 13.3874 303.158 19.1502C303.158 24.0264 305.092 27.75 308.87 30.4098C312.738 33.2469 319.557 35.3745 329.322 37.059C331.348 37.3252 333.007 37.5911 334.481 37.9456L334.666 34.8426L348.299 43.9745L334.022 51.9537L334.112 49.2052C325.729 49.8258 313.66 48.3186 308.133 45.7475L305.092 57.1845C305.829 57.3618 307.211 57.4505 308.87 57.8937C322.413 59.9328 340.101 62.5926 352.169 55.1454C357.422 52.1309 360 47.5207 360 41.492Z"/></svg>
+      <span class="label">Release · <b>2026-10</b></span>
+    </div>
+    <div>
+      <div class="display" style="font-size:calc(var(--u)*27);line-height:.82;letter-spacing:-.035em">
+        <small style="display:block;font-size:.26em;line-height:1;letter-spacing:-.01em;margin:0 0 .35em .12em;color:var(--brand)">RustFS</small>1.0.1
+      </div>
+      <p class="body" style="margin:calc(var(--u)*4) 0 0;max-width:22em">Production-ready, S3-compatible object storage. Built in Rust, licensed Apache 2.0.</p>
+    </div>
+    <span class="url">github.com/rustfs/rustfs/releases</span>
+  </div>
+</div>
+
+<script>
+  // Shard matrix: columns = drives, rows = stripes, k data + m parity, parity shifts per stripe.
+  function mulberry32(a) { return function () { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296 } }
+  const FADE = { l: (x) => x, r: (x) => 1 - x, t: (_, y) => y, b: (_, y) => 1 - y, tl: (x, y) => (x + y) / 2, br: (x, y) => 1 - (x + y) / 2, tr: (x, y) => (1 - x + y) / 2, bl: (x, y) => (x + 1 - y) / 2 }
+  function matrix(el) {
+    const o = Object.assign({ cols: 16, rows: 8, k: 12, m: 4, shift: 1, seed: 7, mode: "solid", density: 1, missing: 0, dead: [], gap: 0.2, fit: "meet", fade: "" }, JSON.parse(el.dataset.matrix || "{}"))
+    const r = mulberry32(o.seed), n = o.k + o.m, cells = []
+    for (let y = 0; y < o.rows; y++) for (let x = 0; x < o.cols; x++) {
+      const pos = (((x - y * o.shift) % n) + n) % n
+      let t = pos >= o.k ? "p" : "d", a = 1
+      if (r() > o.density) t = "e"
+      if (o.mode === "tone" && t === "d") { const q = r(); a = q < 0.5 ? 1 : q < 0.78 ? 0.6 : 0.34 }
+      if (o.mode === "outline" && t === "d") t = "e"
+      if (o.mode === "sparse" && t === "d" && r() < 0.55) t = "e"
+      if (o.fade && FADE[o.fade]) { const f = FADE[o.fade](x / Math.max(1, o.cols - 1), y / Math.max(1, o.rows - 1)); const keep = Math.pow(Math.max(0, Math.min(1, f * 1.15)), 1.6); if (r() > keep) { t = "e"; a = keep > 0.18 ? 1 : 0 } }
+      cells.push({ x, y, t, a })
+    }
+    cells.forEach((c) => { if (o.dead.includes(c.x) && c.a > 0) { c.t = "x"; c.a = 1 } })
+    const pool = cells.filter((c) => c.t === "d" && c.a > 0.9)
+    for (let i = 0; i < o.missing && pool.length; i++) pool.splice(Math.floor(r() * pool.length), 1)[0].t = "x"
+    const cell = 10, g = cell * o.gap, step = cell + g, W = o.cols * step - g, H = o.rows * step - g
+    const css = getComputedStyle(el)
+    const col = { d: css.getPropertyValue("--data"), p: css.getPropertyValue("--parity"), e: css.getPropertyValue("--empty") }
+    const svg = cells.filter((c) => c.a > 0.02).map((c) => {
+      const x = c.x * step, y = c.y * step
+      if (c.t === "d") return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" fill="${col.d}" opacity="${c.a}"/>`
+      if (c.t === "p") return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" fill="${col.p}"/>`
+      const dash = c.t === "x" ? ' stroke-dasharray="3 3"' : ""
+      return `<rect x="${x + 0.5}" y="${y + 0.5}" width="${cell - 1}" height="${cell - 1}" fill="none" stroke="${c.t === "x" ? col.d : col.e}" stroke-width="1" vector-effect="non-scaling-stroke"${dash}/>`
+    }).join("")
+    const par = { slice: "xMidYMid slice", none: "none", left: "xMinYMid meet", right: "xMaxYMid meet" }[o.fit] || "xMidYMid meet"
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="${par}" xmlns="http://www.w3.org/2000/svg">${svg}</svg>`
+  }
+  document.querySelectorAll("[data-matrix]").forEach(matrix)
+</script>
+</body>
+</html>
