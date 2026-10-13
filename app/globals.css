@@ -43,7 +43,8 @@
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
-  :not(pre) > code {
+  /* Inline code in running text only; components style their own code elements */
+  :where(p, li, td, dd, figcaption, small) > code {
     @apply bg-surface-2 text-foreground font-mono;
     font-size: 0.875em;
     padding: 0.1em 0.35em;

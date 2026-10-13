@@ -64,6 +64,9 @@ export const ICONS = {
   layers: { d: 'M12 4.25l8.25 4.25L12 12.75 3.75 8.5zM3.75 12.25L12 16.5l8.25-4.25M3.75 16L12 20.25 20.25 16' },
   bolt: { d: 'M13.25 3.25L5.75 13.25h6l-1 7.5 7.5-10h-6z' },
   info: { d: 'M4.75 4.75h14.5v14.5H4.75zM12 10.75v5.5M12 7.5v1' },
+  'chevron-down': { d: 'M6.75 9.25L12 14.5l5.25-5.25' },
+  search: { d: 'M10.75 4.25a6.5 6.5 0 1 0 0 13 6.5 6.5 0 1 0 0-13zM15.5 15.5l4.75 4.75' },
+  minus: { d: 'M4.75 12h14.5' },
   alert: { d: 'M12 4.25l8.25 15H3.75zM12 10v4.25M12 16v1' },
 } satisfies Record<string, IconDef>
 
@@ -74,5 +77,5 @@ export const ICON_GROUPS: { id: string; zh: string; en: string; names: IconName[
   { id: "data", zh: "数据流与运维", en: "Data & operations", names: ["replicate", "site", "migrate", "upload", "download", "event", "webhook", "metrics", "gauge", "audit", "layers", "chip"] },
   { id: "security", zh: "安全与身份", en: "Security & identity", names: ["shield", "lock", "key", "vault", "user", "policy"] },
   { id: "product", zh: "产品与渠道", en: "Product & channels", names: ["api", "console", "terminal", "container", "branch", "globe", "mail", "calendar", "pin", "image", "bolt"] },
-  { id: "interface", zh: "界面操作", en: "Interface", names: ["arrow-right", "arrow-up-right", "check", "close", "plus", "copy", "external", "menu", "edit", "play", "pause", "replay", "sun", "moon", "monitor", "info", "alert"] },
+  { id: "interface", zh: "界面操作", en: "Interface", names: ["arrow-right", "arrow-up-right", "check", "close", "plus", "copy", "external", "menu", "edit", "play", "pause", "replay", "sun", "moon", "monitor", "info", "alert", "chevron-down", "search", "minus"] },
 ]
