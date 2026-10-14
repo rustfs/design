@@ -34,8 +34,8 @@ export default function GlobalNotFound() {
             </div>
           </div>
           <nav className="flex flex-wrap gap-2 font-mono text-xs" aria-label="Language">
-            <Link href="/zh/" className="border border-white/25 px-3 py-2 transition-colors hover:border-white">返回中文首页</Link>
             <Link href="/en/" className="border border-white/25 px-3 py-2 transition-colors hover:border-white">Back to the guidelines</Link>
+            <Link href="/zh/" className="border border-white/25 px-3 py-2 transition-colors hover:border-white">返回中文首页</Link>
           </nav>
         </main>
       </body>

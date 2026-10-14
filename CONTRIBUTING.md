@@ -1,6 +1,6 @@
 # Contributing to the RustFS Design System
 
-This repository publishes the official RustFS design guidelines at `/zh/` and `/en/`. Every page is public. Read this document before adding or changing a page or template.
+This repository publishes the official RustFS design guidelines at `/en/` (default) and `/zh/`. Every page is public. Read this document before adding or changing a page or template.
 
 ## Stack
 
@@ -56,5 +56,5 @@ Templates are artboards authored at native pixel size inside `<Template>` (`comp
 ## Verification
 
 1. `pnpm exec tsc --noEmit` and `pnpm lint`.
-2. `pnpm build`, then serve `out/` and check `/zh/<slug>/` and `/en/<slug>/` at 1440px and 390px wide, in light and dark themes.
+2. `pnpm build`, then serve `out/` and check `/en/<slug>/` and `/zh/<slug>/` at 1440px and 390px wide, in light and dark themes.
 3. Render every artboard at native size and inspect each one for clipping, overflow, collisions and weak hierarchy. Fix and repeat until nothing obvious can be improved.

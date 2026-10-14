@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     icons: { icon: "/brand/logo/favicon.svg", apple: "/apple-touch-icon.png" },
     openGraph: { type: "website", siteName: "RustFS Design System", images: [{ url: "/og.png", width: 1200, height: 630 }] },
     twitter: { card: "summary_large_image", images: ["/og.png"] },
-    alternates: { languages: { "zh-CN": "/zh/", en: "/en/" } },
+    alternates: { languages: { en: "/en/", "zh-CN": "/zh/", "x-default": "/en/" } },
     robots: { index: true, follow: true },
   }
 }

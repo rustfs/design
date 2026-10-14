@@ -76,8 +76,8 @@ function LangMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className={MENU}>
         <DropdownMenuRadioGroup value={locale} onValueChange={go}>
-          <DropdownMenuRadioItem value="zh" lang="zh-CN">中文</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="en" lang="en">English</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="zh" lang="zh-CN">中文</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

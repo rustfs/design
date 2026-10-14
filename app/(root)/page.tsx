@@ -2,8 +2,8 @@ import Link from "next/link"
 import { Wordmark } from "@/components/brand/logo"
 import { Stripe } from "@/components/brand/stripe"
 
-// "/" picks a language: a saved choice first, then the browser language, then English.
-const script = `try{var l=localStorage.getItem('rfs-lang');if(l!=='zh'&&l!=='en'){l=/^zh\\b/i.test(navigator.language||'')?'zh':'en'}location.replace('/'+l+'/'+location.hash)}catch(e){location.replace('/en/')}`
+// "/" opens English unless the visitor has chosen Chinese before.
+const script = `try{var l=localStorage.getItem('rfs-lang')==='zh'?'zh':'en';location.replace('/'+l+'/'+location.hash)}catch(e){location.replace('/en/')}`
 
 export default function RootPage() {
   return (
@@ -16,8 +16,8 @@ export default function RootPage() {
             <Stripe />
           </span>
           <nav style={{ display: "flex", gap: 8 }} aria-label="Language">
-            <Link href="/zh/" style={{ color: "#FFFFFF", border: "1px solid rgba(255,255,255,.3)", padding: "8px 14px", textDecoration: "none", fontSize: 14 }}>中文</Link>
             <Link href="/en/" style={{ color: "#FFFFFF", border: "1px solid rgba(255,255,255,.3)", padding: "8px 14px", textDecoration: "none", fontSize: 14 }}>English</Link>
+            <Link href="/zh/" style={{ color: "#FFFFFF", border: "1px solid rgba(255,255,255,.3)", padding: "8px 14px", textDecoration: "none", fontSize: 14 }}>中文</Link>
           </nav>
         </div>
       </main>

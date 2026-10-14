@@ -169,8 +169,8 @@ export function Template({ title, spec, w, h, themes = ["ink"], langs = ["zh", "
           )}
           {langs.length > 1 && (
             <Seg label={t("语言", "Language")}>
-              <SegButton pressed={lang === "zh"} onClick={() => setLang("zh")}>中</SegButton>
               <SegButton pressed={lang === "en"} onClick={() => setLang("en")}>EN</SegButton>
+              <SegButton pressed={lang === "zh"} onClick={() => setLang("zh")}>中</SegButton>
             </Seg>
           )}
           <ToolButton onClick={toggleEdit} pressed={editing} icon="edit" label={t("编辑文字", "Edit text")} />

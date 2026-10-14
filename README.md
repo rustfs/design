@@ -1,8 +1,37 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner-dark.png">
+  <img alt="RustFS — AI infrastructure, accounted for byte by byte." src=".github/assets/banner-light.png" width="100%">
+</picture>
+
 # RustFS Design System
 
-The official RustFS brand and design guidelines: logo, colour, typography, graphics, icons, data visualisation, motion and voice, with editable templates for advertising, article covers, slides, web, video, social and print. Every page is bilingual (`/zh/`, `/en/`).
+The official RustFS brand and design guidelines: logo, colour, typography, graphics, icons, data visualisation, motion and voice, with editable templates for advertising, article covers, slides, web, video, social and print. Every page is bilingual (`/en/`, `/zh/`); English is the default.
 
-The same rules are published for AI agents as [`DESIGN.md`](DESIGN.md) (Google design.md format) and as the [`rustfs-brand`](skills/rustfs-brand/SKILL.md) skill.
+**Website:** https://design.rustfs.com · **Agent spec:** [`DESIGN.md`](DESIGN.md) (Google design.md format) · **Agent skill:** [`rustfs-brand`](skills/rustfs-brand/SKILL.md)
+
+## Use with AI agents
+
+Paste the prompt below into any coding or design agent, then replace the last line with your task. The agent reads the published spec and applies it.
+
+```text
+Read https://design.rustfs.com/DESIGN.md before you start and treat it as the source of truth for everything RustFS-branded in this task.
+
+- Colour: use only the tokens it defines. Neutrals about 60%, Signal Blue #0062FF about 30%, Oxide #FF5E14 at most 10% with one focal point. No gradients, glows or other blues.
+- Type and shape: Archivo for display, Geist for text, Geist Mono for labels; square corners everywhere.
+- Logo: use the official SVG files unchanged (https://design.rustfs.com/brand/logo/rustfs-wordmark.svg on light surfaces, https://design.rustfs.com/brand/logo/rustfs-wordmark-white.svg on dark ones). Never retype or redraw the wordmark.
+- Graphics: only the stripe signature and the shard matrix described in the spec.
+- Copy: conclusion first; claims carry conditions, a source and a date; no superlatives. Always write the name as "RustFS".
+- Before handing over, check the result against the "Do's and Don'ts" section and state any assumption you made.
+
+Task: <deliverable, size in px, language, and the one message it carries>
+```
+
+Agents that support skills get the full workflow, templates and render scripts from the packaged skill. For Claude Code:
+
+```bash
+curl -LO https://design.rustfs.com/downloads/rustfs-brand.skill
+unzip rustfs-brand.skill -d ~/.claude/skills/
+```
 
 ## Stack
 
@@ -45,6 +74,8 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing a page or adding a templ
 
 `pnpm run deploy` builds the static site to `out/` and publishes it to Cloudflare Workers static assets at https://design.rustfs.com (custom domain in `wrangler.jsonc`). Run `pnpm exec wrangler login` once first. Any static host can serve `out/` as well.
 
-## Trademarks
+## License
 
-The RustFS name and logo are trademarks of RustFS. The code in this repository is provided for building RustFS materials; it does not grant rights to the trademarks. See the terms of use on the Downloads page.
+The code and documentation in this repository are licensed under the [Apache License 2.0](LICENSE).
+
+The RustFS name and logo are trademarks of RustFS, Inc. The Apache License 2.0 grants no rights to use them; see the terms of use on the [Downloads](https://design.rustfs.com/en/downloads/#terms) page.
