@@ -56,7 +56,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
         }
       >
         <TemplateGrid>
-          <Template title={t("骨架示意 · 橙色虚线为 7u 安全边距", "Anatomy · the dashed line is the 7u safe margin")} spec="1200 × 630 · u = 6.3px" w={1200} h={630} file="cover-anatomy" langs={["en"]}>
+          <Template title={t("封面骨架", "Cover anatomy")} spec={t("1200 × 630 · 安全边距 7u · u = 6.3px", "1200 × 630 · 7u safe margin · u = 6.3px")} w={1200} h={630} file="cover-anatomy" langs={["en"]}>
             <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[36%]" cols={6} rows={12} k={4} m={2} seed={21} mode="tone" fit="slice" gap={0.22} />
             <div className="ab-frame right-[calc(36%+var(--m))]">
               <div className="ab-row">

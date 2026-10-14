@@ -152,7 +152,7 @@ export default async function WebPage({ params }: { params: Promise<{ locale: st
       >
         <Sub title={t("接入", "Setup")} aside="tokens/tailwind.css">
           <div className="grid items-start gap-x-8 gap-y-5 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-            <CodeBlock title="globals.css · layout.tsx" code={SETUP_CODE} />
+            <CodeBlock title="globals.css · layout.tsx" lang="tsx" code={SETUP_CODE} />
             <Rules
               items={[
                 t(
@@ -567,17 +567,7 @@ export default async function WebPage({ params }: { params: Promise<{ locale: st
               <CommandBar command={INSTALL} className="w-full" />
             </Row>
             <Row label={t("代码块", "Block")} className="block">
-              <CodeBlock title="Docker · README" code={DOCKER}>
-                <span className="tok-c"># Create data and logs directories</span>
-                {"\n"}
-                <span className="tok-k">mkdir</span> -p data logs
-                {"\n\n"}
-                <span className="tok-c"># Change the owner of these directories</span>
-                {"\n"}
-                <span className="tok-k">chown</span> -R <span className="tok-n">10001:10001</span> data logs
-                {"\n\n"}
-                <span className="tok-k">docker</span> run -d -p <span className="tok-n">9000:9000</span> -p <span className="tok-n">9001:9001</span> -v $(pwd)/data:/data -v $(pwd)/logs:/logs <span className="tok-s">rustfs/rustfs:latest</span>
-              </CodeBlock>
+              <CodeBlock title="Docker · README" code={DOCKER} lang="bash" />
             </Row>
           </Specimen>
 
@@ -853,7 +843,7 @@ export default async function WebPage({ params }: { params: Promise<{ locale: st
             id="progress"
             n="16"
             title={t("进度与配额", "Progress and quota")}
-            aside={t("以分片绘制", "drawn as shards")}
+           
             code={PROGRESS_CODE}
             codeTitle="heal-progress.tsx · quota.tsx"
             rules={[
@@ -933,7 +923,7 @@ export default async function WebPage({ params }: { params: Promise<{ locale: st
                 [t("合规", "Compliance"), t("页脚须包含订阅原因、退订链接与公司通讯地址，并提供纯文本版本。", "The footer states why the reader is subscribed, an unsubscribe link and the company's postal address; a plain-text version is sent alongside.")],
               ]}
             />
-            <CodeBlock title="email.html · bulletproof button" code={MAIL_BUTTON_CODE} />
+            <CodeBlock title="email.html · bulletproof button" lang="html" code={MAIL_BUTTON_CODE} />
           </div>
         </TemplateGrid>
       </Section>
@@ -1046,8 +1036,8 @@ export default async function WebPage({ params }: { params: Promise<{ locale: st
           ]}
         />
         <div className="grid items-start gap-5 lg:grid-cols-2">
-          <CodeBlock title="heal · keyframes" code={HEAL_CSS} />
-          <CodeBlock title="skeleton · keyframes" code={SKELETON_CSS} />
+          <CodeBlock title="heal · keyframes" lang="css" code={HEAL_CSS} />
+          <CodeBlock title="skeleton · keyframes" lang="css" code={SKELETON_CSS} />
         </div>
       </Section>
 

@@ -104,11 +104,32 @@
     background: linear-gradient(to top right, transparent calc(50% - 1px), color-mix(in srgb, var(--color-red-500) 75%, transparent) calc(50% - 1px), color-mix(in srgb, var(--color-red-500) 75%, transparent) calc(50% + 1px), transparent calc(50% + 1px));
   }
 
-  /* Code token colours (code blocks are always on Ink) */
-  .tok-c { color: var(--color-neutral-500); }
-  .tok-s { color: #8CC8FF; }
-  .tok-n { color: var(--color-oxide-300); }
-  .tok-k { color: var(--color-blue-300); }
+  /* Code: always on Ink; colours come from the syntax tokens */
+  .code-hl pre {
+    margin: 0;
+    padding: 16px;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.65;
+    tab-size: 2;
+    min-width: max-content;
+  }
+  .code-hl pre:focus-visible {
+    outline: 2px solid var(--color-blue-400);
+    outline-offset: -2px;
+  }
+  .code-hl code {
+    font-family: inherit;
+    background: transparent;
+    padding: 0;
+  }
+  .tok-c { color: var(--color-syntax-comment); }
+  .tok-s { color: var(--color-syntax-string); }
+  .tok-n { color: var(--color-syntax-number); }
+  .tok-k { color: var(--color-syntax-keyword); }
+  .tok-f { color: var(--color-syntax-function); }
+  .tok-p { color: var(--color-syntax-property); }
 }
 
 /* Brand "write" move for the wordmark: letters step in left to right */

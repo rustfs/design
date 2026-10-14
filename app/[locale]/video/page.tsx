@@ -302,7 +302,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               { id: "other", label: t("竖屏与方形 2", "Vertical and square 2") },
             ]}
           >
-            <Template title={t("结构示意", "Anatomy")} spec={t("1920 × 1080 · u = 10.8 px · 参考线不导出", "1920 × 1080 · u = 10.8 px · guides are not exported")} w={1920} h={1080} file="video-anatomy">
+            <Template title={t("画面结构", "Frame anatomy")} spec={t("1920 × 1080 · u = 10.8 px · 参考线不导出", "1920 × 1080 · u = 10.8 px · guides are not exported")} w={1920} h={1080} file="video-anatomy">
               <div className="absolute inset-x-[calc(var(--u)*10)] inset-y-(--m) border-ab-brand [border-width:calc(var(--u)*0.15)]" />
               <SafeGuides always />
               <div className={FRAME}>

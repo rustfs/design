@@ -67,10 +67,10 @@ export default async function AgentsPage({ params }: { params: Promise<{ locale:
             </span>
             <span className="text-sm leading-relaxed text-subtle">{t("下载当前版本的 DESIGN.md。", "Download the current DESIGN.md.")}</span>
           </a>
-          <CodeBlock title={t("命令", "Commands")} code={`npx @google/design.md lint DESIGN.md\nnpx @google/design.md export --format css-tailwind DESIGN.md\nnpx @google/design.md export --format dtcg DESIGN.md`} />
-          <CodeBlock title="AGENTS.md" code={`## Design\n\nAll UI, marketing and visual work must follow DESIGN.md\n(RustFS design system). Use the tokens in tokens/tailwind.css;\ndo not introduce colours, radii or fonts outside it.`} />
+          <CodeBlock title={t("命令", "Commands")} lang="bash" code={`npx @google/design.md lint DESIGN.md\nnpx @google/design.md export --format css-tailwind DESIGN.md\nnpx @google/design.md export --format dtcg DESIGN.md`} />
+          <CodeBlock title="AGENTS.md" lang="markdown" code={`## Design\n\nAll UI, marketing and visual work must follow DESIGN.md\n(RustFS design system). Use the tokens in tokens/tailwind.css;\ndo not introduce colours, radii or fonts outside it.`} />
         </div>
-        <CodeBlock title="DESIGN.md" code={design} maxHeight={520} />
+        <CodeBlock title="DESIGN.md" lang="markdown" code={design} maxHeight={520} />
       </Section>
 
       <Section
@@ -95,9 +95,10 @@ export default async function AgentsPage({ params }: { params: Promise<{ locale:
           ))}
         </div>
         <div className="grid gap-4 lg:grid-cols-2">
-          <CodeBlock title={t("安装到 Claude Code", "Install in Claude Code")} code={`# personal, all projects\nunzip rustfs-brand.skill -d ~/.claude/skills/\n\n# one project, shared with the team\nunzip rustfs-brand.skill -d .claude/skills/`} />
+          <CodeBlock title={t("安装到 Claude Code", "Install in Claude Code")} lang="bash" code={`# personal, all projects\nunzip rustfs-brand.skill -d ~/.claude/skills/\n\n# one project, shared with the team\nunzip rustfs-brand.skill -d .claude/skills/`} />
           <CodeBlock
             title={t("目录结构", "Structure")}
+            lang="text"
             code={`rustfs-brand/\n  SKILL.md                 workflow and key rules\n  references/\n    DESIGN.md              tokens and full rules\n    formats.md             sizes and layout recipes per channel\n    copy.md                voice, terminology, approved lines, facts\n    graphics.md            logo, stripe, shard matrix, icons, charts\n  assets/\n    artboard.html          single-file starter for static graphics\n    tailwind.css           Tailwind v4 tokens\n    tokens.css             CSS variables\n    logo/*.svg             wordmark, symbol, app icon\n  scripts/\n    render.mjs             HTML → PNG with headless Chrome\n    matrix.mjs             shard-matrix SVG generator`}
           />
         </div>
@@ -110,7 +111,7 @@ export default async function AgentsPage({ params }: { params: Promise<{ locale:
             ["“A slide comparing RustFS throughput before and after the release”", t("按比例绘制柱状图，RustFS 为蓝色，注明环境与日期；没有实测数据时标注示例数据。", "Draws bars to scale with RustFS in blue and the environment and date stated; marks sample data if no measurement is provided.")],
           ]}
         />
-        <CodeBlock title="SKILL.md" code={skill} maxHeight={420} />
+        <CodeBlock title="SKILL.md" lang="markdown" code={skill} maxHeight={420} />
         <Note>{t("Skill 与 DESIGN.md 随本指南同步发布。规范更新后，请重新下载并替换本地副本。", "The skill and DESIGN.md are published together with these guidelines. When the guidelines change, download them again and replace local copies.")}</Note>
       </Section>
 

@@ -88,7 +88,7 @@ export default async function LogoPage({ params }: { params: Promise<{ locale: s
             <Spec on="surface" bodyClassName="min-h-38" caption={t("应用图标 · Ink", "App icon · Ink")}>
               <AppIcon className="size-28" bg="#0B0E14" />
             </Spec>
-            <Spec on="surface" className="sm:col-span-2" bodyClassName="min-h-38 place-items-end justify-start" caption={t("16 / 24 / 32 / 48 / 64 / 96 px：流向 S 在 16px 时仍可辨认为 S", "16 / 24 / 32 / 48 / 64 / 96 px: the Flow S still reads as an S at 16px")}>
+            <Spec on="surface" className="sm:col-span-2" bodyClassName="min-h-38 place-items-end justify-start" caption={t("16 / 24 / 32 / 48 / 64 / 96 px · 最小 16 px", "16 / 24 / 32 / 48 / 64 / 96 px · minimum 16 px")}>
               <div className="flex flex-wrap items-end gap-5">
                 {[16, 24, 32, 48, 64, 96].map((px) => (
                   <div key={px} className="grid justify-items-center gap-2">

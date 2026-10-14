@@ -288,6 +288,63 @@ export const brandColors = [
   }
 ] as const;
 
+export const syntax = [
+  {
+    "role": "background",
+    "ref": "{color.neutral.950}",
+    "hex": "#0B0E14",
+    "note": "Code surface (Ink)."
+  },
+  {
+    "role": "foreground",
+    "ref": "{color.neutral.100}",
+    "hex": "#EAEDF2",
+    "note": "Plain code and identifiers."
+  },
+  {
+    "role": "comment",
+    "ref": "{color.neutral.500}",
+    "hex": "#757C88",
+    "note": "Comments (4.6:1)."
+  },
+  {
+    "role": "punctuation",
+    "ref": "{color.neutral.400}",
+    "hex": "#9AA0AC",
+    "note": "Punctuation and operators."
+  },
+  {
+    "role": "keyword",
+    "ref": "{color.blue.400}",
+    "hex": "#5C99FF",
+    "note": "Keywords, tags, shell commands."
+  },
+  {
+    "role": "function",
+    "ref": "{color.blue.300}",
+    "hex": "#96BFFF",
+    "note": "Functions, types, components, CSS selectors."
+  },
+  {
+    "role": "property",
+    "ref": "{color.blue.200}",
+    "hex": "#C3DBFE",
+    "note": "Properties, attributes, keys, flags."
+  },
+  {
+    "role": "string",
+    "ref": "#6BDFCA",
+    "hex": "#6BDFCA",
+    "note": "Strings and values; a light teal from data colour 3."
+  },
+  {
+    "role": "number",
+    "ref": "{color.oxide.400}",
+    "hex": "#FE8F5D",
+    "note": "Numbers, units and constants."
+  }
+] as const;
+
 export const dataviz = [
   {
     "index": 1,

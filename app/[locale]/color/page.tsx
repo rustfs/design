@@ -6,7 +6,7 @@ import { DoDont, Note, Page, PageFooter, PageHeader, Section, Sub, Table } from 
 import { CopyChip } from "@/components/site/swatch"
 import { contrast, grade, oklchString, onColor, rgbString } from "@/lib/color"
 import { isLocale, setLocale, t, type Locale } from "@/lib/i18n"
-import { dataviz, scales, semantic } from "@/lib/tokens"
+import { dataviz, scales, semantic, syntax } from "@/lib/tokens"
 import { cn } from "@/lib/utils"
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -294,6 +294,22 @@ export default async function ColorPage({ params }: { params: Promise<{ locale: 
                 <span>{String(d.index).padStart(2, "0")}</span>
               </span>
               <span className="p-2.5 font-mono text-[11px]">{d.hex}</span>
+            </CopyChip>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="syntax" tag="Syntax" title={t("代码配色", "Syntax colours")} lede={<p>{t("代码块在两种主题下都使用 Ink 底色，按以下角色着色，每个角色在 Ink 上的对比度均不低于 4.5 : 1。", "Code blocks sit on Ink in both themes and are coloured by these roles; every role reaches at least 4.5 : 1 on Ink.")}</p>}>
+        <div className="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-3 lg:grid-cols-9">
+          {syntax.map((c) => (
+            <CopyChip key={c.role} value={c.hex} className="grid bg-background">
+              <span className="grid h-20 content-end p-2.5 font-mono text-[11px]" style={{ background: c.role === "background" ? c.hex : "#0B0E14", color: c.role === "background" ? "#9AA0AC" : c.hex }}>
+                {c.role === "background" ? "Ink" : "const x = 1"}
+              </span>
+              <span className="grid gap-0.5 p-2.5 font-mono text-[11px] leading-tight">
+                <span className="text-foreground">{c.role}</span>
+                <span className="text-muted-foreground">{c.hex}</span>
+              </span>
             </CopyChip>
           ))}
         </div>

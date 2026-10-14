@@ -497,7 +497,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             </p>
           </div>
         </TemplateGrid>
-        <CodeBlock title={t("email-signature.html · 复制后替换姓名、职位与图标地址", "email-signature.html · replace the name, title and icon URL after copying")} code={sigHtml} maxHeight={360} />
+        <CodeBlock title={t("email-signature.html · 复制后替换姓名、职位与图标地址", "email-signature.html · replace the name, title and icon URL after copying")} lang="html" code={sigHtml} maxHeight={360} />
       </Section>
 
       {/* ------------------------------------------------------------------ Merchandise */}

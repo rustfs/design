@@ -374,7 +374,7 @@ All corners are square (`rounded.none`): buttons, inputs, cards, images, charts,
 - **Inputs**: square, 1px `outline-strong` border, 40px tall; focus shows a 2px Signal ring with 2px offset; errors show red text below with the cause and fix.
 - **Cards**: 1px border, 24px padding, no shadow, no coloured side rail. Hover turns the border to the foreground colour and nudges the arrow icon 2px (240ms).
 - **Status chips**: square marker + mono label; online green, healing blue (animated heal), degraded amber, offline red, preview Oxide.
-- **Code blocks**: always Ink background in both themes, Geist Mono 13–14px, with a copy button.
+- **Code blocks**: always Ink background in both themes, Geist Mono 13–14px, with a copy button. Syntax colours: foreground #EAEDF2, comment #757C88, punctuation #9AA0AC, keyword/tag/command #5C99FF, function/type/selector #96BFFF, property/attribute/key #C3DBFE, string #6BDFCA, number/unit/constant #FE8F5D (tokens `color.syntax.*`).
 - **Tables**: mono uppercase header labels on `surface-alt`; numbers right-aligned with tabular figures.
 - **Icons**: 24px grid, 1.5px stroke, square caps, miter joins, `currentColor`; fills only for a written/current shard.
 - **Brand graphics** — the only two allowed:

@@ -17,14 +17,14 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
     <>
       {/* Hero: an erasure set drawn to scale — 16 drives, parity rotating per stripe */}
       <section className="relative overflow-hidden border-b border-border bg-neutral-950 text-white [--mx-data:#0062FF] [--mx-empty:rgba(255,255,255,0.14)] [--mx-parity:#FF5E14]" aria-label="RustFS Design System">
-        <div className="container-page grid min-h-[min(680px,86vh)] grid-cols-1 gap-x-10 gap-y-7 pt-[clamp(28px,4vw,48px)] pb-[clamp(28px,3.5vw,40px)] md:grid-cols-2 md:grid-rows-[auto_1fr_auto]">
+        <div className="container-page grid min-h-[min(680px,86vh)] grid-cols-1 gap-x-10 gap-y-7 pt-[clamp(28px,4vw,48px)] pb-[clamp(28px,3.5vw,40px)] md:grid-cols-2 md:grid-rows-[auto_1fr]">
           <div className="flex flex-wrap justify-between gap-4 font-mono text-xs leading-tight tracking-[0.06em] text-neutral-400 uppercase md:col-span-2">
             <span>
               <b className="font-medium text-white">RustFS Design System</b> · {t("官方设计指南", "Official design guidelines")} v1.0
             </span>
             <span>s3://rustfs-brand/ · 2026-10-14</span>
           </div>
-          <LiveMatrix className="relative min-h-55 md:col-start-2 md:row-span-2 md:row-start-2 md:min-h-80 [&>svg]:absolute [&>svg]:inset-0" cols={16} rows={14} k={12} m={4} seed={11} mode="tone" fade="bl" gap={0.22} fit="right" missing={2} write heal />
+          <LiveMatrix className="relative min-h-55 md:col-start-2 md:row-start-2 md:min-h-80 [&>svg]:absolute [&>svg]:inset-0" cols={16} rows={14} k={12} m={4} seed={11} mode="tone" fade="bl" gap={0.22} fit="right" missing={2} write heal />
           <div className="relative z-10 grid gap-7 self-end md:col-start-1 md:row-start-2">
             <WriteWordmark className="h-auto w-full max-w-[560px] text-white" />
             <h1 className="font-display text-[clamp(30px,4.2vw,56px)] leading-[1.16] font-extrabold">
@@ -37,12 +37,6 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
                 <span className="block tracking-[-0.02em] [font-stretch:125%]">Every byte, accounted for.</span>
               )}
             </h1>
-          </div>
-          <div className="relative z-10 flex flex-wrap items-center gap-x-5.5 gap-y-2 font-mono text-xs leading-normal text-neutral-400 md:col-start-1">
-            <span className="inline-flex items-center gap-2"><i className="size-2.5 bg-blue-500" />{t("数据块 Data", "Data shard")}</span>
-            <span className="inline-flex items-center gap-2"><i className="size-2.5 bg-oxide-500" />{t("校验块 Parity", "Parity shard")}</span>
-            <span className="inline-flex items-center gap-2"><i className="size-2.5 shadow-[inset_0_0_0_1px_#0062FF]" />{t("修复中 Healing", "Healing")}</span>
-            <span>{t("图示：EC 12+4 纠删集，16 块盘，校验块逐条带轮转", "Shown: an EC 12+4 erasure set across 16 drives, parity rotating with each stripe")}</span>
           </div>
         </div>
       </section>

@@ -64,6 +64,15 @@
   --color-dataviz-6: #61C3F9;
   --color-dataviz-7: #02A855;
   --color-dataviz-8: #9AA0AC;
+  --color-syntax-background: #0B0E14;
+  --color-syntax-foreground: #EAEDF2;
+  --color-syntax-comment: #757C88;
+  --color-syntax-punctuation: #9AA0AC;
+  --color-syntax-keyword: #5C99FF;
+  --color-syntax-function: #96BFFF;
+  --color-syntax-property: #C3DBFE;
+  --color-syntax-string: #6BDFCA;
+  --color-syntax-number: #FE8F5D;
 
   --font-display: var(--font-archivo, "Archivo"), "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-sans: var(--font-geist-sans, "Geist"), "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;

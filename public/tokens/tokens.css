@@ -61,6 +61,15 @@
   --color-dataviz-6: var(--color-sky-500);
   --color-dataviz-7: var(--color-green-500);
   --color-dataviz-8: var(--color-neutral-400);
+  --color-syntax-background: var(--color-neutral-950);
+  --color-syntax-foreground: var(--color-neutral-100);
+  --color-syntax-comment: var(--color-neutral-500);
+  --color-syntax-punctuation: var(--color-neutral-400);
+  --color-syntax-keyword: var(--color-blue-400);
+  --color-syntax-function: var(--color-blue-300);
+  --color-syntax-property: var(--color-blue-200);
+  --color-syntax-string: #6BDFCA;
+  --color-syntax-number: var(--color-oxide-400);
   --font-display: Archivo, "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-sans: Geist, "HarmonyOS Sans SC", "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --font-mono: "Geist Mono", "SF Mono", ui-monospace, Menlo, Consolas, "PingFang SC", monospace;

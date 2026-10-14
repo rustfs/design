@@ -40,6 +40,7 @@ const primitives = [];
 for (const s of SCALES) for (const [step, t] of entries(src.color[s])) primitives.push([`--color-${s}-${step}`, t.$value, t.$description]);
 const brandNamed = entries(src.color.brand).map(([k, t]) => [`--color-${k}`, refVar(t.$value), t.$description]);
 const dataviz = entries(src.color.dataviz).map(([k, t]) => [`--color-dataviz-${k}`, refVar(t.$value)]);
+const syntax = entries(src.color.syntax).map(([k, t]) => [`--color-syntax-${k}`, refVar(t.$value)]);
 
 // next/font variable first, family name second, so both next/font and plain CSS consumers work
 const FONT_VAR = { display: '--font-archivo', sans: '--font-geist-sans', mono: '--font-geist-mono' };
@@ -64,6 +65,7 @@ const css = `${HEADER}
 ${decl(primitives.map(([k, v]) => [k, v]))}
 ${decl(brandNamed)}
 ${decl(dataviz)}
+${decl(syntax)}
 ${decl(plainFonts)}
 ${decl(typoVars)}
   --radius: 0px;
@@ -113,6 +115,7 @@ const tw = `${HEADER}/* Usage in a Tailwind v4 project:  @import "tailwindcss"; 
 ${decl(primitives.map(([k, v]) => [k, v]))}
 ${decl(brandNamed.map(([k, v]) => [k, v.replace(/var\(--color-([a-z]+)-(\d+)\)/, (m, s, n) => primitives.find(([pk]) => pk === `--color-${s}-${n}`)[1])]))}
 ${decl(dataviz.map(([k, v]) => [k, v.replace(/var\(--color-([a-z]+)-(\d+)\)/, (m, s, n) => primitives.find(([pk]) => pk === `--color-${s}-${n}`)[1])]))}
+${decl(syntax.map(([k, v]) => [k, v.replace(/var\(--color-([a-z]+)-(\d+)\)/, (m, s, n) => primitives.find(([pk]) => pk === `--color-${s}-${n}`)[1])]))}
 
 ${decl(fonts)}
 
@@ -156,6 +159,8 @@ const ts = `// Generated from tokens/tokens.json by scripts/build-tokens.mjs. Do
 export const scales = ${JSON.stringify(scaleData, null, 2)} as const;
 
 export const brandColors = ${JSON.stringify(entries(src.color.brand).map(([k, t]) => ({ name: k, ref: t.$value, hex: hexOf(t.$value), note: t.$description ?? null })), null, 2)} as const;
+
+export const syntax = ${JSON.stringify(entries(src.color.syntax).map(([k, t]) => ({ role: k, ref: t.$value, hex: hexOf(t.$value), note: t.$description ?? null })), null, 2)} as const;
 
 export const dataviz = ${JSON.stringify(entries(src.color.dataviz).map(([k, t]) => ({ index: Number(k), ref: t.$value, hex: hexOf(t.$value) })), null, 2)} as const;
 

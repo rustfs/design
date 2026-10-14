@@ -41,7 +41,7 @@ export default async function GraphicsPage({ params }: { params: Promise<{ local
 
       <Section id="model" tag="Model" title={t("图形从哪里来", "Where the graphics come from")} lede={<p>{t("一个纠删集由若干块盘组成。每次写入，对象被切成 k 个数据块与 m 个校验块，每块盘存一块；下一个条带中，校验块的位置向右移动一格。任意 k 块即可还原对象。", "An erasure set is a group of drives. On each write the object is cut into k data shards and m parity shards, one per drive; on the next stripe the parity moves one drive to the right. Any k shards rebuild the object.")}</p>}>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-          <Spec on="paper" bodyClassName="min-h-80 place-items-stretch content-center gap-6" caption={t("一次写入：EC 4+2", "One write: EC 4+2")}>
+          <Spec on="paper" bodyClassName="min-h-80 place-items-stretch content-center gap-6" caption={t("一次写入 · EC 4+2", "One write · EC 4+2")}>
             <div className="grid grid-cols-[auto_1fr] items-center gap-5 text-neutral-950">
               <div className="grid h-24 w-28 content-between border-2 border-neutral-950 p-2.5 font-mono text-[11px]">
                 <span>{t("对象", "OBJECT")}</span>
@@ -57,7 +57,7 @@ export default async function GraphicsPage({ params }: { params: Promise<{ local
               </div>
             </div>
           </Spec>
-          <Spec on="ink" bodyClassName={`min-h-80 ${INK_VARS}`} caption={t("多次写入：校验块逐条带轮转", "Many writes: parity rotates stripe by stripe")} aside={t("列 = 盘 · 行 = 条带", "Columns = drives · rows = stripes")}>
+          <Spec on="ink" bodyClassName={`min-h-80 ${INK_VARS}`} caption={t("连续写入 · EC 4+2", "Successive writes · EC 4+2")}>
             <ShardMatrix className="!h-56" cols={6} rows={6} k={4} m={2} seed={1} gap={0.22} />
           </Spec>
         </div>
@@ -143,7 +143,7 @@ export default async function GraphicsPage({ params }: { params: Promise<{ local
       </Section>
 
       <Section id="diagrams" tag="Diagrams" title={t("架构图", "Diagrams")} lede={<p>{t("架构图与流程图沿用同一套语言：1px 线框、直角、正交连线、等宽标注。RustFS 组件使用 Signal Blue，外部系统使用中性色，需要强调的唯一路径使用 Oxide。", "Architecture and flow diagrams share one language: 1px outlines, square corners, orthogonal connectors and mono labels. RustFS components are Signal Blue, external systems neutral, and the single path to emphasise is Oxide.")}</p>}>
-        <Spec on="white" bodyClassName="min-h-96 p-[clamp(16px,3vw,40px)] place-items-stretch" caption={t("示意：客户端经 S3 API 访问 RustFS 集群", "Illustration: clients reach a RustFS cluster through the S3 API")}>
+        <Spec on="white" bodyClassName="min-h-96 p-[clamp(16px,3vw,40px)] place-items-stretch">
           <div className="grid gap-3 text-neutral-950 md:grid-cols-[1fr_auto_1.1fr_auto_2.2fr] md:items-center">
             <div className="grid gap-2">
               {["AWS SDK", "mc / aws-cli", t("应用", "Applications")].map((c) => (
@@ -188,7 +188,7 @@ export default async function GraphicsPage({ params }: { params: Promise<{ local
 
       <Section id="imagery" tag="Imagery" title={t("图像与截图", "Imagery and screenshots")} lede={<p>{t("品牌只使用真实的产品截图、硬件与活动照片。不使用库存图片、AI 生成图像，也不使用与内容无关的抽象插画。", "The brand uses real product screenshots and real photos of hardware and events. No stock imagery, no AI-generated images and no abstract illustration unrelated to the content.")}</p>}>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-          <Spec on="paper" bodyClassName="min-h-80 p-[clamp(16px,3vw,36px)] place-items-stretch" caption={t("示意 · 截图：直角、1px 边框、无设备外壳、无投影", "Illustration · Screenshots: square, 1px frame, no device chrome, no shadow")}>
+          <Spec on="paper" bodyClassName="min-h-80 p-[clamp(16px,3vw,36px)] place-items-stretch" caption={t("截图：直角、1px 边框、无设备外壳、无投影", "Screenshots: square, 1px frame, no device chrome, no shadow")}>
             <ConsoleSketch />
           </Spec>
           <div className="grid gap-4">

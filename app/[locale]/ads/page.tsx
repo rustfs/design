@@ -70,7 +70,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         }
       >
         <TemplateGrid>
-          <Template title={t("结构示意 · 橙色虚线为 7u 安全边距", "Anatomy · the dashed line is the 7u safe margin")} spec="1200 × 628 · u = 6.28px" w={1200} h={628} file="ad-anatomy">
+          <Template title={t("广告骨架", "Ad anatomy")} spec={t("1200 × 628 · u = 6.28px · 安全边距 7u", "1200 × 628 · u = 6.28px · 7u safe margin")} w={1200} h={628} file="ad-anatomy">
             <div className="absolute top-(--m) right-(--m) bottom-(--m) grid w-[34%] content-center">
               <DriveGrid cols={6} rows={5} dead={[1, 4]} className="u-gap-x-1.5" colClassName="u-gap-1.5" labels labelClassName="u-mt-1 u-text-1.75" />
             </div>
