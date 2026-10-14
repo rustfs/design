@@ -21,7 +21,7 @@ export function PresentDeck({ group = "deck", count }: { group?: string; count: 
           <span className="font-mono text-[11px] leading-none font-medium tracking-[0.08em] text-brand uppercase">Deck · {count}</span>
           <p className="text-[clamp(20px,2.2vw,26px)] leading-tight font-semibold tracking-[-0.01em]">{t(`全屏演示全部 ${count} 页`, `Present all ${count} slides full screen`)}</p>
           <p className="max-w-[60ch] text-sm leading-relaxed text-muted-foreground">
-            {t("← → 或空格翻页，Esc 退出。每页按其当前选择的底色与语言播放；选择下方页码可从该页开始。", "Use ← → or Space to move and Esc to exit. Each slide plays in the surface and language selected for it; pick a number below to start from that slide.")}
+            {t("← → 或空格翻页 · Esc 退出", "← → or Space to move · Esc to exit")}
           </p>
         </div>
         <div className="flex flex-wrap gap-1" role="group" aria-label={t("从指定页开始演示", "Start from a slide")}>

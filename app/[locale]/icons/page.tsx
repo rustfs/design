@@ -23,10 +23,7 @@ export default async function IconsPage({ params }: { params: Promise<{ locale: 
         label="Guidelines · Icons"
         title={t("图标", "Icons")}
         subtitle={t("Icons", "图标")}
-        lede={t(
-          "RustFS 图标集覆盖存储结构、数据流、安全与界面操作。图标与字标同样方正：24px 网格、1.5px 线宽、直角端点与斜接拐角。",
-          "The RustFS icon set covers storage structure, data flow, security and interface actions. Icons are as square as the wordmark: a 24px grid, 1.5px strokes, square caps and mitred joins.",
-        )}
+        lede={t("24px 网格、1.5px 线宽、直角端点。", "24px grid, 1.5px strokes, square ends.")}
         meta={[
           { k: t("数量", "Icons"), v: String(count) },
           { k: t("网格", "Grid"), v: "24 px" },
@@ -35,7 +32,7 @@ export default async function IconsPage({ params }: { params: Promise<{ locale: 
         ]}
       />
 
-      <Section id="construction" tag="Construction" title={t("绘制规则", "Construction")} lede={<p>{t("图标在 24 × 24 网格上绘制，四周保留 2px 留白，主体位于 20 × 20 的活动区域内。线条一律 1.5px，端点为直角，拐角为斜接；填充只用于表示「已写入」或「当前」的方块。", "Icons are drawn on a 24 × 24 grid with 2px of padding, keeping the subject inside a 20 × 20 live area. Every stroke is 1.5px with square caps and mitred joins; fills are reserved for a shard that is written or current.")}</p>}>
+      <Section id="construction" tag="Construction" title={t("绘制规则", "Construction")} lede={<p>{t("主体在 20 × 20 内；填充只表示已写入的块。", "Keep to the 20 × 20 live area; fills mean a written shard.")}</p>}>
         <div className="grid gap-4 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           <Spec on="white" bodyClassName="min-h-96" caption={t("bucket · 24px 网格放大", "bucket · 24px grid enlarged")}>
             <svg viewBox="-1 -1 26 26" className="size-[min(72vw,320px)]" aria-hidden="true">
@@ -59,12 +56,12 @@ export default async function IconsPage({ params }: { params: Promise<{ locale: 
               mono={[1]}
               head={[t("属性", "Property"), t("取值", "Value"), t("说明", "Notes")]}
               rows={[
-                [t("画布", "Canvas"), "24 × 24", t("所有图标在同一画布上绘制", "Every icon shares one canvas")],
-                [t("留白", "Padding"), "2 px", t("主体位于 20 × 20 活动区域内", "Subject stays in the 20 × 20 live area")],
-                [t("线宽", "Stroke"), "1.5 px", t("缩放时保持比例，不单独加粗", "Scales with the icon; never thickened separately")],
-                [t("端点 · 拐角", "Caps · joins"), "square · miter", t("与字标的直角结构一致", "Matches the wordmark's square construction")],
-                [t("填充", "Fill"), "currentColor", t("仅用于表示已写入或当前的方块", "Only for a shard that is written or current")],
-                [t("颜色", "Colour"), "currentColor", t("跟随文字颜色，不单独上色", "Inherits the text colour; never coloured on its own")],
+                [t("画布", "Canvas"), "24 × 24", t("统一画布", "One canvas")],
+                [t("留白", "Padding"), "2 px", t("20 × 20 活动区", "20 × 20 live area")],
+                [t("线宽", "Stroke"), "1.5 px", t("随图标缩放", "Scales with the icon")],
+                [t("端点 · 拐角", "Caps · joins"), "square · miter", t("与字标一致", "Matches the wordmark")],
+                [t("填充", "Fill"), "currentColor", t("只表示已写入的块", "Written shards only")],
+                [t("颜色", "Colour"), "currentColor", t("跟随文字颜色", "Inherits text colour")],
               ]}
             />
             <div className="grid grid-cols-4 gap-px border border-border bg-border">
@@ -81,7 +78,7 @@ export default async function IconsPage({ params }: { params: Promise<{ locale: 
         </div>
       </Section>
 
-      <Section id="set" tag="Icon set" title={t("图标集", "Icon set")} lede={<p>{t("点击图标即可复制 React 用法。站点与产品中通过 Icon 组件引用，名称即下方标注。", "Click an icon to copy its React usage. Sites and products reference icons through the Icon component by the names below.")}</p>}>
+      <Section id="set" tag="Icon set" title={t("图标集", "Icon set")} lede={<p>{t("点击复制用法。", "Click to copy.")}</p>}>
         <IconBrowser />
       </Section>
 
@@ -90,10 +87,10 @@ export default async function IconsPage({ params }: { params: Promise<{ locale: 
           mono={[1]}
           head={[t("场景", "Context"), t("尺寸", "Size"), t("规则", "Rule")]}
           rows={[
-            [t("按钮与输入框", "Buttons and inputs"), "16 px", t("位于文字左侧，间距 6–8px；与文字同色。", "Left of the label with 6–8px between; same colour as the label.")],
-            [t("导航与列表", "Navigation and lists"), "20 px", t("与文字基线居中对齐。", "Centred on the text line.")],
-            [t("功能卡片", "Feature cards"), "24–32 px", t("位于标题上方，左对齐；一个卡片一个图标。", "Above the title, left aligned; one icon per card.")],
-            [t("营销画面", "Marketing layouts"), "≥ 48 px", t("可按比例放大并将线宽降至 1px，作为辅助图形。", "May scale up with a 1px stroke as a secondary graphic.")],
+            [t("按钮与输入框", "Buttons and inputs"), "16 px", t("文字左侧，间距 6–8px", "Left of the label, 6–8px")],
+            [t("导航与列表", "Navigation and lists"), "20 px", t("居中对齐文字", "Centred on the text")],
+            [t("功能卡片", "Feature cards"), "24–32 px", t("标题上方，一卡一个", "Above the title, one per card")],
+            [t("营销画面", "Marketing layouts"), "≥ 48 px", t("可放大，线宽 1px", "May scale up with a 1px stroke")],
           ]}
         />
         <div className="grid gap-4 md:grid-cols-2">

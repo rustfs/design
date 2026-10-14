@@ -200,10 +200,8 @@ export function HealBanner() {
             )
           })}
         </ol>
-        <p className="text-[13px] leading-relaxed text-muted-foreground" aria-live="polite">
-          {reduced
-            ? t("已开启「减少动态效果」：直接显示尾帧。", "Reduced motion is on: the end frame is shown directly.")
-            : t("开启「减少动态效果」时，横幅直接显示尾帧。", "With reduced motion on, the banner shows the end frame directly.")}
+        <p className="text-[13px] leading-relaxed text-muted-foreground empty:hidden" aria-live="polite">
+          {reduced && t("已开启「减少动态效果」：直接显示尾帧。", "Reduced motion is on: the end frame is shown directly.")}
         </p>
       </div>
     </div>

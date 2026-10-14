@@ -29,7 +29,7 @@ Normative documents use 应 / 须 / 不得 and should / must / must not. Never n
 | 开源，不设暗条款。 | Open source. No fine print. | Apache License 2.0 |
 | 数据只留在你的硬件上。 | Your data stays on your hardware. | 无遥测，完全自托管。 / No telemetry. Fully self-hosted. |
 | 为 AI 数据打造的内存安全存储。 | Memory-safe storage for AI data. | 以 Rust 构建。 / Built in Rust. |
-| 每一个字节，都有着落。 | Every byte, accounted for. | Brand line; needs no footnote. |
+| AI 时代的基建，从每一个字节算起。 | AI infrastructure, accounted for byte by byte. | Brand line; needs no footnote. |
 
 ## Terminology (zh ↔ en)
 

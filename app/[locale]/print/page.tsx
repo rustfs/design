@@ -52,8 +52,8 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
         title={t("印刷与活动", "Print & events")}
         subtitle={t("Print & events", "印刷与活动")}
         lede={t(
-          "名片、信纸、周边制品与活动物料的版式规范。画板按成品尺寸等比绘制，以屏幕分辨率导出供审阅；印刷生产文件须按 300 dpi、3 mm 出血另行制作。",
-          "Layouts for stationery, merchandise and event materials. Artboards are drawn in proportion to the finished size and export at screen resolution for review; production files are prepared separately at 300 dpi with 3 mm bleed.",
+          "文具、周边与活动物料的版式。画板仅供审阅，印刷文件须另行制作。",
+          "Layouts for stationery, merchandise and events. Artboards are for review; print files are prepared separately.",
         )}
         meta={[
           { k: t("模板", "Templates"), v: "21" },
@@ -68,14 +68,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
         id="production"
         tag="Print production"
         title={t("印刷生产", "Print production")}
-        lede={
-          <p>
-            {t(
-              "屏幕上的品牌色无法在纸张、织物与陶瓷上完全复现。以下规则使不同供应商、不同材料的成品保持一致：颜色以印刷打样为准，尺寸以毫米计量，标志与文字始终远离裁切线。",
-              "Brand colours on screen cannot be reproduced exactly on paper, fabric or ceramic. These rules keep finished pieces consistent across suppliers and materials: colour is approved on a printed proof, sizes are measured in millimetres, and marks and text stay clear of the trim.",
-            )}
-          </p>
-        }
+        lede={<p>{t("颜色以打样为准，尺寸以毫米计，标志远离裁切线。", "Colour is approved on a proof, sizes are in millimetres, and marks stay clear of the trim.")}</p>}
       >
         <TemplateGrid>
           <PrintTemplate
@@ -122,22 +115,22 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
           </PrintTemplate>
           <div className="col-span-12 grid grid-cols-2 content-start gap-x-6 gap-y-6 md:col-span-5 md:pt-14">
             <Figure n="3" unit="mm" label={t("出血", "Bleed")}>
-              {t("底色与图形延伸至裁切线外 3 mm。", "Backgrounds and graphics run 3 mm past the trim.")}
+              {t("底色与图形越过裁切线。", "Backgrounds and graphics run past the trim.")}
             </Figure>
             <Figure n="5" unit="mm" label={t("安全区", "Safe zone")}>
-              {t("文字、标志与二维码距裁切线不少于 5 mm。", "Text, marks and QR codes stay 5 mm inside the trim.")}
+              {t("文字、标志与二维码在此线内。", "Text, marks and QR codes stay inside.")}
             </Figure>
             <Figure n="300" unit="dpi" label={t("分辨率", "Resolution")}>
-              {t("按成品尺寸计算；标志与文字保持矢量。", "At finished size; marks and type stay vector.")}
+              {t("按成品尺寸；标志与文字为矢量。", "At finished size; marks and type vector.")}
             </Figure>
             <Figure n="6" unit="pt" label={t("最小字号", "Minimum type")}>
-              {t("反白文字不小于 8 pt，且不使用细体。", "Reversed type at least 8 pt and never light.")}
+              {t("反白 ≥ 8 pt，不用细体。", "Reversed ≥ 8 pt, never light.")}
             </Figure>
             <Figure n="18" unit="mm" label={t("字标最小宽度", "Wordmark min. width")}>
-              {t("小于此宽度时改用符号。", "Below this width, use the symbol.")}
+              {t("更小时改用符号。", "Below this, use the symbol.")}
             </Figure>
             <Figure n="5" unit="mm" label={t("符号最小宽度", "Symbol min. width")}>
-              {t("更小的物件不放置标志。", "Smaller items carry no mark.")}
+              {t("更小的物件不放标志。", "Smaller items carry no mark.")}
             </Figure>
           </div>
         </TemplateGrid>
@@ -150,7 +143,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               swatch="#0062FF"
               value="C90 M60 Y0 K0"
               cmyk={[90, 60, 0, 0]}
-              note={t("字标、数据块与大面积品牌色。超出四色色域，对颜色要求高的物料宜使用专色。", "Wordmark, data shards and large brand fields. It lies outside the process gamut; colour-critical pieces should use a spot ink.")}
+              note={t("超出四色色域；关键物料宜用专色。", "Outside the process gamut; colour-critical pieces should use a spot ink.")}
             />
             <InkCard
               name="Oxide"
@@ -158,7 +151,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               swatch="#FF5E14"
               value="C0 M70 Y95 K0"
               cmyk={[0, 70, 95, 0]}
-              note={t("仅用于校验块与单一焦点，约占画面 10%，不得大面积铺底。", "Parity and the single focal point only, about 10% of the area. Never a flood.")}
+              note={t("仅用于校验块与焦点，约 10%，不得铺底。", "Parity and one focal point, about 10%. Never a flood.")}
             />
             <InkCard
               name={t("Ink · 大面积", "Ink · large areas")}
@@ -166,7 +159,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               swatch="#0B0E14"
               value="C60 M40 Y20 K100"
               cmyk={[60, 40, 20, 100]}
-              note={t("四色黑，总墨量 220%。单色黑大面积印刷会发灰，底色与大色块须使用四色黑。", "Rich black at 220% total ink. Black alone prints greyish over large areas, so backgrounds and large fields use rich black.")}
+              note={t("底色与大色块用四色黑，总墨量 220%。", "Backgrounds and large fields: rich black, 220% total ink.")}
             />
             <InkCard
               name={t("Ink · 文字与细线", "Ink · type and lines")}
@@ -174,7 +167,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               swatch="#231F20"
               value="C0 M0 Y0 K100"
               cmyk={[0, 0, 0, 100]}
-              note={t("文字、细线与小面积元素只用单色黑，避免套印偏差。灰色使用 K 单色网点。", "Type, fine lines and small elements use black only, avoiding misregistration. Greys are K-only tints.")}
+              note={t("文字与细线只用单色黑；灰色用 K 网点。", "Type and fine lines in black only; greys are K tints.")}
             />
             <InkCard
               name="White / Paper"
@@ -182,16 +175,16 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               swatch="#FFFFFF"
               value={t("不着墨 · 白墨", "No ink · white ink")}
               cmyk={null}
-              note={t("浅色底即纸张本色，不得用浅灰网点模拟 Paper。深色承印物上以白墨或白色箔实现。", "Light surfaces are the stock itself; never imitate Paper with a grey tint. On dark substrates, use white ink or white foil.")}
+              note={t("浅底即纸色，不得用灰网模拟；深色承印物用白墨或白箔。", "Bare stock, never a grey tint; white ink or foil on dark stock.")}
             />
           </div>
           <Note tone="parity">
             {t(
               <>
-                <b>以上 CMYK 数值为参考值</b>，是与印刷厂沟通的起点，不是最终色值。每批物料须在实际承印物上打样，在标准光源（D50）下与经批准的印刷色样比对后方可批量生产。本规范不指定 Pantone 色号；专色须按经批准的色样调配，并出示样张确认。
+                <b>CMYK 仅为参考值</b>：每批须在实际承印物上打样，于 D50 光源下与批准色样比对后方可量产；不指定 Pantone，专色按批准色样调配。
               </>,
               <>
-                <b>These CMYK values are reference values</b>: a starting point for the printer, not final values. Every job is proofed on the actual stock and compared with the approved printed reference under standard D50 light before the run. These guidelines do not name a Pantone match; spot inks are mixed to the approved reference and confirmed on a drawdown.
+                <b>CMYK values are references only</b>: proof every job on the actual stock and match it to the approved reference under D50 light before the run; no Pantone is named, and spot inks are mixed to the approved reference.
               </>,
             )}
           </Note>
@@ -201,27 +194,24 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
           <Table
             head={[t("项目", "Item"), t("规则", "Rule")]}
             rows={[
-              [t("色彩模式", "Colour mode"), t("印刷文件使用 CMYK 或专色。屏幕显示不得作为颜色依据，颜色以印刷打样为准。", "Print files are CMYK or spot. The screen is never the colour reference; the printed proof is.")],
-              [t("黑色", "Black"), t("大面积 Ink 使用四色黑 C60 M40 Y20 K100；文字与细线只用 K100，不得使用四色黑。", "Large Ink areas use rich black C60 M40 Y20 K100. Type and fine lines use K100 only, never rich black.")],
-              [t("出血与安全区", "Bleed and safe zone"), t("底色与图形延伸至裁切线外 3 mm；文字、标志与二维码距裁切线不少于 5 mm。大幅面物料的遮挡区见各模板说明。", "Backgrounds and graphics extend 3 mm past the trim; text, marks and QR codes stay at least 5 mm inside it. Large formats add the hidden zones given with each template.")],
-              [t("分辨率", "Resolution"), t("位图按成品尺寸不低于 300 dpi；字标、符号、文字与分片矩阵始终为矢量。", "Bitmaps at 300 dpi or more at finished size; the wordmark, symbol, type and shard matrix are always vector.")],
-              [t("最小尺寸", "Minimum sizes"), t("字标宽 ≥ 18 mm，符号宽 ≥ 5 mm。字号 ≥ 6 pt，反白文字 ≥ 8 pt 且不使用细体。线宽 ≥ 0.25 pt，反白线宽 ≥ 0.5 pt。", "Wordmark ≥ 18 mm wide, symbol ≥ 5 mm. Type ≥ 6 pt; reversed type ≥ 8 pt and never light. Lines ≥ 0.25 pt; reversed lines ≥ 0.5 pt.")],
-              [t("渐变与网点", "Gradients and tints"), t("不使用渐变、阴影与透明叠加，渐变在印刷中会出现色阶断层。网点色调不低于 10%。", "No gradients, shadows or transparency; gradients band in print. Tints no lighter than 10%.")],
-              [t("二维码", "QR codes"), t("深色模块印在浅色底上，宽 ≥ 15 mm，四周留 4 个模块的静区。不得反色、不得嵌入标志、不得使用圆点模块。付印前须用至少两部手机实测。", "Dark modules on a light ground, at least 15 mm wide, with a 4-module quiet zone. Never inverted, never with a logo inside, never with round modules. Test on at least two phones before printing.")],
-              [t("深色承印物", "Dark substrates"), t("在深色纸张或织物上，Signal Blue 与 Oxide 下须铺白墨打底。烫印仅用于字标或符号，使用白色或银色哑光箔，笔画不细于 0.3 mm；不使用金色或镭射箔。", "On dark stock or fabric, Signal Blue and Oxide print over a white underbase. Foil is for the wordmark or symbol only, in matte white or silver, with strokes no finer than 0.3 mm; never gold or holographic.")],
-              [t("模切", "Die-cuts"), t("贴纸、吊牌与卡片一律直角模切，不使用圆角或异形轮廓。", "Stickers, tags and cards are die-cut with square corners; no rounded corners or contour shapes.")],
-              [t("交付", "Delivery"), t("交付 PDF/X-4，嵌入字体，含 3 mm 出血与裁切标记；文件名包含成品尺寸与版本，例如 rustfs-card-90x54-v1.pdf。", "Deliver PDF/X-4 with fonts embedded, 3 mm bleed and crop marks. File names carry the finished size and version, for example rustfs-card-90x54-v1.pdf.")],
+              [t("色彩模式", "Colour mode"), t("CMYK 或专色；不以屏幕为准", "CMYK or spot; never judged on screen")],
+              [t("线宽", "Line weight"), t("≥ 0.25 pt；反白 ≥ 0.5 pt", "≥ 0.25 pt; reversed ≥ 0.5 pt")],
+              [t("渐变与网点", "Gradients and tints"), t("不用渐变、阴影与透明；网点 ≥ 10%", "No gradients, shadows or transparency; tints ≥ 10%")],
+              [t("二维码", "QR codes"), t("宽 ≥ 15 mm，静区 4 模块，不用圆点模块；付印前两部手机实测", "≥ 15 mm wide, 4-module quiet zone, square modules; test on two phones before print")],
+              [t("深色承印物", "Dark substrates"), t("彩色下铺白墨；烫印仅限标志，白或银哑光箔，笔画 ≥ 0.3 mm，不用金箔或镭射箔", "White underbase beneath colour; foil for marks only, matte white or silver, strokes ≥ 0.3 mm, never gold or holographic")],
+              [t("模切", "Die-cuts"), t("一律直角", "Square corners only")],
+              [t("交付", "Delivery"), t("PDF/X-4，嵌入字体，含出血与裁切标记；命名如 rustfs-card-90x54-v1.pdf", "PDF/X-4, fonts embedded, bleed and crop marks; named like rustfs-card-90x54-v1.pdf")],
             ]}
           />
         </Sub>
 
-        <Sub title={t("纸张与工艺", "Stock and finishing")} aside={t("推荐项 · 以供应商规格与打样为准", "Recommendations · confirm with the supplier and a proof")}>
+        <Sub title={t("纸张与工艺", "Stock and finishing")} aside={t("推荐项 · 以打样为准", "Recommended · confirm on a proof")}>
           <div className="grid border-t border-l border-border sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: "layers" as const, k: t("文具", "Stationery"), v: t("推荐非涂布纸：名片 350 g/m²，信纸 100–120 g/m²（兼容激光打印），信封 100 g/m²。非涂布纸吸墨，Signal Blue 会略显暗，须单独打样。", "Uncoated stock is recommended: 350 g/m² for cards, 100–120 g/m² for letterhead (laser-safe), 100 g/m² for envelopes. Uncoated stock absorbs ink and darkens Signal Blue, so it needs its own proof.") },
-              { icon: "image" as const, k: t("海报与指示", "Posters and signs"), v: t("推荐哑光涂布纸 170–200 g/m²，避免高光纸在灯光下反光。指示牌宜裱 5 mm KT 板或 PVC 板。", "Matte coated stock at 170–200 g/m² is recommended; gloss reflects under venue lighting. Mount signs on 5 mm foam board or PVC.") },
-              { icon: "site" as const, k: t("大幅面", "Large format"), v: t("背景墙与桌布推荐布面热升华，无反光、可折叠运输；易拉宝推荐防卷曲 PP 或 PET 膜。", "Dye-sublimated fabric is recommended for backdrops and table covers: no glare, folds for transport. Roll-ups use anti-curl PP or PET film.") },
-              { icon: "chip" as const, k: t("周边制品", "Merchandise"), v: t("织物推荐丝网印刷（不超过 3 色）或数码直喷；马克杯推荐热转印；贴纸推荐哑膜乙烯基。", "Screen print (three colours at most) or direct-to-garment for textiles; sublimation for mugs; matte vinyl for stickers.") },
+              { icon: "layers" as const, k: t("文具", "Stationery"), v: t("非涂布纸：名片 350 g/m²，信纸 100–120 g/m²，信封 100 g/m²。Signal Blue 会偏暗，须单独打样。", "Uncoated: cards 350 g/m², letterhead 100–120 g/m², envelopes 100 g/m². Signal Blue darkens; proof it separately.") },
+              { icon: "image" as const, k: t("海报与指示", "Posters and signs"), v: t("哑光涂布纸 170–200 g/m²；指示牌裱 5 mm KT 板或 PVC。", "Matte coated 170–200 g/m²; signs on 5 mm foam board or PVC.") },
+              { icon: "site" as const, k: t("大幅面", "Large format"), v: t("背景墙与桌布用布面热升华；易拉宝用防卷曲 PP 或 PET 膜。", "Dye-sublimated fabric for backdrops and table covers; anti-curl PP or PET for roll-ups.") },
+              { icon: "chip" as const, k: t("周边制品", "Merchandise"), v: t("织物丝印 ≤ 3 色或数码直喷；马克杯热转印；贴纸哑膜乙烯基。", "Textiles: screen print (≤ 3 colours) or DTG; mugs: sublimation; stickers: matte vinyl.") },
             ].map(({ icon, k, v }) => (
               <div key={icon} className="grid content-start gap-3 border-r border-b border-border p-5">
                 <Icon name={icon} className="size-5 text-brand" />
@@ -232,28 +222,28 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
           </div>
         </Sub>
 
-        <Sub title={t("成品尺寸", "Finished sizes")} aside={t("画板 = 成品尺寸 × 比例", "Artboard = finished size × scale")}>
+        <Sub title={t("成品尺寸", "Finished sizes")}>
           <Table
-            mono={[1, 2, 3]}
-            head={[t("物料", "Item"), t("成品尺寸 mm", "Finished mm"), t("画板 px", "Artboard px"), t("比例", "Scale"), t("安全区与遮挡区", "Safe and hidden zones")]}
+            mono={[1]}
+            head={[t("物料", "Item"), t("成品 mm", "Finished mm"), t("安全区 / 遮挡区", "Safe / hidden zone")]}
             rows={[
-              [t("名片", "Business card"), "90 × 54", "1080 × 648", "12 px/mm", t("5 mm；版式边距 6 mm", "5 mm; layout margin 6 mm")],
-              [t("信纸 A4", "Letterhead A4"), "210 × 297", "1240 × 1754", "5.9 px/mm", t("左右边距 20 mm；页脚距底边 12 mm", "20 mm side margins; footer 12 mm from the bottom")],
-              [t("DL 信封", "DL envelope"), "220 × 110", "1100 × 550", "5 px/mm", t("底边 15 mm 留空；右上角为邮资区", "Bottom 15 mm clear; postage top right")],
-              [t("插卡式名牌", "Slide-in name tag"), "100 × 70", "1000 × 700", "10 px/mm", t("上缘 12 mm 为插口区", "Top 12 mm is the slot zone")],
-              [t("贴纸版", "Sticker sheet"), "150 × 150", "1500 × 1500", "10 px/mm", t("图形越过模切线 1.5 mm", "Artwork runs 1.5 mm past each cut")],
-              [t("T 恤 · 胸前", "T-shirt · chest"), "100 × 100", "1200 × 1200", "12 px/mm", t("领口下 75 mm 起", "Starts 75 mm below the collar")],
-              [t("T 恤 · 背后", "T-shirt · back"), "300 × 360", "1500 × 1800", "5 px/mm", t("领口下 100 mm 起", "Starts 100 mm below the collar")],
-              [t("帆布袋", "Tote bag"), "250 × 300", "1250 × 1500", "5 px/mm", t("距缝线 20 mm", "20 mm from the seams")],
-              [t("A5 笔记本封面", "A5 notebook cover"), "148 × 210", "1036 × 1470", "7 px/mm", t("书脊侧 12 mm", "12 mm on the spine side")],
-              [t("马克杯", "Mug wrap"), "200 × 85", "2000 × 850", "10 px/mm", t("两端各 15 mm 为手柄区", "15 mm handle zone at each end")],
-              [t("挂绳", "Lanyard"), t("20 × 100 循环", "20 × 100 repeat"), "3000 × 200", "10 px/mm", t("上下各 2 mm 为缝边", "2 mm hem top and bottom")],
-              [t("胸牌", "Conference badge"), "100 × 140", "1000 × 1400", "10 px/mm", t("上缘 15 mm 为挂孔区", "Top 15 mm is the clip zone")],
-              [t("展台背景墙", "Booth backdrop"), "3000 × 2400", "1500 × 1200", "0.5 px/mm", t("1.0 m 以下被台面遮挡", "Below 1.0 m is hidden by the counter")],
-              [t("易拉宝", "Roll-up banner"), "850 × 2000", "850 × 2000", "1 px/mm", t("底部 200 mm 不放重要信息", "Nothing important in the bottom 200 mm")],
-              [t("桌布前挡", "Table cover front"), "1800 × 760", "1800 × 760", "1 px/mm", t("上缘 50 mm 为桌面转折", "Top 50 mm folds over the table edge")],
-              [t("指示牌 A3 横版", "Directional sign A3"), "420 × 297", "1680 × 1188", "4 px/mm", "20 mm"],
-              [t("活动海报 A3 竖版", "Meetup poster A3"), "297 × 420", "1188 × 1680", "4 px/mm", "20 mm"],
+              [t("名片", "Business card"), "90 × 54", t("5 mm；边距 6 mm", "5 mm; margin 6 mm")],
+              [t("信纸 A4", "Letterhead A4"), "210 × 297", t("边距 20 mm；页脚距底 12 mm", "20 mm sides; footer 12 mm up")],
+              [t("DL 信封", "DL envelope"), "220 × 110", t("底边 15 mm 留空；右上邮资区", "Bottom 15 mm clear; postage top right")],
+              [t("插卡式名牌", "Slide-in name tag"), "100 × 70", t("上缘 12 mm 插口区", "Top 12 mm slot")],
+              [t("贴纸版", "Sticker sheet"), "150 × 150", t("越过模切线 1.5 mm", "1.5 mm past each cut")],
+              [t("T 恤 · 胸前", "T-shirt · chest"), "100 × 100", t("领口下 75 mm", "75 mm below collar")],
+              [t("T 恤 · 背后", "T-shirt · back"), "300 × 360", t("领口下 100 mm", "100 mm below collar")],
+              [t("帆布袋", "Tote bag"), "250 × 300", t("距缝线 20 mm", "20 mm from seams")],
+              [t("A5 笔记本封面", "A5 notebook cover"), "148 × 210", t("书脊侧 12 mm", "12 mm spine side")],
+              [t("马克杯", "Mug wrap"), "200 × 85", t("两端 15 mm 手柄区", "15 mm handle zone each end")],
+              [t("挂绳", "Lanyard"), t("20 × 100 循环", "20 × 100 repeat"), t("上下 2 mm 缝边", "2 mm hem each edge")],
+              [t("胸牌", "Conference badge"), "100 × 140", t("上缘 15 mm 挂孔区", "Top 15 mm clip")],
+              [t("展台背景墙", "Booth backdrop"), "3000 × 2400", t("1.0 m 以下被台面遮挡", "Hidden below 1.0 m")],
+              [t("易拉宝", "Roll-up banner"), "850 × 2000", t("底部 200 mm 被遮挡", "Bottom 200 mm hidden")],
+              [t("桌布前挡", "Table cover front"), "1800 × 760", t("上缘 50 mm 翻过桌沿", "Top 50 mm folds over")],
+              [t("指示牌 A3 横版", "Directional sign A3"), "420 × 297", "20 mm"],
+              [t("活动海报 A3 竖版", "Meetup poster A3"), "297 × 420", "20 mm"],
             ]}
           />
         </Sub>
@@ -264,14 +254,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
         id="stationery"
         tag="Stationery"
         title={t("办公文具", "Stationery")}
-        lede={
-          <p>
-            {t(
-              "文具以白色或纸张本色为底，Signal Blue 只用于字标与少量图形。个人信息以等宽字体排列，姓名是唯一的视觉重点。",
-              "Stationery sits on white or natural stock; Signal Blue is kept to the wordmark and a few small graphics. Personal details are set in mono, and the name is the only point of emphasis.",
-            )}
-          </p>
-        }
+        lede={<p>{t("白色或本色纸为底；Signal Blue 仅限字标与少量图形，姓名是唯一重点。", "White or natural stock; Signal Blue kept to the wordmark and small graphics; the name is the sole emphasis.")}</p>}
       >
         <TemplateGrid>
           {/* Business card · front */}
@@ -285,7 +268,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             langs={["en"]}
             file="card-front"
             style={phys(12, 6)}
-            note={t(<><b>规则：</b>字标宽 40 mm，左下对齐 6 mm 版式边距；条带签名位于右上。正面不放任何文字信息。</>, <><b>Rule:</b> the wordmark is 40 mm wide, set bottom left on the 6 mm layout margin; the stripe signature sits top right. The front carries no other copy.</>)}
+            note={t("字标宽 40 mm；正面不放其他文字。", "Wordmark 40 mm wide; no other copy on the front.")}
           >
             <Wordmark className="ab-logo absolute bottom-(--m) left-(--m) u-h-12.5" />
             <Stripe className="absolute top-(--m) right-(--m) u-text-5.5" />
@@ -301,7 +284,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["white", "paper"]}
             file="card-back"
             style={phys(12, 6)}
-            note={t(<><b>规则：</b>姓名 12 pt，职位 8 pt，联系方式为等宽 7 pt。二维码宽 18 mm，指向 rustfs.com 或个人页面，四周保留静区。</>, <><b>Rule:</b> name 12 pt, title 8 pt, contact details in 7 pt mono. The 18 mm QR code points to rustfs.com or a personal page and keeps its quiet zone.</>)}
+            note={t("姓名 12 pt，职位 8 pt，联系方式等宽 7 pt；二维码 18 mm。", "Name 12 pt, title 8 pt, contacts 7 pt mono; QR 18 mm.")}
           >
             <div className="ab-frame">
               <div className="ab-row items-start">
@@ -341,7 +324,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["white", "paper"]}
             file="letterhead-a4"
             style={phys(5.905, 20)}
-            note={t(<><b>规则：</b>正文 10/15 pt，左对齐。左缘两条折线位于 99 mm 与 198 mm，三折后收件人地址落在 DL 信封窗口内。</>, <><b>Rule:</b> body text 10/15 pt, ranged left. Fold marks at 99 mm and 198 mm on the left edge; folded in three, the address shows through a DL window.</>)}
+            note={t("正文 10/15 pt 左对齐；折线 99、198 mm，地址对准 DL 窗口。", "Body 10/15 pt, ranged left; folds at 99 and 198 mm fit a DL window.")}
           >
             <div className="absolute top-[calc(var(--mm)*15)] right-(--m) left-(--m) flex items-start justify-between">
               <Wordmark className="ab-logo h-[calc(var(--mm)*6.06)]" />
@@ -402,7 +385,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               themes={["white", "paper"]}
               file="envelope-dl"
               style={phys(5, 10)}
-              note={t(<><b>规则：</b>发件信息位于左上角；右上角为邮资区，底边 15 mm 留空供邮政处理。虚线为窗口位置，不印刷。</>, <><b>Rule:</b> sender details top left; postage top right; the bottom 15 mm stays clear for postal processing. The dashed window guide does not print.</>)}
+              note={t("底边 15 mm 须留空，供邮政处理。", "Keep the bottom 15 mm clear for postal processing.")}
             >
               <div className="ab-frame justify-start u-gap-2.5">
                 <div className="flex items-center u-gap-4">
@@ -458,7 +441,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["white", "paper", "ink"]}
             file="name-tag"
             style={phys(10, 7)}
-            note={t(<><b>规则：</b>用于办公访客与内部活动。左侧色带承载符号，姓名在 2 m 外可读。上缘 12 mm 插入卡套后被遮挡。</>, <><b>Rule:</b> for office visitors and internal events. The band on the left carries the symbol; the name reads from 2 m. The top 12 mm is hidden by the holder.</>)}
+            note={t("用于访客与内部活动；姓名 2 m 外可读。", "For visitors and internal events; the name reads from 2 m.")}
           >
             <div className="absolute inset-y-0 left-0 flex w-[calc(var(--mm)*24)] items-end bg-ab-data u-p-6 text-ab-on-data">
               <BrandSymbol className="u-size-9" />
@@ -490,14 +473,11 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               <div className="min-w-0 overflow-x-auto" dangerouslySetInnerHTML={{ __html: sigHtml.replace("{ICON_PNG_URL}", "/brand/logo/rustfs-app-icon.svg") }} />
             </Spec>
             <p className="max-w-[72ch] text-[13px] leading-relaxed text-muted-foreground">
-              {t(
-                "邮件客户端普遍不支持 SVG 与网页字体：图标须使用托管在公开地址上的 PNG（96 × 96，显示为 48 × 48），并以 {ICON_PNG_URL} 处替换；Geist 不可用时依次回退到系统字体。签名中不得加入横幅图片、口号或社交图标墙。",
-                "Mail clients rarely support SVG or web fonts. Use a hosted PNG icon (96 × 96, shown at 48 × 48) in place of {ICON_PNG_URL}; when Geist is unavailable the stack falls back to system fonts. Signatures carry no banner images, slogans or rows of social icons.",
-              )}
+              {t("图标 96 × 96，显示为 48 × 48；不得加入横幅、口号或社交图标。", "Icon 96 × 96, shown at 48 × 48. No banners, slogans or social icons.")}
             </p>
           </div>
         </TemplateGrid>
-        <CodeBlock title={t("email-signature.html · 复制后替换姓名、职位与图标地址", "email-signature.html · replace the name, title and icon URL after copying")} lang="html" code={sigHtml} maxHeight={360} />
+        <CodeBlock title={t("email-signature.html · 替换姓名、职位与图标地址", "email-signature.html · replace name, title and icon URL")} lang="html" code={sigHtml} maxHeight={360} />
       </Section>
 
       {/* ------------------------------------------------------------------ Merchandise */}
@@ -505,14 +485,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
         id="merchandise"
         tag="Merchandise"
         title={t("周边制品", "Merchandise")}
-        lede={
-          <p>
-            {t(
-              "周边制品以一个图形、少量颜色完成：丝网印刷不超过 3 色，Oxide 只出现在校验块上。印花须在实际面料或器物上打样确认。",
-              "Merchandise is built from one graphic and few colours: screen prints use three colours at most, and Oxide appears only on parity. Every print is proofed on the actual fabric or object.",
-            )}
-          </p>
-        }
+        lede={<p>{t("一个图形、少量颜色：丝印不超过 3 色，Oxide 只用于校验块。", "One graphic, few colours: three screen colours at most, Oxide on parity only.")}</p>}
       >
         <TemplateGrid>
           {/* Sticker sheet */}
@@ -525,7 +498,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["paper", "white"]}
             file="sticker-sheet"
             style={phys(10, 8)}
-            note={t(<><b>规则：</b>六枚贴纸均为直角模切，图形延伸至模切线外 1.5 mm。虚线为模切线，不印刷。符号贴纸不小于 30 mm。</>, <><b>Rule:</b> all six stickers are die-cut with square corners, artwork running 1.5 mm past each cut. Dashed lines are cut paths and do not print. The symbol sticker is at least 30 mm.</>)}
+            note={t("直角模切，图形越过模切线 1.5 mm；符号贴纸 ≥ 30 mm。", "Square die-cuts, artwork 1.5 mm past the cut; symbol sticker ≥ 30 mm.")}
           >
             <div className="absolute inset-(--m) grid grid-cols-[440px_1fr] grid-rows-[40px_440px_500px_180px] gap-[60px]">
               <div className="col-span-2 flex items-center justify-between font-mono u-text-1.75 leading-none tracking-[0.08em] text-ab-muted uppercase">
@@ -572,7 +545,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               </div>
               {/* 6 · brand line */}
               <div className="t-signal relative col-span-2 flex items-center justify-between bg-ab-bg px-[50px] text-ab-fg [--mx-data:var(--ab-data)] [--mx-parity:var(--ab-parity)]">
-                <b className="ab-head u-text-4.25 whitespace-nowrap"><L zh="每一个字节，都有着落。" en="Every byte, accounted for." /></b>
+                <b className="ab-head whitespace-nowrap"><L zh={<span className="u-text-4.25">AI 时代的基建，从每一个字节算起。</span>} en={<span className="u-text-2.75">AI infrastructure, accounted for byte by byte.</span>} /></b>
                 <Stripe className="u-text-1.75" />
                 <i className="no-export absolute -inset-[8px] border border-dashed border-oxide-500" />
               </div>
@@ -590,7 +563,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             langs={["en"]}
             file="tshirt-chest"
             style={phys(12, 10)}
-            note={t(<><b>规则：</b>底色代表面料颜色。字标宽 80 mm，居中于 100 × 100 mm 印花区内，印花区上缘位于领口下 75 mm；深色面料须铺白墨打底。</>, <><b>Rule:</b> the surface stands for the garment colour. The 80 mm wordmark is centred in a 100 × 100 mm print area whose top edge sits 75 mm below the collar; dark garments need a white underbase.</>)}
+            note={t("字标宽 80 mm 居中；深色面料须铺白墨打底。", "Wordmark 80 mm wide, centred; dark garments need a white underbase.")}
           >
             <div className="absolute inset-0 grid place-items-center">
               <div className="grid justify-items-center u-gap-7">
@@ -614,7 +587,6 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["ink", "white", "signal"]}
             file="tshirt-back"
             style={phys(5, 20)}
-            note={t(<><b>规则：</b>EC 12+4 纠删集，16 列为 16 块盘，校验块逐条带轮转。品牌口号置于图形之下。</>, <><b>Rule:</b> an EC 12+4 erasure set: 16 columns for 16 drives, parity rotating with each stripe. The brand line sits below the graphic.</>)}
           >
             <div className="ab-frame">
               <div className="grid u-gap-2.5">
@@ -624,7 +596,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
                   <span><L zh="校验块逐条带轮转" en="Parity rotates per stripe" /></span>
                 </span>
                 <h3 className="ab-display u-mt-9 leading-[0.94]">
-                  <L zh={<span className="block u-text-10 leading-[1.12]">每一个字节，<br />都有着落。</span>} en={<span className="block u-text-7.5">Every byte,<br />accounted for.</span>} />
+                  <L zh={<span className="block u-text-8.5 leading-[1.14]">AI 时代的基建，<br />从每一个字节算起。</span>} en={<span className="block u-text-7.5">AI infrastructure,<br />accounted for<br />byte by byte.</span>} />
                 </h3>
               </div>
               <span className="ab-url u-text-1.75">rustfs.com</span>
@@ -641,13 +613,13 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["paper", "ink", "signal"]}
             file="tote-bag"
             style={phys(5, 20)}
-            note={t(<><b>规则：</b>Paper 代表本色帆布。条带签名每格 26 mm，与字标共用左边线；丝网印刷不超过 3 色。</>, <><b>Rule:</b> Paper stands for natural canvas. Each stripe square is 26 mm and shares the wordmark&rsquo;s left edge; three screen colours at most.</>)}
+            note={t("条带每格 26 mm，与字标左边线对齐。", "Stripe squares are 26 mm, flush left with the wordmark.")}
           >
             <div className="ab-frame">
               <span className="ab-label u-text-2">EC 4+2 · <L zh="4 数据块 + 2 校验块" en="4 data + 2 parity" /></span>
               <div className="grid u-gap-7">
                 <Stripe className="u-text-10.5" />
-                <h3 className="ab-head leading-[1.02]"><L zh={<span className="block u-text-7.5 leading-[1.14]">每一个字节，<br />都有着落。</span>} en={<span className="block u-text-6.5">Every byte,<br />accounted for.</span>} /></h3>
+                <h3 className="ab-head leading-[1.02]"><L zh={<span className="block u-text-7.5 leading-[1.14]">AI 时代的基建，<br />从每一个字节算起。</span>} en={<span className="block u-text-6.5">AI infrastructure,<br />accounted for<br />byte by byte.</span>} /></h3>
               </div>
               <Wordmark className="ab-logo u-h-5" />
             </div>
@@ -663,7 +635,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["ink", "signal", "paper"]}
             file="notebook-a5"
             style={phys(7, 12)}
-            note={t(<><b>规则：</b>分片矩阵以压凹或同色印刷呈现，字标为白色或银色哑光烫印。书脊侧留 12 mm。</>, <><b>Rule:</b> the shard matrix is blind-debossed or printed tone on tone; the wordmark is matte white or silver foil. Keep 12 mm clear on the spine side.</>)}
+            note={t("矩阵压凹或同色印；字标用白或银哑光烫印。", "Matrix debossed or tone on tone; wordmark in matte white or silver foil.")}
           >
             <ShardMatrix className="absolute inset-x-0 top-0 !h-auto [--mx-parity:var(--ab-line)]" cols={8} rows={7} k={6} m={2} seed={9} mode="outline" gap={0.16} />
             <div className="absolute right-(--m) bottom-(--m) left-(--m) flex items-end justify-between">
@@ -682,7 +654,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["white", "ink"]}
             file="mug-wrap"
             style={phys(10, 10)}
-            note={t(<><b>规则：</b>左右两面各放一个主体：字标与品牌口号。底部的分片带以 6 格为周期，在手柄处无缝衔接；两端 15 mm 为手柄区。</>, <><b>Rule:</b> one subject per face: the wordmark on one, the brand line on the other. The shard band along the bottom repeats every six cells so it meets seamlessly at the handle; the 15 mm at each end is the handle zone.</>)}
+            note={t("每面一个主体；分片带 6 格一循环，于手柄处无缝衔接。", "One subject per face; a six-cell shard repeat meets seamlessly at the handle.")}
           >
             <div className="absolute top-(--m) right-[150px] bottom-[220px] left-[150px] grid grid-cols-2">
               <div className="grid place-items-center">
@@ -690,7 +662,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               </div>
               <div className="grid place-items-center">
                 <h3 className="ab-display leading-[0.94]">
-                  <L zh={<span className="block u-text-9.5 leading-[1.12]">每一个字节，<br />都有着落。</span>} en={<span className="block u-text-8.5">Every byte,<br />accounted for.</span>} />
+                  <L zh={<span className="block u-text-9.5 leading-[1.12]">AI 时代的基建，<br />从每一个字节算起。</span>} en={<span className="block u-text-7.5">AI infrastructure,<br />accounted for<br />byte by byte.</span>} />
                 </h3>
               </div>
             </div>
@@ -716,7 +688,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             langs={["en"]}
             file="lanyard"
             style={phys(10, 2)}
-            note={t(<><b>规则：</b>字标与条带签名每 100 mm 重复一次，字标高 8 mm。上下各 2 mm 为缝边，不放图形。</>, <><b>Rule:</b> the wordmark and stripe signature repeat every 100 mm, the wordmark 8 mm tall. The 2 mm hem at top and bottom carries no artwork.</>)}
+            note={t("字标高 8 mm；缝边不放图形。", "Wordmark 8 mm tall; no artwork on the hems.")}
           >
             <div className="absolute inset-0 flex items-center">
               {[0, 1, 2].map((i) => (
@@ -740,21 +712,14 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
         id="events"
         tag="Events"
         title={t("活动物料", "Event materials")}
-        lede={
-          <p>
-            {t(
-              "活动物料在数米之外被阅读。每件物料只传达一条信息，字号按观看距离计算；关键信息位于视线高度，被台面与人群遮挡的下部只放装饰图形。",
-              "Event materials are read from metres away. Each piece carries one message, sized for its viewing distance; the key message sits at eye level, and the lower area hidden by counters and crowds carries decoration only.",
-            )}
-          </p>
-        }
+        lede={<p>{t("每件只传达一条信息，置于视线高度；被遮挡的下部只放装饰。", "One message per piece, at eye level; the hidden lower area carries decoration only.")}</p>}
       >
         <TemplateGrid>
           {/* Badges */}
           {[
-            { id: "attendee", zh: "参会者", en: "Attendee", band: "t-signal bg-ab-bg text-ab-fg", note: t("Signal 色带：参会者。", "Signal band: attendees.") },
-            { id: "speaker", zh: "演讲者", en: "Speaker", band: "t-ink bg-ab-bg text-ab-fg", note: t("Ink 色带：演讲者。", "Ink band: speakers.") },
-            { id: "staff", zh: "工作人员", en: "Staff", band: "t-ink bg-ab-bg text-ab-fg", marker: true, note: t("Ink 色带加 Oxide 方块：工作人员，是参会者需要一眼找到的唯一角色；Oxide 只作为这一处焦点标记，不铺满色带。", "Ink band with an Oxide marker: staff, the one role attendees must find at a glance. Oxide is the single focal marker, never a full band.") },
+            { id: "attendee", zh: "参会者", en: "Attendee", band: "t-signal bg-ab-bg text-ab-fg", note: t("Signal 色带 = 参会者。", "Signal band = attendee.") },
+            { id: "speaker", zh: "演讲者", en: "Speaker", band: "t-ink bg-ab-bg text-ab-fg", note: t("Ink 色带 = 演讲者。", "Ink band = speaker.") },
+            { id: "staff", zh: "工作人员", en: "Staff", band: "t-ink bg-ab-bg text-ab-fg", marker: true, note: t("Ink 色带加 Oxide 方块 = 工作人员；Oxide 不铺满色带。", "Ink band plus Oxide marker = staff; Oxide never fills the band.") },
           ].map((b) => (
             <PrintTemplate
               key={b.id}
@@ -766,13 +731,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               themes={["white", "paper"]}
               file={`badge-${b.id}`}
               style={phys(10, 8)}
-              note={
-                <>
-                  <b>{t("规则：", "Rule: ")}</b>
-                  {b.note}
-                  {t(" 姓名字高不小于 11 mm，2 m 外可读；上缘 15 mm 为挂孔区。", " The name is at least 11 mm tall and reads from 2 m; the top 15 mm is the clip zone.")}
-                </>
-              }
+              note={b.note}
             >
               <div className="absolute top-[calc(var(--mm)*19)] right-(--m) left-(--m) flex items-start justify-between">
                 <Wordmark className="ab-logo u-h-5" />
@@ -813,12 +772,12 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               themes={["ink", "signal", "white"]}
               file="booth-backdrop"
               style={phys(0.5, 168)}
-              note={t(<><b>规则：</b>字标位于 1.8 m 以上，越过人群可见；唯一的信息位于 1.2–1.8 m 视线区；1.0 m 以下被台面遮挡，只放分片矩阵。参考线不导出。</>, <><b>Rule:</b> the wordmark sits above 1.8 m, visible over the crowd; the single message sits in the 1.2–1.8 m eye-level zone; below 1.0 m the counter hides the wall, so it carries only the shard matrix. Guides do not export.</>)}
+              note={t("字标在 1.8 m 以上，信息在 1.2–1.8 m，1.0 m 以下只放矩阵。", "Wordmark above 1.8 m, message at 1.2–1.8 m, only the matrix below 1.0 m.")}
             >
               <ShardMatrix className="absolute inset-x-0 bottom-0 !h-[460px] [--mx-empty:transparent]" cols={16} rows={5} k={12} m={4} seed={17} mode="tone" gap={0.16} fit="slice" fade="t" />
               <Wordmark className="ab-logo absolute top-(--m) left-(--m) u-h-9" />
               <h3 className="ab-display absolute top-[318px] left-(--m) u-text-11 leading-[0.94]">
-                <L zh={<span className="block leading-[1.08]">每一个字节，<br />都有着落。</span>} en={<>Every byte,<br />accounted for.</>} />
+                <L zh={<span className="block leading-[1.08]">AI 时代的基建，<br />从每一个字节算起。</span>} en={<span className="block u-text-7.5">AI infrastructure,<br />accounted for<br />byte by byte.</span>} />
               </h3>
               <span className="absolute top-[622px] left-(--m) font-mono u-text-3 leading-none font-medium tracking-[0.02em] text-ab-fg-2">rustfs.com</span>
               <GuideZone top={300} height={300} />
@@ -851,10 +810,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
                 ]}
               />
               <p className="max-w-[72ch] text-[13px] leading-relaxed text-muted-foreground">
-                {t(
-                  "字高指拉丁大写字母或汉字的高度。最小字高 = 最远观看距离 ÷ 300；主信息不小于最小字高的 1.5 倍。",
-                  "Letter height means the height of a Latin capital or a Chinese character. Minimum letter height = farthest viewing distance ÷ 300; the key message is at least 1.5 times that.",
-                )}
+                {t("字高按拉丁大写或汉字计：最小字高 = 最远距离 ÷ 300，主信息 ≥ 1.5 倍。", "Cap or Han height: minimum = farthest distance ÷ 300; key message ≥ 1.5×.")}
               </p>
             </div>
           </div>
@@ -869,7 +825,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["signal", "ink", "white"]}
             file="rollup-banner"
             style={phys(1, 60)}
-            note={t(<><b>规则：</b>唯一的信息位于 1 m 以上；二维码置于 1.0–1.2 m，便于扫码。底部 20 cm 被底座遮挡，不放重要信息。</>, <><b>Rule:</b> the single message sits above 1 m; the QR code sits at 1.0–1.2 m where it is easy to scan. The bottom 20 cm is hidden by the base and carries nothing important.</>)}
+            note={t("信息在 1 m 以上；二维码置于 1.0–1.2 m。", "Message above 1 m; QR code at 1.0–1.2 m.")}
           >
             <ShardMatrix className="absolute inset-x-0 bottom-0 !h-[940px] [--mx-empty:transparent]" cols={8} rows={10} k={6} m={2} seed={6} gap={0.16} fit="slice" fade="t" />
             <div className="absolute top-(--m) right-(--m) left-(--m) grid u-gap-12">
@@ -912,7 +868,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
             themes={["ink", "signal", "paper"]}
             file="poster-meetup-a3"
             style={phys(4, 20)}
-            note={t(<><b>规则：</b>日期、场地与议程为占位文字，演讲者信息须经本人确认后填写。二维码须替换为活动报名链接，并同步修改其下方的地址。</>, <><b>Rule:</b> date, venue and agenda are placeholders; speaker details are filled in only after each speaker confirms them. Replace the QR code with the registration link and update the address printed beneath it.</>)}
+            note={t("演讲者信息须经本人确认；二维码与下方地址须同步替换。", "Speaker details need each speaker's approval; replace the QR code and its printed URL together.")}
           >
             <div className="ab-frame u-gap-0">
               <div className="ab-row">
@@ -966,7 +922,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               themes={["signal", "ink", "white"]}
               file="sign-a3"
               style={phys(4, 20)}
-              note={t(<><b>规则：</b>箭头只按 45° 步进旋转，不得镜像文字。每块指示牌只指向一个目的地。</>, <><b>Rule:</b> the arrow rotates in 45° steps only and the text is never mirrored. Each sign points to one destination.</>)}
+              note={t("箭头按 45° 步进，文字不得镜像；一牌一个目的地。", "Arrow turns in 45° steps; text never mirrored; one destination per sign.")}
             >
               <div className="ab-frame">
                 <div className="ab-row items-start">
@@ -990,7 +946,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               langs={["en"]}
               file="table-cover"
               style={phys(1, 60)}
-              note={t(<><b>规则：</b>桌布为对称版式，字标居中，宽 760 mm。上缘 50 mm 翻过桌沿，底部图形可被遮挡。</>, <><b>Rule:</b> the table cover is symmetric, with the wordmark centred at 760 mm wide. The top 50 mm folds over the table edge; the graphic at the bottom may be hidden.</>)}
+              note={t("对称版式，字标居中，宽 760 mm。", "Symmetric; wordmark centred, 760 mm wide.")}
             >
               <div className="absolute inset-x-0 top-[150px] grid justify-items-center u-gap-6">
                 <Wordmark className="ab-logo self-center h-[calc(var(--mm)*128)]" />
@@ -1011,18 +967,17 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
         id="rules"
         tag="Do & Don't"
         title={t("付印前检查", "Before it goes to press")}
-        lede={<p>{t("付印前，须逐项对照以下规则，并确认打样已获批准。", "Check every piece against these rules, and confirm the proof is approved, before it goes to press.")}</p>}
       >
         <div className="grid gap-4 md:grid-cols-2">
           {/* 1 · trim */}
-          <DoDont kind="do" on="paper" caption={t("字标与条带签名位于 5 mm 安全区内，裁切误差不会影响标志。", "The wordmark and stripe sit inside the 5 mm safe zone; trimming tolerance never touches the mark.")}>
+          <DoDont kind="do" on="paper" caption={t("标志位于 5 mm 安全区内。", "Marks inside the 5 mm safe zone.")}>
             <div className="relative h-[150px] w-[250px] bg-blue-500 [--mx-data:#FFFFFF] [--mx-parity:#0B0E14]">
               <span className="absolute inset-[14px] border border-dashed border-white/45" />
               <Wordmark className="absolute bottom-[18px] left-[18px] h-[22px] w-auto text-white" />
               <Stripe className="absolute top-[18px] right-[18px] text-[9px]" />
             </div>
           </DoDont>
-          <DoDont kind="dont" on="paper" caption={t("标志贴近或越过裁切线，裁切后被切掉一部分。", "Marks set against or across the trim lose part of themselves when cut.")}>
+          <DoDont kind="dont" on="paper" caption={t("标志贴近或越过裁切线。", "Marks against or across the trim.")}>
             <div className="relative h-[150px] w-[250px] overflow-hidden bg-blue-500 [--mx-data:#FFFFFF] [--mx-parity:#0B0E14]">
               <Wordmark className="absolute -bottom-[5px] -left-[6px] h-[30px] w-auto text-white" />
               <Stripe className="absolute -top-[3px] -right-[8px] text-[11px]" />
@@ -1030,7 +985,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
           </DoDont>
 
           {/* 2 · die-cut */}
-          <DoDont kind="do" on="paper" caption={t("贴纸直角模切，与品牌的方正形态一致。", "Stickers are die-cut square, matching the brand's square geometry.")}>
+          <DoDont kind="do" on="paper" caption={t("直角模切。", "Square die-cuts.")}>
             <div className="flex items-center gap-4">
               <AppIcon className="size-24" />
               <div className="grid h-24 w-40 place-items-center bg-neutral-950 px-4 [--mx-data:#0062FF] [--mx-parity:#FF5E14]">
@@ -1038,7 +993,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
               </div>
             </div>
           </DoDont>
-          <DoDont kind="dont" on="paper" caption={t("圆角、圆形或沿图形轮廓的异形模切。", "Rounded corners, circles or contour cuts around the artwork.")}>
+          <DoDont kind="dont" on="paper" caption={t("圆角、圆形或异形模切。", "Rounded, circular or contour cuts.")}>
             <div className="flex items-center gap-4">
               <span className="block size-24 overflow-hidden rounded-[22px]"><AppIcon className="size-full" /></span>
               <span className="grid size-24 place-items-center rounded-full bg-neutral-950 font-mono text-xs font-medium tracking-[0.06em] text-white">EC 4+2</span>
@@ -1046,26 +1001,26 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
           </DoDont>
 
           {/* 3 · gradients */}
-          <DoDont kind="do" on="blue" bodyClassName="p-0 min-h-44" caption={t("平涂色块与实心分片，任何印刷方式都能稳定复现。", "Flat fields and solid shards reproduce reliably in any process.")}>
+          <DoDont kind="do" on="blue" bodyClassName="p-0 min-h-44" caption={t("平涂色块与实心分片。", "Flat fields and solid shards.")}>
             <div className="absolute inset-0 [--mx-data:#FFFFFF] [--mx-parity:#0B0E14] [--mx-empty:rgba(255,255,255,0.3)]">
               <ShardMatrix className="absolute inset-y-6 right-6 !h-[calc(100%-48px)] !w-[46%]" cols={6} rows={4} k={4} m={2} seed={4} fit="right" gap={0.22} />
               <Wordmark className="absolute bottom-6 left-6 h-6 w-auto text-white" />
             </div>
           </DoDont>
-          <DoDont kind="dont" bodyClassName="p-0 min-h-44" caption={t("蓝橙渐变在印刷中出现色阶断层，且混出品牌之外的颜色。", "A blue-to-orange gradient bands in print and mixes colours outside the palette.")}>
+          <DoDont kind="dont" bodyClassName="p-0 min-h-44" caption={t("渐变在印刷中出现色阶断层。", "Gradients band in print.")}>
             <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, ${BANDING.map((c, i) => `${c} ${(i * 100) / BANDING.length}% ${((i + 1) * 100) / BANDING.length}%`).join(", ")})` }}>
               <Wordmark className="absolute bottom-6 left-6 h-6 w-auto text-white" />
             </div>
           </DoDont>
 
           {/* 4 · orange */}
-          <DoDont kind="do" on="ink" caption={t("Oxide 只标记校验块，约占画面 10%。", "Oxide marks parity only, about 10% of the area.")}>
+          <DoDont kind="do" on="ink" caption={t("Oxide 只标记校验块，约 10%。", "Oxide on parity only, about 10%.")}>
             <div className="grid justify-items-start gap-4 [--mx-data:#0062FF] [--mx-parity:#FF5E14]">
               <Wordmark className="h-7 w-auto text-white" />
               <Stripe className="text-[18px]" />
             </div>
           </DoDont>
-          <DoDont kind="dont" on="oxide" caption={t("Oxide 大面积铺底，失去校验色的含义，也压过 Signal Blue。", "Oxide as a full flood loses its meaning as the parity colour and overpowers Signal Blue.")}>
+          <DoDont kind="dont" on="oxide" caption={t("Oxide 大面积铺底。", "Oxide as a flood.")}>
             <div className="grid justify-items-start gap-4">
               <Wordmark className="h-7 w-auto text-white" />
               <span className="font-display text-xl leading-none font-extrabold text-white [font-stretch:125%]">EC 4+2</span>
@@ -1073,23 +1028,23 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
           </DoDont>
 
           {/* 5 · reversed type */}
-          <DoDont kind="do" on="ink" bodyClassName="place-items-start content-center gap-2" caption={t("深色底上的反白文字不小于 8 pt，使用 Regular 或更粗的字重。", "Reversed type on dark grounds is 8 pt or larger, Regular weight or heavier.")}>
+          <DoDont kind="do" on="ink" bodyClassName="place-items-start content-center gap-2" caption={t("反白文字 ≥ 8 pt，Regular 或更粗。", "Reversed type ≥ 8 pt, Regular or heavier.")}>
             <span className="font-mono text-[11px] leading-none font-medium tracking-[0.08em] text-neutral-400 uppercase">Email</span>
             <span className="font-mono text-[15px] leading-none font-medium text-white">name@rustfs.com</span>
           </DoDont>
-          <DoDont kind="dont" on="ink" bodyClassName="place-items-start content-center" caption={t("细体小字反白在深色底上，印刷时被油墨填没。", "Small light type reversed out of a dark ground fills in on press.")}>
+          <DoDont kind="dont" on="ink" bodyClassName="place-items-start content-center" caption={t("细体小字反白，印刷时糊版。", "Small light reversed type fills in.")}>
             <span className="max-w-[30ch] text-[9px] leading-snug font-light text-neutral-600">
               {t("Apache 2.0 许可 · 自托管 · 无遥测 · 兼容 S3 的分布式对象存储 · rustfs.com", "Apache 2.0 · self-hosted · no telemetry · S3-compatible distributed object storage · rustfs.com")}
             </span>
           </DoDont>
 
           {/* 6 · QR */}
-          <DoDont kind="do" on="ink" caption={t("深色模块印在白色底上，四周保留 4 个模块的静区。", "Dark modules on a white ground with a 4-module quiet zone.")}>
+          <DoDont kind="do" on="ink" caption={t("白底深色模块，静区 4 模块。", "Dark on white, 4-module quiet zone.")}>
             <div className="size-28 bg-white text-neutral-950">
               <QR value={URL} quiet={4} className="size-full" />
             </div>
           </DoDont>
-          <DoDont kind="dont" on="ink" caption={t("反色二维码、裁掉静区或在中间嵌入标志，部分手机无法识别。", "Inverted codes, a cropped quiet zone or a logo in the middle fail on some phones.")}>
+          <DoDont kind="dont" on="ink" caption={t("反色、裁掉静区或嵌入标志。", "Inverted, no quiet zone, or a logo inside.")}>
             <div className="relative size-28 text-white">
               <QR value={URL} quiet={0} className="size-full" />
               <span className="absolute top-1/2 left-1/2 grid size-8 -translate-1/2 place-items-center bg-blue-500">

@@ -31,8 +31,8 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
         title={t("文章封面", "Article covers")}
         subtitle={t("Article covers", "文章封面")}
         lede={t(
-          "博客、微信公众号、技术社区与 Newsletter 的封面采用统一骨架：字标位于左上，栏目标签位于右上，标题占据左侧约三分之二，品牌图形位于右侧或底边。替换标题即可生成新封面，底色用于区分栏目。",
-          "Covers for the blog, WeChat, developer communities and the newsletter share one skeleton: the wordmark top left, the category label top right, the title across the left two thirds and the brand graphic on the right or along the bottom edge. A new cover needs only a new title; the surface colour identifies the series.",
+          "博客、公众号、技术社区与 Newsletter 封面共用一套骨架；换标题即得新封面，底色区分栏目。",
+          "Blog, WeChat, community and newsletter covers share one skeleton: change the title for a new cover; the surface marks the series.",
         )}
         meta={[
           { k: t("模板", "Templates"), v: "15" },
@@ -46,14 +46,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
         id="anatomy"
         tag="Anatomy"
         title={t("封面结构", "Four zones, fixed positions")}
-        lede={
-          <p>
-            {t(
-              "封面尺寸以 u 为单位，1u 等于画板短边的 1/100。安全边距为 7u，字标高 4.25u，标签字号 2.25u。不同尺寸的封面因此保持相同比例，品牌在各平台呈现一致。",
-              "All measurements use u, one hundredth of the artboard's short side. The safe margin is 7u, the wordmark 4.25u tall and labels 2.25u. Covers of every size therefore keep the same proportions, and the brand reads the same on every platform.",
-            )}
-          </p>
-        }
+        lede={<p>{t("1u = 画板短边的 1/100；安全边距 7u，各尺寸比例一致。", "1u is one hundredth of the short side; the safe margin is 7u at every size.")}</p>}
       >
         <TemplateGrid>
           <Template title={t("封面骨架", "Cover anatomy")} spec={t("1200 × 630 · 安全边距 7u · u = 6.3px", "1200 × 630 · 7u safe margin · u = 6.3px")} w={1200} h={630} file="cover-anatomy" langs={["en"]}>
@@ -83,10 +76,10 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
         </TemplateGrid>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            [t("① 字标", "① Wordmark"), t("位于左上角，高 4.25u。Ink 与 Signal 底色上使用白色字标，浅色底色上使用 Signal Blue。", "Top left, 4.25u tall. White on Ink and Signal; Signal Blue on light surfaces.")],
-            [t("② 标签", "② Label"), t("位于右上角，使用等宽大写：栏目 · 日期或阅读时长。每个封面仅设一个标签。", "Top right, in mono capitals: category · date or reading time. One label per cover.")],
-            [t("③ 标题", "③ Title"), t("中文不超过 2 行、18 字；英文不超过 3 行。标题过长时缩小字号，不得压缩字距。", "Chinese: at most two lines and 18 characters. English: at most three lines. Long titles are set smaller; tracking is never tightened.")],
-            [t("④ 图形", "④ Graphic"), t("使用分片矩阵或说明内容的示意图。不得使用与内容无关的插画、库存图片或 AI 生成图像。", "A shard matrix or a diagram that explains the content. Unrelated illustration, stock imagery and AI-generated images are not permitted.")],
+            [t("① 字标", "① Wordmark"), t("左上，高 4.25u；Ink、Signal 底用白色，浅底用 Signal Blue。", "Top left, 4.25u; white on Ink and Signal, Signal Blue on light.")],
+            [t("② 标签", "② Label"), t("右上，等宽大写 2.25u：栏目 · 日期或时长，仅一个。", "Top right, 2.25u mono caps: category · date or read time. One only.")],
+            [t("③ 标题", "③ Title"), t("中文 ≤ 2 行 18 字，英文 ≤ 3 行；过长缩字号，不压字距。", "Chinese ≤ 2 lines, 18 characters; English ≤ 3 lines. Shrink, never tighten.")],
+            [t("④ 图形", "④ Graphic"), t("分片矩阵或解释内容的图解；不用库存图、无关插画或 AI 图像。", "Shard matrix or an explanatory diagram; no stock, unrelated or AI imagery.")],
           ].map(([k, v], i) => (
             <div key={i} className="grid gap-1.5 border-t border-border pt-3 text-sm leading-relaxed text-subtle">
               <b className="font-mono text-[11px] font-medium tracking-[0.06em] text-brand uppercase">{k}</b>
@@ -100,18 +93,18 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
         id="sizes"
         tag="Sizes"
         title={t("平台尺寸", "Sizes by platform")}
-        lede={<p>{t("下表为各平台截至 2026 年 10 月的推荐尺寸。平台规则可能调整，发布前应在平台预览中确认裁切效果。", "Recommended sizes for each platform as of October 2026. Platform rules change; confirm the crop in the platform preview before publishing.")}</p>}
+        lede={<p>{t("截至 2026 年 10 月；发布前须在平台预览中确认裁切。", "As of October 2026; check the crop in the platform preview before publishing.")}</p>}
       >
         <Table
           mono={[1, 2]}
           head={[t("用途", "Use"), t("画板", "Artboard"), t("比例", "Ratio"), t("注意", "Notes")]}
           rows={[
-            [t("博客 OG、X、LinkedIn、Slack 预览", "Blog OG, X, LinkedIn, Slack unfurls"), "1200 × 630", "1.91 : 1", t("X 在时间线里会裁上下各约 3%，重要内容离上下边至少 7u", "X trims about 3% top and bottom in the timeline; keep key content 7u from the edges")],
-            [t("微信公众号头条封面", "WeChat article cover"), "900 × 383", "2.35 : 1", t("转发到聊天时使用单独上传的 1:1 图，不要指望自动裁切", "Chat shares use a separately uploaded 1:1 image; do not rely on the automatic crop")],
-            [t("公众号次条 / 分享缩略图", "WeChat secondary / share thumbnail"), "600 × 600", "1 : 1", t("缩略图实际显示约 64px，只放一个大字或符号", "Shown at about 64px; one big word or the symbol only")],
-            [t("掘金、知乎、CSDN、思否等文章头图", "Juejin, Zhihu, CSDN, SegmentFault headers"), "1600 × 900", "16 : 9", t("列表页会缩到约 240px 宽，标题字号不小于 8u", "Lists shrink it to about 240px wide; keep titles at 8u or larger")],
-            ["Medium, dev.to", "1000 × 420", "2.38 : 1", t("dev.to 会裁成 1000 × 420，Medium 列表页裁成方形，主体放左半", "dev.to crops to 1000 × 420 and Medium lists crop to a square; keep the subject on the left")],
-            [t("Newsletter 邮件头图", "Newsletter header"), "1200 × 400", "3 : 1", t("邮件客户端常默认不加载图片，标题同时写进邮件正文", "Many mail clients block images by default; repeat the title in the email body")],
+            [t("博客 OG、X、LinkedIn、Slack 预览", "Blog OG, X, LinkedIn, Slack unfurls"), "1200 × 630", "1.91 : 1", t("X 裁上下各约 3%，内容距边 ≥ 7u", "X trims ~3% top and bottom; keep content 7u in")],
+            [t("微信公众号头条封面", "WeChat article cover"), "900 × 383", "2.35 : 1", t("聊天分享须另传 1:1 图", "Upload a separate 1:1 image for chat shares")],
+            [t("公众号次条 / 分享缩略图", "WeChat secondary / share thumbnail"), "600 × 600", "1 : 1", t("显示约 64px，只放一个大字或符号", "Shown ~64px; one big word or the symbol")],
+            [t("掘金、知乎、CSDN、思否", "Juejin, Zhihu, CSDN, SegmentFault"), "1600 × 900", "16 : 9", t("列表缩至约 240px，标题 ≥ 8u", "Lists shrink to ~240px; titles ≥ 8u")],
+            ["Medium, dev.to", "1000 × 420", "2.38 : 1", t("Medium 列表裁为方形，主体靠左", "Medium lists crop square; keep the subject left")],
+            [t("Newsletter 邮件头图", "Newsletter header"), "1200 × 400", "3 : 1", t("图片常被屏蔽，标题须写进正文", "Images are often blocked; repeat the title in the body")],
           ]}
         />
       </Section>
@@ -120,7 +113,6 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
         id="templates"
         tag="Templates"
         title={t("封面模板", "Cover templates")}
-        lede={<p>{t("共 15 个模板。选择「编辑文字」可直接修改画板文字；底色与语言可切换；完成后选择「导出 PNG」。", "Fifteen templates. Choose Edit text to change copy on the artboard, switch the surface and language as needed, then choose Export PNG.")}</p>}
       >
         <TemplateGrid
           filters={[
@@ -132,7 +124,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           ]}
         >
           {/* 1 · Release */}
-          <Template span={6} title={t("版本发布", "Release")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper", "signal"]} tags={["og"]} file="og-release" note={t(<><b>用途：</b>主版本与补丁版本发布。版本号是画面唯一的主体，副标题以一句话说明该版本的意义。</>, <><b>Use:</b> major and patch releases. The version number is the sole focus; the subtitle states in one line what the release delivers.</>)}>
+          <Template span={6} title={t("版本发布", "Release")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper", "signal"]} tags={["og"]} file="og-release" note={t("版本号是唯一主体；副标题一句话说明意义。", "The version number is the sole focus; one-line subtitle.")}>
             <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[36%]" cols={6} rows={12} k={4} m={2} seed={21} mode="tone" fit="slice" gap={0.22} />
             <div className="ab-frame right-[calc(36%+var(--m))]">
               <div className="ab-row">
@@ -152,7 +144,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 2 · Engineering */}
-          <Template span={6} title={t("工程深度文", "Engineering deep dive")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["paper", "ink", "signal"]} tags={["og"]} file="og-engineering" note={t(<><b>用途：</b>技术原理类文章。下半部以说明原理的示意图代替装饰；示例为 EC 4+2，任意 2 块盘损坏后数据均可重建。</>, <><b>Use:</b> technical explainers. A small diagram that explains the idea replaces decoration; this one shows EC 4+2, which survives any two failed drives.</>)}>
+          <Template span={6} title={t("工程深度文", "Engineering deep dive")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["paper", "ink", "signal"]} tags={["og"]} file="og-engineering" note={t("用解释原理的图解代替装饰。", "A diagram that explains the idea replaces decoration.")}>
             <div className="ab-frame">
               <div className="ab-row">
                 <Wordmark className="ab-logo" />
@@ -178,7 +170,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 3 · Tutorial */}
-          <Template span={6} title={t("教程", "Tutorial")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper", "signal"]} tags={["og"]} file="og-tutorial" note={t(<><b>用途：</b>操作教程。终端中仅展示官方文档中存在的命令；结果以注释形式说明，不得虚构程序输出。</>, <><b>Use:</b> tutorials. The terminal shows only commands from the official documentation; results are given as comments and program output is never invented.</>)}>
+          <Template span={6} title={t("教程", "Tutorial")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper", "signal"]} tags={["og"]} file="og-tutorial" note={t("只用官方文档中的命令；结果写成注释，不得虚构输出。", "Only documented commands; results as comments, never invented output.")}>
             <div className="ab-frame right-1/2">
               <Wordmark className="ab-logo" />
               <h3 className="ab-head u-text-8.5"><L zh="快速上手：用 Docker 运行 RustFS" en="Quickstart: RustFS on Docker" /></h3>
@@ -207,7 +199,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 4 · Partnership */}
-          <Template span={6} title={t("合作公告", "Partnership")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["signal", "ink", "paper"]} tags={["og"]} file="og-partner" note={t(<><b>用途：</b>联合公告。双方标志等高，以细「×」分隔。合作方标志按其品牌规范置入虚线框，导出前删除虚线框。</>, <><b>Use:</b> joint announcements. Both logos share one height with a light “×” between them. Place the partner logo per their guidelines inside the dashed box, then remove the box.</>)}>
+          <Template span={6} title={t("合作公告", "Partnership")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["signal", "ink", "paper"]} tags={["og"]} file="og-partner" note={t("双方标志等高；合作方标志遵循其品牌规范。", "Both logos share one height; the partner's follows its own guidelines.")}>
             <div className="ab-frame justify-start gap-0">
               <div className="ab-row">
                 <span className="ab-label"><L zh="公告" en="Announcement" /></span>
@@ -224,7 +216,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 5 · Case study */}
-          <Template span={6} title={t("客户案例", "Case study")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["white", "paper", "ink", "signal"]} tags={["og"]} file="og-case" note={t(<><b>用途：</b>客户案例。以一条数据流说明 RustFS 在客户系统中的位置。客户名称与数据须经客户书面确认，未经确认不得使用数字。</>, <><b>Use:</b> customer stories. One data flow shows where RustFS sits in the customer’s system. Customer names and figures require the customer’s written approval; without it, no figures are used.</>)}>
+          <Template span={6} title={t("客户案例", "Case study")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["white", "paper", "ink", "signal"]} tags={["og"]} file="og-case" note={t("客户名称与数据须经客户书面确认。", "Customer names and figures need the customer’s written approval.")}>
             <div className="ab-frame">
               <div className="ab-row">
                 <Wordmark className="ab-logo" />
@@ -257,7 +249,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 6 · Security advisory */}
-          <Template span={6} title={t("安全公告", "Security advisory")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper"]} tags={["og"]} file="og-advisory" note={t(<><b>用途：</b>安全公告，仅在公告公开后使用。信息须完整：编号、严重程度、修复版本。Oxide 仅用于严重程度标记。</>, <><b>Use:</b> only after the advisory is public. Calm and complete: identifier, severity, fixed version. Orange appears once, on severity.</>)}>
+          <Template span={6} title={t("安全公告", "Security advisory")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper"]} tags={["og"]} file="og-advisory" note={t("仅在公告公开后使用；Oxide 只标严重程度。", "Only once the advisory is public; Oxide marks severity only.")}>
             <div className="ab-frame">
               <div className="ab-row">
                 <Wordmark className="ab-logo" />
@@ -282,7 +274,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 7 · Docs */}
-          <Template span={6} title={t("文档页 OG", "Docs OG")} spec={t("1200 × 630 · docs.rustfs.com 自动生成", "1200 × 630 · generated for docs.rustfs.com")} w={1200} h={630} themes={["white", "paper", "ink"]} tags={["og"]} file="og-docs" note={t(<><b>用途：</b>文档站自动生成的分享图。面包屑取自页面路径，标题取自页面标题，图标按章节对应（安装 = terminal，管理 = console，安全 = shield）。</>, <><b>Use:</b> share images generated for the documentation site. The breadcrumb follows the page path, the title is the page title and the icon follows the section (install = terminal, manage = console, security = shield).</>)}>
+          <Template span={6} title={t("文档页 OG", "Docs OG")} spec={t("1200 × 630 · docs.rustfs.com 自动生成", "1200 × 630 · generated for docs.rustfs.com")} w={1200} h={630} themes={["white", "paper", "ink"]} tags={["og"]} file="og-docs" note={t("图标按章节：安装 terminal，管理 console，安全 shield。", "Icon by section: install terminal, manage console, security shield.")}>
             <div className="ab-frame right-[calc(var(--u)*42+var(--m))]">
               <Wordmark className="ab-logo" />
               <div>
@@ -300,7 +292,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 8 · What's new */}
-          <Template span={6} title={t("功能盘点", "What's new")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper", "signal"]} tags={["og"]} file="og-whats-new" note={t(<><b>用途：</b>功能盘点。状态标签与官方功能状态表一致：可用、预览、可选构建。预览功能以 Oxide 方块标记。</>, <><b>Use:</b> feature round-ups. Status labels follow the official feature status table: Available, Preview, Opt-in. Preview items carry the Oxide marker.</>)}>
+          <Template span={6} title={t("功能盘点", "What's new")} spec="1200 × 630 · OG / X / LinkedIn" w={1200} h={630} themes={["ink", "paper", "signal"]} tags={["og"]} file="og-whats-new" note={t("状态与官方功能状态表一致；预览项标 Oxide 方块。", "Statuses follow the official feature table; Preview items get the Oxide marker.")}>
             <div className="ab-frame">
               <div className="ab-row">
                 <Wordmark className="ab-logo" />
@@ -356,7 +348,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 11 · WeChat series */}
-          <Template span={6} title={t("公众号 · 系列专栏", "WeChat · series")} spec={t("900 × 383 · 期号即顺序", "900 × 383 · the number is the issue")} w={900} h={383} themes={["paper", "ink", "signal"]} langs={["zh"]} tags={["wechat"]} file="wechat-series" note={t(<><b>用途：</b>系列连载。右侧空心数字为期号；同一系列须使用同一底色。</>, <><b>Use:</b> series. The large outlined number is the issue number; each series keeps a single surface colour.</>)}>
+          <Template span={6} title={t("公众号 · 系列专栏", "WeChat · series")} spec={t("900 × 383 · 期号即顺序", "900 × 383 · the number is the issue")} w={900} h={383} themes={["paper", "ink", "signal"]} langs={["zh"]} tags={["wechat"]} file="wechat-series" note={t("同一系列固定一种底色。", "One surface colour per series.")}>
             <div className="ab-display absolute right-[calc(var(--m)-var(--u)*2)] bottom-[calc(var(--m)-var(--u)*1)] u-text-42 leading-[0.76] tracking-[-0.05em] text-transparent [-webkit-text-stroke:calc(var(--u)*0.45)_var(--ab-fg)]">02</div>
             <div className="ab-frame">
               <div className="flex items-center u-gap-5">
@@ -384,7 +376,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 13 · Community 16:9 */}
-          <Template span={6} title={t("技术社区头图 16:9", "Community header 16:9")} spec={t("1600 × 900 · 掘金 / 知乎 / CSDN / 思否", "1600 × 900 · Juejin / Zhihu / CSDN / SegmentFault")} w={1600} h={900} themes={["paper", "ink", "signal"]} langs={["zh"]} tags={["community"]} file="community-16x9" note={t(<><b>用途：</b>中文技术社区。列表页缩略图宽约 240px，标题须位于左上，图形置于下半部。提及第三方产品时仅使用文字，不得使用其标志。</>, <><b>Use:</b> Chinese developer communities. List thumbnails are about 240px wide, so the title sits top left and the graphic below. Third-party products are named in text only, never with their logos.</>)}>
+          <Template span={6} title={t("技术社区头图 16:9", "Community header 16:9")} spec={t("1600 × 900 · 掘金 / 知乎 / CSDN / 思否", "1600 × 900 · Juejin / Zhihu / CSDN / SegmentFault")} w={1600} h={900} themes={["paper", "ink", "signal"]} langs={["zh"]} tags={["community"]} file="community-16x9" note={t("第三方产品只写名称，不得使用其标志。", "Name third-party products in text, never with their logos.")}>
             <div className="ab-frame">
               <div className="ab-row">
                 <Wordmark className="ab-logo" />
@@ -414,7 +406,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 14 · Medium / dev.to */}
-          <Template span={6} title="Medium / dev.to" spec="1000 × 420" w={1000} h={420} themes={["ink", "paper", "signal"]} langs={["en"]} tags={["community"]} file="medium-cover" note={t(<><b>用途：</b>英文技术社区。Medium 列表页从左侧裁切为方形，标题与字标须位于左侧。</>, <><b>Use:</b> English communities. Medium lists crop a square from the left, so the title and wordmark stay left.</>)}>
+          <Template span={6} title="Medium / dev.to" spec="1000 × 420" w={1000} h={420} themes={["ink", "paper", "signal"]} langs={["en"]} tags={["community"]} file="medium-cover">
             <div className="absolute top-1/2 right-(--m) flex -translate-y-1/2 items-center u-gap-3">
               <div className="grid u-h-40 u-w-34 content-between border border-dashed border-ab-line u-p-3 font-mono u-text-4.5 text-ab-muted">
                 <em className="text-[0.72em] tracking-[0.06em] not-italic">/usr/local/bin</em>
@@ -433,7 +425,7 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
           </Template>
 
           {/* 15 · Newsletter */}
-          <Template title={t("Newsletter 邮件头图", "Newsletter header")} spec={t("1200 × 400 · 邮件内 640px 宽显示", "1200 × 400 · shown 640px wide in mail")} w={1200} h={400} themes={["paper", "ink", "signal"]} tags={["news"]} file="newsletter-header" note={t(<><b>用途：</b>月报邮件头图。三项数据每期更新，统计日期须在邮件正文首段注明。</>, <><b>Use:</b> the monthly newsletter header. Update the three figures each issue and state their date in the first paragraph of the email.</>)}>
+          <Template title={t("Newsletter 邮件头图", "Newsletter header")} spec={t("1200 × 400 · 邮件内 640px 宽显示", "1200 × 400 · shown 640px wide in mail")} w={1200} h={400} themes={["paper", "ink", "signal"]} tags={["news"]} file="newsletter-header" note={t("数据每期更新，统计日期写在正文首段。", "Update figures each issue; date them in the email's first paragraph.")}>
             <div className="ab-frame flex-row items-stretch">
               <div className="grid content-between">
                 <Wordmark className="ab-logo" />
@@ -470,25 +462,24 @@ export default async function CoversPage({ params }: { params: Promise<{ locale:
         id="rules"
         tag="Do & Don't"
         title={t("发布前检查", "Before you publish")}
-        lede={<p>{t("发布封面前，须逐项对照以下规则。", "Check every cover against these rules before publication.")}</p>}
       >
         <div className="grid gap-4 md:grid-cols-2">
-          <DoDont kind="do" on="ink" bodyClassName="p-0 min-h-55" caption={t("品牌图形源自产品结构，标题是画面唯一的主体。", "The graphic comes from the product's structure; the title is the only hero.")}>
+          <DoDont kind="do" on="ink" bodyClassName="p-0 min-h-55" caption={t("图形源自产品结构，标题唯一主体。", "Product-derived graphic; the title leads.")}>
             <div className="absolute inset-0 [--mx-data:#0062FF] [--mx-parity:#FF5E14]">
               <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[36%]" cols={5} rows={8} k={4} m={1} seed={2} fit="slice" />
               <Wordmark className="absolute top-5.5 left-6 h-auto w-25 text-white" />
               <span className="absolute bottom-6 left-6 font-display text-[34px] leading-[0.95] font-extrabold text-white [font-stretch:125%]">1.0.1</span>
             </div>
           </DoDont>
-          <DoDont kind="dont" bodyClassName="p-0 min-h-55 bg-black" caption={t("使用与内容无关的抽象线条或 AI 插画，标题使用系统字体，缺少字标。", "Unrelated abstract lines or AI art, a system-font title and no wordmark.")}>
+          <DoDont kind="dont" bodyClassName="p-0 min-h-55 bg-black" caption={t("无关插画、系统字体、缺少字标。", "Unrelated art, system font, no wordmark.")}>
             <div className="absolute inset-0 bg-[repeating-linear-gradient(115deg,transparent_0_6px,rgba(255,0,0,.55)_6px_7px),repeating-linear-gradient(35deg,transparent_0_9px,rgba(255,0,0,.4)_9px_10px)]" />
             <span className="relative p-6 font-[Arial,Helvetica,sans-serif] text-[30px] leading-tight font-bold text-white">RustFS Weekly</span>
           </DoDont>
-          <DoDont kind="do" on="paper" bodyClassName="place-items-start content-center gap-2" caption={t("一个标签、一个标题，左对齐。", "One label, one title, aligned left.")}>
+          <DoDont kind="do" on="paper" bodyClassName="place-items-start content-center gap-2" caption={t("一个标签、一个标题，左对齐。", "One label, one title, left-aligned.")}>
             <span className="font-mono text-[11px] leading-none tracking-[0.08em] text-neutral-600">ENGINEERING · 12 MIN</span>
             <span className="max-w-[14em] font-display text-[26px] leading-[1.1] font-[750] text-neutral-950 [font-stretch:112%]">How erasure coding keeps your data whole</span>
           </DoDont>
-          <DoDont kind="dont" on="paper" bodyClassName="content-center gap-1.5 text-center" caption={t("居中堆叠、多个标签、表情符号、发光投影与最高级口号。", "Centred stacks, several tags, emoji, glows and superlative slogans.")}>
+          <DoDont kind="dont" on="paper" bodyClassName="content-center gap-1.5 text-center" caption={t("居中、多标签、表情、发光与夸张口号。", "Centring, many tags, emoji, glows, superlatives.")}>
             <span className="font-mono text-xs leading-none font-semibold text-oxide-500">🔥 NEW!! 必看</span>
             <span className="font-display text-[26px] leading-[1.1] font-extrabold text-blue-500 [font-stretch:125%] [text-shadow:0_4px_18px_rgba(0,98,255,.6)]">THE FASTEST STORAGE EVER</span>
             <span className="font-mono text-xs leading-none text-oxide-500">#AI #Cloud #Rust #S3 #Storage</span>

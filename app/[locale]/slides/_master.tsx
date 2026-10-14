@@ -20,7 +20,7 @@ export function Master() {
         className={SLIDE}
         themes={["ink", "paper", "white"]}
         file="slide-master"
-        title={t("母版 · 橙色虚线为 96 px 安全边距", "Master · the dashed line is the 96 px safe margin")}
+        title={t("母版 · 96 px 安全边距", "Master · 96 px safe margin")}
         spec="1920 × 1080 · 16:9 · 1u = 10.8 px"
       >
         {/* 12 columns inside the margins */}

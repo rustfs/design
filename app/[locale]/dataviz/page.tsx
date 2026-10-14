@@ -25,10 +25,7 @@ export default async function DatavizPage({ params }: { params: Promise<{ locale
         label="Guidelines · Data visualisation"
         title={t("数据可视化", "Data visualisation")}
         subtitle={t("Data visualisation", "数据可视化")}
-        lede={t(
-          "图表是 RustFS 对外陈述性能与可靠性的主要方式。每张图表都须按比例绘制、注明单位与来源，并让读者在三秒内看出结论。",
-          "Charts are how RustFS states performance and reliability in public. Every chart must be drawn to scale, carry units and a source, and let a reader see the conclusion within three seconds.",
-        )}
+        lede={t("按比例绘制，注明单位与来源，三秒内看出结论。", "Drawn to scale, with units and a source, readable in three seconds.")}
         meta={[
           { k: t("主色", "Series 1"), v: "Signal #0062FF" },
           { k: t("对比系列", "Comparisons"), v: t("中性色", "Neutral") },
@@ -39,10 +36,10 @@ export default async function DatavizPage({ params }: { params: Promise<{ locale
       <Section id="principles" tag="Principles" title={t("制图原则", "Principles")}>
         <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {[
-            [t("按比例绘制", "Draw to scale"), t("柱状图从 0 开始；坐标轴不截断；同一组图表使用同一刻度。", "Bars start at zero, axes are never truncated, and charts in a set share one scale.")],
-            [t("结论先行", "Lead with the finding"), t("标题写结论而不是图表类型，例如「1 MiB 对象 GET 吞吐提升 38%」。", "The title states the finding, not the chart type — for example “GET throughput up 38% on 1 MiB objects”.")],
-            [t("RustFS 永远是蓝色", "RustFS is always blue"), t("RustFS 系列使用 Signal Blue；对比对象使用中性色；Oxide 只标记一个需要注意的点。", "The RustFS series is Signal Blue, comparisons are neutral, and Oxide marks the one point that matters.")],
-            [t("可追溯", "Traceable"), t("注明单位、测试环境、版本、日期与来源；示例数据须明确标注。", "Give units, environment, versions, date and source; sample data is labelled as such.")],
+            [t("按比例绘制", "Draw to scale"), t("从 0 开始，不截断坐标轴。", "Bars start at zero; axes are never cut.")],
+            [t("结论先行", "Lead with the finding"), t("标题写结论，不写图表类型。", "The title states the finding.")],
+            [t("RustFS 永远是蓝色", "RustFS is always blue"), t("RustFS 蓝色，对比项中性色。", "RustFS blue, comparisons neutral.")],
+            [t("可追溯", "Traceable"), t("注明单位、环境、日期与来源。", "Units, environment, date and source.")],
           ].map(([k, v], i) => (
             <div key={i} className="grid content-start gap-2 bg-background p-5">
               <h3 className="text-base font-semibold">{k}</h3>
@@ -52,7 +49,7 @@ export default async function DatavizPage({ params }: { params: Promise<{ locale
         </div>
       </Section>
 
-      <Section id="palette" tag="Palette" title={t("图表色板", "Chart palette")} lede={<p>{t("分类色按固定顺序使用，最多 8 个系列；超过 5 个系列时优先考虑拆图。连续数据使用 Signal 色阶，正负对比使用 Signal—中性—Oxide 发散色阶。", "Categorical colours are used in a fixed order, up to eight series; beyond five, split the chart. Sequential data uses the Signal scale; diverging data runs from Signal through neutral to Oxide.")}</p>}>
+      <Section id="palette" tag="Palette" title={t("图表色板", "Chart palette")} lede={<p>{t("最多 8 个系列，超过 5 个应拆图。", "Up to eight series; split beyond five.")}</p>}>
         <div className="grid gap-4">
           <div className="grid grid-cols-8 gap-1.5">
             {dataviz.map((d) => (
@@ -77,7 +74,7 @@ export default async function DatavizPage({ params }: { params: Promise<{ locale
         </div>
       </Section>
 
-      <Section id="charts" tag="Chart types" title={t("图表规范", "Chart standards")} lede={<p>{t("以下图表均为示例数据，用于说明画法。", "The charts below use sample data to show the drawing standard.")}</p>}>
+      <Section id="charts" tag="Chart types" title={t("图表规范", "Chart standards")} lede={<p>{t("以下均为示例数据。", "All charts below use sample data.")}</p>}>
         <div className="grid gap-4 lg:grid-cols-2">
           <ChartCard title={t("1 MiB 对象的 GET 吞吐高出 38%", "GET throughput is 38% higher on 1 MiB objects")} kicker={t("柱状图 · 分组", "Bar · grouped")} source={`${sample} · GiB/s · 4 × NVMe · 25 GbE`}>
             <GroupedBars sample={sample} />
@@ -114,7 +111,7 @@ export default async function DatavizPage({ params }: { params: Promise<{ locale
         </Sub2>
       </Section>
 
-      <Section id="benchmarks" tag="Benchmarks" title={t("性能数据发布要求", "Publishing benchmarks")} lede={<p>{t("对外发布的性能数据须完整说明测试条件，并且只与同一环境、同一时间段测得的结果比较。", "Published performance figures must state the full test conditions and compare only with results measured in the same environment and period.")}</p>}>
+      <Section id="benchmarks" tag="Benchmarks" title={t("性能数据发布要求", "Publishing benchmarks")} lede={<p>{t("只与同环境、同时期的结果比较。", "Compare only like-for-like runs.")}</p>}>
         <Table
           head={[t("必须注明", "Must state"), t("示例格式", "Example format")]}
           mono={[1]}
@@ -127,7 +124,7 @@ export default async function DatavizPage({ params }: { params: Promise<{ locale
             [t("日期与来源", "Date and source"), "2026-10-14 · github.com/rustfs/rustfs"],
           ]}
         />
-        <Note tone="parity">{t("不得发布单次测量的峰值，不得在未注明的情况下更换对比对象的配置，不得使用「最快」等无法验证的结论。", "Never publish a single-run peak, never change a competitor's configuration without saying so, and never claim “fastest” or any other unverifiable conclusion.")}</Note>
+        <Note tone="parity">{t("不得发布单次峰值或「最快」类结论。", "No single-run peaks and no “fastest” claims.")}</Note>
       </Section>
 
       <Section id="rules" tag="Do & Don't" title={t("制图规则", "Chart rules")}>

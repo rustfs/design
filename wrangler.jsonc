@@ -1,9 +1,16 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "rustfs-design",
+  "account_id": "ac8ec345405cc5df457ef4e8684d9d4a",
   "compatibility_date": "2026-09-30",
   "assets": {
     "directory": "./out",
     "not_found_handling": "404-page"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "design.rustfs.com",
+      "custom_domain": true
+    }
+  ]
 }

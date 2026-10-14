@@ -21,7 +21,7 @@ export function EmailTemplate() {
       themes={["white", "ink"]}
       tags={["email"]}
       file="email-newsletter"
-      note={t("WHITE 为默认外观；INK 用于检查深色模式邮件客户端中的效果。", "WHITE is the default appearance; INK checks the result in dark-mode mail clients.")}
+      note={t("WHITE 为默认；INK 用于检查深色模式。", "WHITE is the default; INK checks dark mode.")}
     >
       <div className="absolute inset-0 flex flex-col" style={sans}>
         <div className="flex items-center justify-between u-px-6.25 u-py-2.5 u-text-1.75 text-ab-muted">

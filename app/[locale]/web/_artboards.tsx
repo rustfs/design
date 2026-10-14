@@ -140,14 +140,7 @@ export function PageSectionTemplates() {
         themes={["ink", "paper", "white"]}
         tags={["hero"]}
         file="web-hero-a"
-        note={t(
-          <>
-            <b>用途：</b>官网首页首屏。左侧依次为标签、标语、一句话定位、两个按钮与安装命令；右侧分片矩阵以修复动效持续运行。主按钮仅一个，次按钮使用描边样式；安装命令取自 README，可一键复制。
-          </>,
-          <>
-            <b>Use:</b> the home page hero. On the left: label, line, one-sentence positioning, two buttons and the install command; on the right the shard matrix runs the heal motion. One primary button only, the second is outlined; the install command comes from the README and copies in one click.
-          </>,
-        )}
+        note={t("安装命令须取自 README，可一键复制。", "The install command comes from the README and copies in one click.")}
       >
         <Announce />
         <DeskNav />
@@ -157,7 +150,7 @@ export function PageSectionTemplates() {
             <L zh="开源对象存储" en="Open-source object storage" /> · <b>Apache 2.0</b>
           </Label>
           <h2>
-            <L zh={<span className="ab-zh block u-text-8.25 leading-[1.14]">每一个字节，<br />都有着落。</span>} en={<span className="ab-display block u-text-8.25 leading-[0.98]">Every byte,<br />accounted for.</span>} />
+            <L zh={<span className="ab-zh block u-text-7.5 leading-[1.16]">AI 时代的基建，<br />从每一个字节算起。</span>} en={<span className="ab-display block u-text-6.5 leading-[1]">AI infrastructure,<br />accounted for<br />byte by byte.</span>} />
           </h2>
           <p className="ab-body u-text-2 max-w-[34em]">
             <L zh={<>RustFS 是以 Rust 构建、兼容 S3 的分布式对象存储。<br />纠删码、位腐烂检测与自愈内建于每一次写入。</>} en="RustFS is distributed object storage built in Rust and compatible with S3. Erasure coding, bitrot detection and healing are built into every write." />
@@ -187,14 +180,7 @@ export function PageSectionTemplates() {
         themes={["signal", "ink"]}
         tags={["hero"]}
         file="web-hero-b"
-        note={t(
-          <>
-            <b>用途：</b>版本发布与活动落地页。以三句短陈述占满首屏，下方给出可核实的事实与唯一的行动按钮。Signal 底色上主按钮为白底蓝字，条带签名中的校验块为 Ink。
-          </>,
-          <>
-            <b>Use:</b> release and campaign landing pages. Three short statements fill the screen, with verifiable facts and a single call to action underneath. On Signal the primary button is white with blue text, and the parity shards of the stripe signature are Ink.
-          </>,
-        )}
+        note={t("Signal 底上主按钮为白底蓝字，条带签名的校验块为 Ink。", "On Signal the primary button is white with blue text; stripe parity is Ink.")}
       >
         <DeskNav />
         <div className="absolute top-[calc(var(--u)*8)] right-0 bottom-0 left-0 grid grid-rows-[1fr_auto] u-px-11 u-pb-9">
@@ -245,7 +231,7 @@ export function PageSectionTemplates() {
         themes={["ink", "paper", "white"]}
         tags={["hero", "phone"]}
         file="web-hero-a-phone"
-        note={t("按钮通栏、高 48px；安装命令单行显示并可横向滚动；矩阵移至底部。", "Buttons run full width at 48px; the install command stays on one line and scrolls; the matrix moves to the bottom.")}
+        note={t("按钮通栏高 48px；安装命令单行横向滚动。", "Full-width 48px buttons; the install command stays on one line and scrolls.")}
       >
         <Announce phone />
         <PhoneNav />
@@ -254,7 +240,7 @@ export function PageSectionTemplates() {
             <L zh="开源对象存储" en="Open-source object storage" /> · <b>Apache 2.0</b>
           </Label>
           <h2>
-            <L zh={<span className="ab-zh block u-text-11 leading-[1.16]">每一个字节，<br />都有着落。</span>} en={<span className="ab-display block u-text-9.5 leading-[1]">Every byte, accounted for.</span>} />
+            <L zh={<span className="ab-zh block u-text-9.5 leading-[1.18]">AI 时代的基建，<br />从每一个字节算起。</span>} en={<span className="ab-display block u-text-8 leading-[1.02]">AI infrastructure, accounted for byte by byte.</span>} />
           </h2>
           <p className="ab-body u-text-4">
             <L zh="以 Rust 构建、兼容 S3 的分布式对象存储。" en="Distributed object storage built in Rust and compatible with S3." />
@@ -285,7 +271,7 @@ export function PageSectionTemplates() {
         themes={["signal", "ink"]}
         tags={["hero", "phone"]}
         file="web-hero-b-phone"
-        note={t("三句陈述保持三行；事实改为纵向列表；唯一按钮通栏。", "The three statements keep three lines; facts become a vertical list; the single button runs full width.")}
+        note={t("三句陈述保持三行；事实改为纵向列表。", "The three statements keep three lines; facts stack vertically.")}
       >
         <PhoneNav />
         <div className="absolute top-[calc(var(--u)*14)] right-0 bottom-0 left-0 grid grid-rows-[1fr_auto] u-px-5 u-pb-6">
@@ -332,7 +318,7 @@ export function PageSectionTemplates() {
         themes={["ink", "paper", "white"]}
         tags={["page", "phone"]}
         file="web-404-phone"
-        note={t("分片数字位于上方；标题、说明与两个按钮贴近拇指可及的下半屏。", "The shard numerals sit on top; the title, text and both buttons stay in the lower half, within thumb reach.")}
+        note={t("标题与按钮置于拇指可及的下半屏。", "Title and buttons sit in the lower half, within thumb reach.")}
       >
         <PhoneNav />
         <div className="absolute inset-x-0 top-[calc(var(--u)*14)] bottom-0 grid grid-rows-[1fr_auto] u-px-5 u-pt-10 u-pb-6">
@@ -345,7 +331,7 @@ export function PageSectionTemplates() {
             <L zh={<span className="ab-zh block u-text-8 leading-[1.2]">此路径下没有对象。</span>} en={<span className="ab-head block u-text-8 leading-[1.06]">There is no object at this path.</span>} />
           </h2>
           <p className="ab-body u-text-4">
-            <L zh={<>页面可能已移动或删除。<br />其他每一个字节，都有着落。</>} en="The page may have moved or been deleted. Every other byte is accounted for." />
+            <L zh={<>页面可能已移动或删除。<br />请检查地址，或返回首页。</>} en="The page may have moved or been deleted. Check the address, or go back to the home page." />
           </p>
           <div className="grid u-gap-2.5">
             <Btn size="phone">
@@ -368,14 +354,7 @@ export function PageSectionTemplates() {
         themes={["white", "paper", "ink"]}
         tags={["content"]}
         file="web-features"
-        note={t(
-          <>
-            <b>用途：</b>功能介绍区块。六项能力以 1px 线框成 3 × 2 网格，每项一个图标、一个标题、一句说明。卡片之间不加阴影或侧边色条，悬停时边框变为前景色。
-          </>,
-          <>
-            <b>Use:</b> capability sections. Six capabilities sit in a 3 × 2 grid drawn with 1px rules, each with one icon, one title and one sentence. No shadows or side rails between cards; on hover the border turns to the foreground colour.
-          </>,
-        )}
+        note={t("每项一个图标、一个标题、一句说明。", "Each item: one icon, one title, one sentence.")}
       >
         <div className="absolute inset-0 grid grid-rows-[auto_1fr] u-gap-6 u-px-11 u-py-9">
           <div className="grid grid-cols-[1.1fr_1fr] items-end u-gap-10">
@@ -431,14 +410,7 @@ export function PageSectionTemplates() {
         themes={["ink", "paper", "signal"]}
         tags={["content"]}
         file="web-stats"
-        note={t(
-          <>
-            <b>用途：</b>社区与采用数据。只使用官方来源的数字，保留千分位或两位小数的缩写，并在区块内注明来源与统计日期。不得使用「领先」「最快」等表述。
-          </>,
-          <>
-            <b>Use:</b> community and adoption figures. Use official figures only, keep thousands separators or a two-decimal abbreviation, and state the source and date inside the section. Words such as “leading” or “fastest” are not used.
-          </>,
-        )}
+        note={t("只用官方数字；不得使用「领先」「最快」等表述。", "Official figures only; never “leading” or “fastest”.")}
       >
         <div className="absolute inset-0 grid grid-rows-[auto_1fr_auto] u-px-12.5 u-py-10">
           <div className="grid grid-cols-[1.1fr_1fr] items-end u-gap-10">
@@ -489,14 +461,7 @@ export function PageSectionTemplates() {
         themes={["white", "paper", "ink"]}
         tags={["content"]}
         file="web-integrations"
-        note={t(
-          <>
-            <b>用途：</b>生态与集成区块。第三方产品只以文字列出，按用途标注类别，不得使用其标志、配色或字体，也不得暗示合作关系。区块底部须注明商标归属。
-          </>,
-          <>
-            <b>Use:</b> ecosystem sections. Third-party products appear as text only, labelled by role; their logos, colours and typefaces are never used, and no partnership is implied. A trademark line closes the section.
-          </>,
-        )}
+        note={t("不得暗示合作关系；区块底部注明商标归属。", "Imply no partnership; close with a trademark line.")}
       >
         <div className="absolute inset-0 grid grid-rows-[auto_1fr_auto] u-gap-6 u-px-11 u-py-9">
           <div className="grid grid-cols-[1.1fr_1fr] items-end u-gap-10">
@@ -548,14 +513,7 @@ export function PageSectionTemplates() {
         themes={["white", "paper", "ink"]}
         tags={["content"]}
         file="web-compare"
-        note={t(
-          <>
-            <b>用途：</b>选型对比。只比较可核实的事实，每一项均须有来源；对比对象一栏以虚线框留空，填写前须核对其官方文档。不使用打勾打叉的胜负表与最高级用语。
-          </>,
-          <>
-            <b>Use:</b> evaluations. Compare verifiable facts only, each with a source; the alternative column is left as dashed placeholders and filled only after checking that product’s official documentation. No win–lose tick tables, no superlatives.
-          </>,
-        )}
+        note={t("只比有来源的事实；对比栏须核对其官方文档后填写。", "Sourced facts only; fill the alternative column from its official docs.")}
       >
         <div className="absolute inset-0 grid grid-rows-[auto_1fr_auto] u-gap-6 u-px-11 u-py-9">
           <div className="grid u-gap-2.5">
@@ -611,14 +569,7 @@ export function PageSectionTemplates() {
         themes={["signal", "ink", "paper"]}
         tags={["content"]}
         file="web-cta"
-        note={t(
-          <>
-            <b>用途：</b>页面末尾的行动号召。一个标题、一组 README 中的命令、一个主按钮。终端中的注释说明结果，不得虚构程序输出。
-          </>,
-          <>
-            <b>Use:</b> the call to action that closes a page. One title, one set of commands from the README, one primary button. Comments in the terminal state the result; program output is never invented.
-          </>,
-        )}
+        note={t("命令取自 README；注释说明结果，不得虚构输出。", "Commands from the README; comments state results, never invented output.")}
       >
         <div className="absolute inset-x-0 top-0 bottom-[calc(var(--u)*5)] grid grid-cols-[1.45fr_1fr] items-center u-gap-10 u-px-12.5">
           <div className="grid content-center u-gap-4">
@@ -680,20 +631,13 @@ export function PageSectionTemplates() {
         themes={["ink", "paper", "white"]}
         tags={["content"]}
         file="web-footer"
-        note={t(
-          <>
-            <b>用途：</b>全站页脚。上部为标语、订阅与四列链接；底部为整幅字标与法律信息。字标宽度与 1240px 内容栏一致，不得裁切。
-          </>,
-          <>
-            <b>Use:</b> the site footer. Above: the line, newsletter sign-up and four link columns; below: the full-width wordmark and legal line. The wordmark spans the 1240px content column and is never cropped.
-          </>,
-        )}
+        note={t("整幅字标与 1240px 内容栏同宽，不得裁切。", "The wordmark spans the 1240px column and is never cropped.")}
       >
         <div className="absolute inset-0 grid grid-rows-[auto_1fr_auto] u-px-11 u-pt-9 u-pb-4">
           <div className="grid grid-cols-[1.5fr_repeat(4,1fr)] u-gap-4">
             <div className="grid content-start u-gap-3 u-pr-6">
               <p className="u-text-2.75 leading-[1.3] font-semibold">
-                <L zh={<>每一个字节，<br />都有着落。</>} en={<>Every byte,<br />accounted for.</>} />
+                <L zh={<>AI 时代的基建，<br />从每一个字节算起。</>} en={<>AI infrastructure,<br />accounted for byte by byte.</>} />
               </p>
               <span className="u-mt-1 ab-label u-text-1.5">
                 <L zh="订阅月报" en="Monthly newsletter" />
@@ -746,14 +690,7 @@ export function PageSectionTemplates() {
         themes={["white", "paper", "ink"]}
         tags={["page"]}
         file="web-blog"
-        note={t(
-          <>
-            <b>用途：</b>博客列表页。最新的一篇占两栏，其余四栏等宽。每张卡片：封面图形、栏目与日期、标题；不放摘要、作者头像与阅读数。封面图形取自品牌图形或图标，不使用库存图片。
-          </>,
-          <>
-            <b>Use:</b> the blog index. The latest post spans two columns; the rest sit in four equal columns. Each card carries a cover graphic, category and date, and the title; no excerpt, avatars or view counts. Covers use brand graphics or icons, never stock imagery.
-          </>,
-        )}
+        note={t("封面用品牌图形，不用库存图片；不放摘要与头像。", "Covers use brand graphics, never stock images; no excerpts or avatars.")}
       >
         <DeskNav active={2} />
         <div className="absolute top-[calc(var(--u)*8)] right-0 bottom-0 left-0 grid grid-rows-[auto_1fr] u-gap-4 u-px-11 u-pt-6 u-pb-7">
@@ -803,14 +740,7 @@ export function PageSectionTemplates() {
         themes={["ink", "paper", "white"]}
         tags={["page"]}
         file="web-404"
-        note={t(
-          <>
-            <b>用途：</b>404 页面。数字由分片组成，其中一块缺失并以修复动效重建：页面找不到，数据不会丢。文案平实，给出两个出口。
-          </>,
-          <>
-            <b>Use:</b> the 404 page. The numerals are built from shards; one is missing and rebuilt with the heal motion: the page is gone, the data is not. The copy is plain and offers two ways out.
-          </>,
-        )}
+        note={t("文案平实，给出两个出口。", "Plain copy and two ways out.")}
       >
         <DeskNav />
         <div className="absolute top-[calc(var(--u)*8)] right-0 bottom-0 left-0 grid grid-cols-[1fr_auto] items-center u-gap-10 u-px-11">
@@ -822,7 +752,7 @@ export function PageSectionTemplates() {
               <L zh={<span className="ab-zh block u-text-6.5 leading-[1.2]">此路径下<br />没有对象。</span>} en={<span className="ab-head block u-text-6.5 max-w-[11em]">There is no object at this path.</span>} />
             </h2>
             <p className="ab-body u-text-2 max-w-[26em]">
-              <L zh={<>页面可能已移动或删除。<br />其他每一个字节，都有着落。</>} en="The page may have moved or been deleted. Every other byte is accounted for." />
+              <L zh={<>页面可能已移动或删除。<br />请检查地址，或返回首页。</>} en="The page may have moved or been deleted. Check the address, or go back to the home page." />
             </p>
             <div className="flex u-gap-1.5 u-mt-1">
               <Btn>
@@ -847,14 +777,7 @@ export function PageSectionTemplates() {
         themes={["white", "paper", "ink"]}
         tags={["page"]}
         file="web-docs"
-        note={t(
-          <>
-            <b>用途：</b>文档站。左侧导航 270px，正文最大 72 字符宽，右侧本页目录 216px。当前页以方块标记与加粗表示，不使用左侧色条；代码块始终为 Ink 底色。
-          </>,
-          <>
-            <b>Use:</b> the documentation site. Left navigation 270px, body text at most 72 characters wide, on-page contents 216px on the right. The current page is marked with a square and bold weight, never a coloured side rail; code blocks always sit on Ink.
-          </>,
-        )}
+        note={t("侧栏 270px · 正文 ≤ 72 字符 · 目录 216px；当前页不用色条。", "Sidebar 270px · body ≤ 72 characters · contents 216px; no side rail for the current page.")}
       >
         <div className="flex u-h-8 items-center u-gap-4 border-b border-ab-line u-px-4">
           <Logo className="u-h-2.25" />

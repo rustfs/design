@@ -43,14 +43,13 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         title={t("广告投放", "Advertising")}
         subtitle={t("Advertising", "广告投放")}
         lede={t(
-          "展示广告、社交信息流、户外与印刷使用同一套投放系统。每则广告都包含字标、一条主信息、一行依据和一个行动按钮；尺寸不同，结构不变。",
-          "Display, social feeds, outdoor and print run on one campaign system. Every ad carries the wordmark, one message, one proof line and one call to action; the size changes, the structure does not.",
+          "展示、社交、户外与印刷共用一套投放系统：尺寸会变，结构不变。",
+          "Display, social, outdoor and print share one campaign system: the size changes, the structure does not.",
         )}
         meta={[
           { k: t("模板", "Templates"), v: "16" },
           { k: t("信息", "Messages"), v: "5" },
           { k: t("底色", "Surfaces"), v: "Ink / Paper / White / Signal" },
-          { k: t("语言", "Languages"), v: "中 / EN" },
           { k: t("导出", "Export"), v: "PNG @2x" },
         ]}
       />
@@ -63,8 +62,8 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         lede={
           <p>
             {t(
-              "广告的尺寸以 u 为单位，1u 等于画板短边的 1/100，安全边距为 7u。五个部件的位置可以随版式移动，但不得缺少，也不得重复：一个字标、一条信息、一行依据、一个按钮、一个品牌图形。",
-              "Ads are measured in u, one hundredth of the artboard's short side, with a 7u safe margin. The five parts may move with the format but none may be dropped or repeated: one wordmark, one message, one proof line, one button and one brand graphic.",
+              "1u 为画板短边的 1/100，安全边距 7u；五个部件可以移动，不得缺少或重复。",
+              "1u is a hundredth of the short side and the safe margin is 7u; the five parts may move, but none may be dropped or repeated.",
             )}
           </p>
         }
@@ -100,11 +99,11 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         </TemplateGrid>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {[
-            [t("① 信息", "① Message"), t("一则广告只讲一条信息，取自下文核准信息表，逐字使用。信息是画面中最大的文字。", "One message per ad, taken word for word from the approved list below. It is the largest text on the artboard.")],
-            [t("② 依据", "② Proof line"), t("每条信息配一行依据。需要前提条件的表述以上标数字标注，并在同一画面内给出脚注。", "Each message has one proof line. A claim that depends on a condition carries a superscript numeral and a footnote on the same artboard.")],
-            [t("③ 按钮", "③ Call to action"), t("每则广告一个按钮，直角，标签为动词开头的短语。按钮不得使用 Oxide。", "One button per ad: square corners, a label that starts with a verb. Buttons are never Oxide.")],
-            [t("④ 字标", "④ Wordmark"), t("每则广告都须出现字标。Ink 与 Signal 底色用白色，浅色底色用 Signal Blue。", "Every ad carries the wordmark: white on Ink and Signal, Signal Blue on light surfaces.")],
-            [t("⑤ 图形", "⑤ Graphic"), t("分片矩阵或由它派生的示意图，用来说明信息本身。Oxide 只标记校验块或唯一焦点。", "The shard matrix, or a diagram drawn from it, that illustrates the message itself. Oxide marks parity or the single focal point.")],
+            [t("① 信息", "① Message"), t("逐字取自核准信息，是画面中最大的文字。", "Word for word from the approved list; the largest text.")],
+            [t("② 依据", "② Proof line"), t("每条信息一行；有条件的表述改为上标加脚注。", "One per message; a conditional claim takes a superscript and footnote.")],
+            [t("③ 按钮", "③ Call to action"), t("一个，直角，动词开头；不用 Oxide。", "One, square-cornered, verb first; never Oxide.")],
+            [t("④ 字标", "④ Wordmark"), t("必须出现：深底白色，浅底 Signal Blue。", "Always present: white on Ink and Signal, Signal Blue on light.")],
+            [t("⑤ 图形", "⑤ Graphic"), t("分片矩阵或其派生图；Oxide 只标校验块或唯一焦点。", "The shard matrix or a derivative; Oxide marks parity or the single focus.")],
           ].map(([k, v], i) => (
             <div key={i} className="grid content-start gap-1.5 border-t border-border pt-3 text-sm leading-relaxed text-subtle">
               <b className="font-mono text-[11px] font-medium tracking-[0.06em] text-brand uppercase">{k}</b>
@@ -113,18 +112,18 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           ))}
         </div>
 
-        <Sub title={t("信息长度按尺寸限定", "Message length by size")} aside={t("中文按字计，拉丁词与数字各计 1 字，标点不计", "Chinese counts characters; each Latin word or number counts as one; punctuation is not counted")}>
+        <Sub title={t("信息长度按尺寸限定", "Message length by size")} aside={t("拉丁词与数字各计 1 字，标点不计", "A Latin word or number counts as one; punctuation does not count")}>
           <Table
             mono={[0]}
             head={[t("画板", "Artboard"), t("信息上限", "Message limit"), t("依据与脚注", "Proof line & footnote"), t("按钮", "Button"), t("最小字号", "Minimum size")]}
             rows={[
-              ["320\u00a0×\u00a050", mid(t("5 个英文词 / 8 字，最多 2 行", "5 English words / 8 Chinese characters, 2 lines max")), mid(t("不可容纳，只投放无需脚注的信息", "No room: run only messages that need no footnote")), mid(t("动词单用：下载 / Download", "Verb alone: Download / 下载")), mid(t("信息 12 px", "Message 12 px"))],
-              ["728\u00a0×\u00a090", mid(t("6 个英文词 / 12 字", "6 English words / 12 Chinese characters")), mid(t("脚注 1 行", "Footnote on 1 line")), mid(t("完整标签", "Full label")), mid(t("信息 18 px · 脚注 9 px", "Message 18 px · footnote 9 px"))],
-              ["300\u00a0×\u00a0250 · 160\u00a0×\u00a0600", mid(t("6 个英文词 / 12 字，最多 4 行", "6 English words / 12 Chinese characters, 4 lines max")), mid(t("脚注最多 3 行", "Footnote up to 3 lines")), mid(t("完整标签", "Full label")), mid(t("信息 20 px · 脚注 9 px", "Message 20 px · footnote 9 px"))],
-              ["300\u00a0×\u00a0600 · 970\u00a0×\u00a0250", mid(t("8 个英文词 / 16 字", "8 English words / 16 Chinese characters")), mid(t("依据 1 行，脚注最多 2 行", "Proof 1 line, footnote up to 2 lines")), mid(t("完整标签", "Full label")), mid(t("信息 24 px · 脚注 9 px", "Message 24 px · footnote 9 px"))],
-              [t("社交 1080 宽", "Social, 1080 wide"), mid(t("8 个英文词 / 16 字，最多 3 行", "8 English words / 16 Chinese characters, 3 lines max")), mid(t("依据 1 行，脚注最多 2 行", "Proof 1 line, footnote up to 2 lines")), mid(t("完整标签", "Full label")), mid(t("信息 7u · 脚注 1.75u", "Message 7u · footnote 1.75u"))],
-              [t("户外大牌 · 数字屏", "Billboards · screens"), mid(t("6 个英文词 / 12 字，5 秒内读完", "6 English words / 12 Chinese characters, read in 5 seconds")), mid(t("脚注紧邻图形，不小于 1.75u", "Footnote beside the graphic, at least 1.75u")), mid(t("标签 + 网址", "Label + URL")), mid(t("信息 8u · 脚注 1.75u", "Message 8u · footnote 1.75u"))],
-              [t("灯箱 · 海报", "Lightboxes · posters"), mid(t("8 个英文词 / 16 字，最多 3 行", "8 English words / 16 Chinese characters, 3 lines max")), mid(t("依据 1 行；脚注不小于 1.75u，印刷不小于 7 pt", "Proof 1 line; footnote at least 1.75u, 7 pt in print")), mid(t("标签 + 网址或二维码", "Label + URL or QR code")), mid(t("信息 8u · 脚注 1.75u", "Message 8u · footnote 1.75u"))],
+              ["320\u00a0×\u00a050", mid(t("5 词 / 8 字，≤ 2 行", "5 words / 8 characters, ≤ 2 lines")), mid(t("无，只投无需脚注的信息", "None; only lines that need no footnote")), mid(t("只用动词：下载", "Verb alone: Download")), mid(t("信息 12 px", "Message 12 px"))],
+              ["728\u00a0×\u00a090", mid(t("6 词 / 12 字", "6 words / 12 characters")), mid(t("脚注 1 行", "Footnote 1 line")), mid(t("完整标签", "Full label")), mid(t("信息 18 px · 脚注 9 px", "Message 18 px · footnote 9 px"))],
+              ["300\u00a0×\u00a0250 · 160\u00a0×\u00a0600", mid(t("6 词 / 12 字，≤ 4 行", "6 words / 12 characters, ≤ 4 lines")), mid(t("脚注 ≤ 3 行", "Footnote ≤ 3 lines")), mid(t("完整标签", "Full label")), mid(t("信息 20 px · 脚注 9 px", "Message 20 px · footnote 9 px"))],
+              ["300\u00a0×\u00a0600 · 970\u00a0×\u00a0250", mid(t("8 词 / 16 字", "8 words / 16 characters")), mid(t("依据 1 行，脚注 ≤ 2 行", "Proof 1 line, footnote ≤ 2 lines")), mid(t("完整标签", "Full label")), mid(t("信息 24 px · 脚注 9 px", "Message 24 px · footnote 9 px"))],
+              [t("社交 1080 宽", "Social, 1080 wide"), mid(t("8 词 / 16 字，≤ 3 行", "8 words / 16 characters, ≤ 3 lines")), mid(t("依据 1 行，脚注 ≤ 2 行", "Proof 1 line, footnote ≤ 2 lines")), mid(t("完整标签", "Full label")), mid(t("信息 7u · 脚注 1.75u", "Message 7u · footnote 1.75u"))],
+              [t("户外大牌 · 数字屏", "Billboards · screens"), mid(t("6 词 / 12 字，5 秒读完", "6 words / 12 characters, read in 5 s")), mid(t("脚注紧邻图形，≥ 1.75u", "Footnote beside the graphic, ≥ 1.75u")), mid(t("标签 + 网址", "Label + URL")), mid(t("信息 8u · 脚注 1.75u", "Message 8u · footnote 1.75u"))],
+              [t("灯箱 · 海报", "Lightboxes · posters"), mid(t("8 词 / 16 字，≤ 3 行", "8 words / 16 characters, ≤ 3 lines")), mid(t("依据 1 行；脚注 ≥ 1.75u，印刷 ≥ 7 pt", "Proof 1 line; footnote ≥ 1.75u, ≥ 7 pt in print")), mid(t("标签 + 网址或二维码", "Label + URL or QR code")), mid(t("信息 8u · 脚注 1.75u", "Message 8u · footnote 1.75u"))],
             ]}
           />
         </Sub>
@@ -148,9 +147,9 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
               ))}
             </Spec>
             <ul className="m-0 grid list-[square] gap-1.5 pl-5 text-[15px] leading-relaxed text-subtle">
-              <li>{t("核准标签：「下载 RustFS」「阅读文档」「查看源码」。320 × 50 可只保留动词「下载」。", "Approved labels: “Download RustFS”, “Read the docs”, “View the source”. At 320 × 50 the verb may stand alone: “Download”.")}</li>
-              <li>{t("按钮高度为标签字号的 2.4–3 倍，左右内边距约为高度的 1/3；标签不小于 11 px。箭头可选，只用 arrow-right 图标。", "Button height is 2.4–3 times the label size, with side padding about a third of the height; labels are never below 11 px. The arrow is optional and is always the arrow-right icon.")}</li>
-              <li>{t("不得使用「点击这里」「了解更多」等不说明结果的标签，不得使用圆角、描边按钮或 Oxide 底色。", "Labels that do not say what happens, such as “Click here” or “Learn more”, are not permitted; nor are rounded corners, outline buttons or an Oxide fill.")}</li>
+              <li>{t("核准标签：「下载 RustFS」「阅读文档」「查看源码」。", "Approved labels: “Download RustFS”, “Read the docs”, “View the source”.")}</li>
+              <li>{t("高度为标签字号的 2.4–3 倍，内边距约为高度 1/3；标签 ≥ 11 px；箭头只用 arrow-right。", "Height 2.4–3× the label size, side padding about ⅓ of the height; labels ≥ 11 px; arrow-right only.")}</li>
+              <li>{t("不得用「点击这里」「了解更多」、圆角、描边或 Oxide 底色。", "Never “Click here”, “Learn more”, rounded corners, outlines or an Oxide fill.")}</li>
             </ul>
           </Sub>
           <Sub title={t("脚注", "Footnotes")}>
@@ -171,9 +170,8 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
               </div>
             </Spec>
             <ul className="m-0 grid list-[square] gap-1.5 pl-5 text-[15px] leading-relaxed text-subtle">
-              <li>{t("凡依赖前提条件的表述，须在信息后加上标数字，并在同一画面给出脚注；不得把条件放到落地页。", "Every claim that depends on a condition gets a superscript numeral and a footnote on the same artboard; the condition is never left to the landing page.")}</li>
-              <li>{t("脚注不小于 1.75u，展示广告不小于 9 px，印刷不小于 7 pt；与底色对比度不低于 4.5 : 1。", "Footnotes are at least 1.75u, never below 9 px in display ads or 7 pt in print, with a contrast of at least 4.5 : 1.")}</li>
-              <li>{t("放不下脚注的尺寸（如 320 × 50）只投放无需条件的信息。", "Sizes with no room for a footnote, such as 320 × 50, run only messages that need no condition.")}</li>
+              <li>{t("条件须在同一画面的脚注中写明，不得留给落地页。", "State the condition in a footnote on the same artboard, never on the landing page.")}</li>
+              <li>{t("脚注 ≥ 1.75u，展示广告 ≥ 9 px，印刷 ≥ 7 pt；对比度 ≥ 4.5 : 1。", "Footnotes ≥ 1.75u, ≥ 9 px in display, ≥ 7 pt in print; contrast ≥ 4.5 : 1.")}</li>
             </ul>
           </Sub>
         </div>
@@ -187,8 +185,8 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         lede={
           <p>
             {t(
-              "以下五条信息是广告唯一可用的主文案，中英文成对使用。每条信息附一行依据；标有上标的信息须同时给出脚注。新增信息须经品牌团队审核，并附可在代码仓库或正式版本中核验的依据。",
-              "These five lines are the only headlines an ad may use, always as a Chinese–English pair. Each comes with one proof line; lines marked with a superscript must carry the footnote. New lines need brand review and a proof that can be verified in the repository or an official release.",
+              "广告只能使用这五条信息，中英文成对；新增须经品牌审核并附可核验的依据。",
+              "Ads may use only these five lines, always as a Chinese–English pair; new lines need brand review and a verifiable proof.",
             )}
           </p>
         }
@@ -220,11 +218,11 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
                 <MessageGlyph id={m.id} />
                 <span className="text-[13px] leading-snug">{
                   {
-                    drives: t("纠删集中两列离线的分片矩阵", "An erasure set with two offline drive columns"),
-                    s3: t("S3 调用层在上，分片矩阵在下", "The S3 call layer on top, the shard matrix underneath"),
-                    open: t("许可证名称作为图形，空心「2.0」", "The licence name as the graphic, an outlined “2.0”"),
-                    hardware: t("机柜边框内的分片矩阵与锁", "The shard matrix inside a rack frame, with a lock"),
-                    ai: t("以 AI 数据前缀标注的条带", "Stripes labelled with AI data prefixes"),
+                    drives: t("两列离线的纠删集", "Erasure set, two drives offline"),
+                    s3: t("S3 调用层压在分片上", "S3 calls over shards"),
+                    open: t("空心「2.0」", "Outlined “2.0”"),
+                    hardware: t("机柜框内的矩阵与锁", "Matrix in a rack, with lock"),
+                    ai: t("AI 前缀条带", "AI-prefix stripes"),
                   }[m.id]
                 }</span>
               </span>,
@@ -234,8 +232,8 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         />
         <Note>
           {t(
-            "信息须逐字使用，不得改写、合并两条信息或单独翻译其中一种语言。不得添加「最快」「最好」「领先」等无法核验的表述；性能数字只有在附带测试条件、版本与日期，且已在官方渠道发布时才可使用。",
-            "Use the lines word for word: do not rewrite them, merge two of them or translate one language on its own. Unverifiable words such as “fastest”, “best” or “leading” are not permitted. Performance figures may appear only with their test conditions, version and date, and only once they are published on an official channel.",
+            "不得改写、合并或单独翻译信息，不得用「最快」「最好」；性能数字须附测试条件、版本与日期，且已官方发布。",
+            "Never rewrite or merge lines, translate one language alone, or add “fastest” or “best”; performance figures need test conditions, version and date, and must already be officially published.",
           )}
         </Note>
       </Section>
@@ -248,8 +246,8 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         lede={
           <p>
             {t(
-              "下表为截至 2026 年 10 月的常用尺寸。静态展示广告以 PNG 或 JPG 交付，单个文件不超过 150 KB；平台规则可能调整，投放前应在平台预览中确认裁切与界面遮挡。",
-              "Common formats as of October 2026. Static display ads are delivered as PNG or JPG at 150 KB or less per file. Platform rules change; confirm crops and interface overlays in the platform preview before a campaign goes live.",
+              "截至 2026 年 10 月；静态展示广告交付 PNG 或 JPG，单文件 ≤ 150 KB，上线前须在平台预览中确认裁切。",
+              "As of October 2026. Static display ads ship as PNG or JPG at ≤ 150 KB; confirm crops in the platform preview before launch.",
             )}
           </p>
         }
@@ -258,20 +256,20 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           mono={[1]}
           head={[t("格式", "Format"), t("画板", "Artboard"), t("渠道", "Channel"), t("注意", "Notes")]}
           rows={[
-            [fmt(t("中矩形 Medium Rectangle", "Medium Rectangle"), t("展示广告", "Display")), <Dim key="d" w={300} h={250} />, mid(t("展示广告网络、程序化购买", "Display networks, programmatic")), wide(t("五个部件齐全的基准尺寸，其他展示尺寸以它为参照", "The reference size with all five parts; other display sizes follow it"))],
-            [fmt(t("通栏 Leaderboard", "Leaderboard"), t("展示广告", "Display")), <Dim key="d" w={728} h={90} />, mid(t("桌面端页面顶部", "Desktop, top of page")), wide(t("信息 1 行，脚注 1 行", "One-line message, one-line footnote"))],
-            [fmt(t("宽擎天柱 Wide Skyscraper", "Wide Skyscraper"), t("展示广告", "Display")), <Dim key="d" w={160} h={600} />, mid(t("桌面端侧栏", "Desktop sidebar")), wide(t("纵向堆叠，信息每行不超过 8 个字符", "Stacked vertically; no line longer than 8 characters"))],
-            [fmt(t("半页 Half Page", "Half Page"), t("展示广告", "Display")), <Dim key="d" w={300} h={600} />, mid(t("桌面端侧栏", "Desktop sidebar")), wide(t("图形可占画面一半", "The graphic may take half the height"))],
-            [fmt(t("移动通栏 Mobile Leaderboard", "Mobile Leaderboard"), t("展示广告", "Display")), <Dim key="d" w={320} h={50} />, mid(t("移动端页面顶部或底部", "Mobile, top or bottom of page")), wide(t("字标 + 一句信息 + 按钮，只投放无需脚注的信息", "Wordmark, one line and a button; only messages that need no footnote"))],
-            [fmt(t("横幅大图 Billboard", "Billboard"), t("展示广告", "Display")), <Dim key="d" w={970} h={250} />, mid(t("桌面端首屏", "Desktop, above the fold")), wide(t("信息、图形、按钮横向排开", "Message, graphic and button side by side"))],
-            [fmt(t("信息流方图", "Feed square"), t("社交信息流", "Social")), <Dim key="d" w={1080} h={1080} />, mid("LinkedIn · X · Facebook · Instagram"), wide(t("平台标题栏重复同一条信息，不另写一条", "The platform headline field repeats the same message, never a second one"))],
-            [fmt(t("信息流竖图 4:5", "Feed portrait 4:5"), t("社交信息流", "Social")), <Dim key="d" w={1080} h={1350} />, mid(t("Instagram、Facebook、LinkedIn 移动端", "Instagram, Facebook, LinkedIn mobile")), wide(t("比方图更高；主体放在中部 1080 × 1080 范围内，被裁为方图时仍完整", "Taller than the square; keep the subject inside the central 1080 × 1080 so a square crop still works"))],
-            [fmt(t("快拍 / 短视频 9:16", "Story / Reels 9:16"), t("社交信息流", "Social")), <Dim key="d" w={1080} h={1920} />, mid(t("Stories、Reels、Shorts、抖音、视频号", "Stories, Reels, Shorts, Douyin, WeChat Channels")), wide(t("顶部 250 px、底部 420 px 与右侧操作栏不放置文字、字标与按钮", "Keep text, wordmark and button out of the top 250 px, the bottom 420 px and the right-hand action rail"))],
-            [fmt(t("链接广告", "Link ad"), t("社交信息流", "Social")), <Dim key="d" w={1200} h={628} />, mid("LinkedIn · X · Facebook"), wide(t("平台在图片下方另显示标题与网址；图内不重复网址", "The platform shows a headline and URL under the image; do not repeat the URL inside it"))],
-            [fmt(t("户外大牌 3:1", "Billboard 3:1"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={2400} h={800} />, mid(t("公路、楼宇户外大牌", "Roadside and building billboards")), wide(t("比例母版；制作文件按媒体方规格等比放大并加出血", "Proportion master; scale to the media owner's spec and add bleed for production"))],
-            [fmt(t("数字屏 16:9", "Digital screen 16:9"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={1920} h={1080} />, mid(t("地铁、机场、楼宇数字屏", "Metro, airport and lobby screens")), wide(t("静帧投放；如需动画，遵循下文动画规则", "Runs as a still; animation follows the rules below"))],
-            [fmt(t("地铁灯箱 2:3", "Metro lightbox 2:3"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={1200} h={1800} />, mid(t("地铁站台与通道灯箱", "Metro platform and corridor lightboxes")), wide(t("观看距离 3 m 以上，字标高度不小于画面高度 3%", "Viewed from 3 m or more; wordmark at least 3% of the height"))],
-            [fmt(t("A2 海报", "A2 poster"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={1190} h={1684} />, mid(t("活动现场、办公场所", "Events and offices")), wide(t("按 A2（420 × 594 mm）以 pt 绘制；印刷加 3 mm 出血；二维码不小于 20 mm", "Drawn in points at A2 (420 × 594 mm); add 3 mm bleed; QR code at least 20 mm"))],
+            [fmt(t("中矩形 Medium Rectangle", "Medium Rectangle"), t("展示广告", "Display")), <Dim key="d" w={300} h={250} />, mid(t("展示广告网络、程序化购买", "Display networks, programmatic")), wide(t("基准尺寸，五个部件齐全", "Reference size; all five parts"))],
+            [fmt(t("通栏 Leaderboard", "Leaderboard"), t("展示广告", "Display")), <Dim key="d" w={728} h={90} />, mid(t("桌面端页面顶部", "Desktop, top of page")), wide(t("信息 1 行，脚注 1 行", "One-line message and footnote"))],
+            [fmt(t("宽擎天柱 Wide Skyscraper", "Wide Skyscraper"), t("展示广告", "Display")), <Dim key="d" w={160} h={600} />, mid(t("桌面端侧栏", "Desktop sidebar")), wide(t("纵向堆叠，每行 ≤ 8 字符", "Stacked; ≤ 8 characters a line"))],
+            [fmt(t("半页 Half Page", "Half Page"), t("展示广告", "Display")), <Dim key="d" w={300} h={600} />, mid(t("桌面端侧栏", "Desktop sidebar")), wide(t("图形可占一半高度", "Graphic may take half the height"))],
+            [fmt(t("移动通栏 Mobile Leaderboard", "Mobile Leaderboard"), t("展示广告", "Display")), <Dim key="d" w={320} h={50} />, mid(t("移动端页面顶部或底部", "Mobile, top or bottom of page")), wide(t("字标、一句信息、按钮；只投无需脚注的信息", "Wordmark, one line, button; footnote-free lines only"))],
+            [fmt(t("横幅大图 Billboard", "Billboard"), t("展示广告", "Display")), <Dim key="d" w={970} h={250} />, mid(t("桌面端首屏", "Desktop, above the fold")), wide(t("信息、图形、按钮横排", "Message, graphic, button in a row"))],
+            [fmt(t("信息流方图", "Feed square"), t("社交信息流", "Social")), <Dim key="d" w={1080} h={1080} />, mid("LinkedIn · X · Facebook · Instagram"), wide(t("平台标题栏重复同一信息", "Platform headline repeats the same message"))],
+            [fmt(t("信息流竖图 4:5", "Feed portrait 4:5"), t("社交信息流", "Social")), <Dim key="d" w={1080} h={1350} />, mid(t("Instagram、Facebook、LinkedIn 移动端", "Instagram, Facebook, LinkedIn mobile")), wide(t("主体放在中部 1080 × 1080 内", "Keep the subject in the central 1080 × 1080"))],
+            [fmt(t("快拍 / 短视频 9:16", "Story / Reels 9:16"), t("社交信息流", "Social")), <Dim key="d" w={1080} h={1920} />, mid(t("Stories、Reels、Shorts、抖音、视频号", "Stories, Reels, Shorts, Douyin, WeChat Channels")), wide(t("顶部 250 px、底部 420 px 与右侧操作栏留空", "Nothing in the top 250 px, bottom 420 px or right rail"))],
+            [fmt(t("链接广告", "Link ad"), t("社交信息流", "Social")), <Dim key="d" w={1200} h={628} />, mid("LinkedIn · X · Facebook"), wide(t("图内不重复网址", "Don't repeat the URL in the image"))],
+            [fmt(t("户外大牌 3:1", "Billboard 3:1"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={2400} h={800} />, mid(t("公路、楼宇户外大牌", "Roadside and building billboards")), wide(t("比例母版；按媒体规格放大并加出血", "Proportion master; scale to spec, add bleed"))],
+            [fmt(t("数字屏 16:9", "Digital screen 16:9"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={1920} h={1080} />, mid(t("地铁、机场、楼宇数字屏", "Metro, airport and lobby screens")), wide(t("静帧；动画按下文规则", "Still; animation follows the rules below"))],
+            [fmt(t("地铁灯箱 2:3", "Metro lightbox 2:3"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={1200} h={1800} />, mid(t("地铁站台与通道灯箱", "Metro platform and corridor lightboxes")), wide(t("观看距离 ≥ 3 m；字标 ≥ 画面高度 3%", "Viewed from 3 m+; wordmark ≥ 3% of height"))],
+            [fmt(t("A2 海报", "A2 poster"), t("户外与印刷", "Outdoor & print")), <Dim key="d" w={1190} h={1684} />, mid(t("活动现场、办公场所", "Events and offices")), wide(t("A2（420 × 594 mm）以 pt 绘制；3 mm 出血；二维码 ≥ 20 mm", "A2 (420 × 594 mm) in pt; 3 mm bleed; QR ≥ 20 mm"))],
           ]}
         />
       </Section>
@@ -281,14 +279,6 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         id="templates"
         tag="Templates"
         title={t("广告模板", "Ad templates")}
-        lede={
-          <p>
-            {t(
-              "共 16 个模板，覆盖五条核准信息。每个模板只讲一条信息，图形为该信息而画。选择「编辑文字」可修改画板文字；底色与语言可切换；完成后选择「导出 PNG」。",
-              "Sixteen templates covering the five approved messages. Each template carries one message, with a graphic drawn for that message. Choose Edit text to change copy on the artboard, switch the surface and language as needed, then choose Export PNG.",
-            )}
-          </p>
-        }
       >
         <TemplateGrid
           filters={[
@@ -299,7 +289,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           ]}
         >
           {/* 1 · 970 × 250 Billboard — drives */}
-          <Template span={12} title={t("横幅大图 · 丢盘", "Billboard · drives")} spec="970 × 250 · IAB Billboard" w={970} h={250} themes={["ink", "paper", "signal"]} tags={["display"]} file="ad-970x250-drives" note={t(<><b>用途：</b>桌面端首屏。信息、图形、按钮从左到右排开；图形标出纠删集中离线的两块盘，脚注说明成立条件。</>, <><b>Use:</b> desktop, above the fold. Message, graphic and button run left to right; the graphic marks the two offline drives in the erasure set and the footnote states the condition.</>)}>
+          <Template span={12} title={t("横幅大图 · 丢盘", "Billboard · drives")} spec="970 × 250 · IAB Billboard" w={970} h={250} themes={["ink", "paper", "signal"]} tags={["display"]} file="ad-970x250-drives">
             <div className="ab-frame right-[52%]">
               <Wordmark className="ab-logo u-h-6" />
               <h3 className="ab-head [&_[data-l=zh]]:leading-[1.16] u-text-16 leading-[0.98]">
@@ -317,7 +307,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 2 · 728 × 90 Leaderboard — S3 */}
-          <Template span={8} title={t("通栏 · S3 调用", "Leaderboard · S3 calls")} spec="728 × 90 · IAB Leaderboard" w={728} h={90} themes={["white", "paper", "ink", "signal"]} tags={["display"]} file="ad-728x90-s3" note={t(<><b>用途：</b>桌面端页面顶部。字标、一行信息、一行脚注与按钮横向排开；底边的分片带即「底层」。</>, <><b>Use:</b> desktop, top of page. Wordmark, a one-line message with a one-line footnote and the button sit in a row; the shard band along the bottom edge is the “underneath”.</>)}>
+          <Template span={8} title={t("通栏 · S3 调用", "Leaderboard · S3 calls")} spec="728 × 90 · IAB Leaderboard" w={728} h={90} themes={["white", "paper", "ink", "signal"]} tags={["display"]} file="ad-728x90-s3">
             <div className="absolute inset-x-0 top-0 bottom-[calc(var(--u)*7)] flex items-center u-gap-x-22 u-px-22">
               <Wordmark className="ab-logo u-h-17 self-center" />
               <div className="grid min-w-0 flex-1 u-gap-5">
@@ -332,7 +322,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 3 · 320 × 50 Mobile Leaderboard — open */}
-          <Template span={4} title={t("移动通栏 · 开源", "Mobile Leaderboard · open")} spec="320 × 50 · IAB Mobile Leaderboard" w={320} h={50} themes={["signal", "ink", "white"]} tags={["display"]} file="ad-320x50-open" note={t(<><b>用途：</b>移动端。只放字标、一句信息与按钮；放不下脚注，因此只投放无需条件的信息。</>, <><b>Use:</b> mobile. Wordmark, one line and the button only; there is no room for a footnote, so only messages that need no condition run here.</>)}>
+          <Template span={4} title={t("移动通栏 · 开源", "Mobile Leaderboard · open")} spec="320 × 50 · IAB Mobile Leaderboard" w={320} h={50} themes={["signal", "ink", "white"]} tags={["display"]} file="ad-320x50-open">
             <div className="absolute inset-0 flex items-center u-gap-x-20 u-pr-14 u-pl-20">
               <Wordmark className="ab-logo u-h-19 self-center" />
               <i className="block u-h-48 w-px shrink-0 bg-ab-line" />
@@ -344,7 +334,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 4 · 300 × 250 — drives */}
-          <Template span={6} title={t("中矩形 · 丢盘", "Medium Rectangle · drives")} spec="300 × 250 · IAB Medium Rectangle" w={300} h={250} themes={["ink", "paper", "signal"]} tags={["display"]} file="ad-300x250-drives" note={t(<><b>用途：</b>基准尺寸。右侧六列即一个 EC 4+2 纠删集的六块盘，虚线两列为离线盘。</>, <><b>Use:</b> the reference size. The six columns on the right are the six drives of one EC 4+2 erasure set; the two dashed columns are offline.</>)}>
+          <Template span={6} title={t("中矩形 · 丢盘", "Medium Rectangle · drives")} spec="300 × 250 · IAB Medium Rectangle" w={300} h={250} themes={["ink", "paper", "signal"]} tags={["display"]} file="ad-300x250-drives">
             <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[30%]" cols={6} rows={18} k={4} m={2} seed={3} dead={[1, 4]} fit="slice" gap={0.22} />
             <div className="absolute top-(--m) right-[calc(30%+var(--u)*6)] bottom-(--m) left-(--m) flex flex-col justify-between">
               <Wordmark className="ab-logo u-h-5.5" />
@@ -359,7 +349,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 5 · 300 × 250 — hardware */}
-          <Template span={6} title={t("中矩形 · 自托管", "Medium Rectangle · self-hosted")} spec="300 × 250 · IAB Medium Rectangle" w={300} h={250} themes={["white", "paper", "ink"]} tags={["display"]} file="ad-300x250-hardware" note={t(<><b>用途：</b>数据主权。实线框代表用户自己的机柜，分片全部在框内；锁位于边框上。</>, <><b>Use:</b> data sovereignty. The solid frame is the customer’s own rack; every shard sits inside it, with the lock on the frame.</>)}>
+          <Template span={6} title={t("中矩形 · 自托管", "Medium Rectangle · self-hosted")} spec="300 × 250 · IAB Medium Rectangle" w={300} h={250} themes={["white", "paper", "ink"]} tags={["display"]} file="ad-300x250-hardware">
             <div className="ab-frame u-gap-0">
               <div className="relative border-ab-fg u-px-3 u-pt-4 u-pb-3 [border-width:calc(var(--u)*0.5)]">
                 <span className="absolute -top-[calc(var(--u)*2)] u-left-2.5 bg-ab-bg u-px-1 font-mono u-text-3.75 leading-none font-medium tracking-[0.08em] uppercase">
@@ -386,7 +376,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 6 · 300 × 600 — AI */}
-          <Template span={5} title={t("半页 · AI 数据", "Half Page · AI data")} spec="300 × 600 · IAB Half Page" w={300} h={600} themes={["ink", "paper"]} tags={["display"]} file="ad-300x600-ai" note={t(<><b>用途：</b>面向 AI 基础设施团队。每一行条带标注一类 AI 数据的前缀；前缀为通用示例，不代表任何用户的数据。</>, <><b>Use:</b> for AI infrastructure teams. Each stripe is labelled with a common AI data prefix; the prefixes are generic examples, not any customer’s data.</>)}>
+          <Template span={5} title={t("半页 · AI 数据", "Half Page · AI data")} spec="300 × 600 · IAB Half Page" w={300} h={600} themes={["ink", "paper"]} tags={["display"]} file="ad-300x600-ai" note={t("前缀为通用示例，不代表任何用户数据。", "Prefixes are generic examples, never customer data.")}>
             <div className="ab-frame">
               <Wordmark className="ab-logo u-h-5" />
               <div>
@@ -406,7 +396,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 7 · 160 × 600 — open */}
-          <Template span={3} title={t("宽擎天柱 · 开源", "Wide Skyscraper · open")} spec="160 × 600 · IAB Wide Skyscraper" w={160} h={600} themes={["signal", "ink"]} tags={["display"]} file="ad-160x600-open" note={t(<><b>用途：</b>桌面端侧栏。许可证名称本身就是图形：所有条款都按正文字号公开，没有需要缩小的部分。</>, <><b>Use:</b> desktop sidebar. The licence name is the graphic: every term is public at full size, with nothing set small.</>)}>
+          <Template span={3} title={t("宽擎天柱 · 开源", "Wide Skyscraper · open")} spec="160 × 600 · IAB Wide Skyscraper" w={160} h={600} themes={["signal", "ink"]} tags={["display"]} file="ad-160x600-open">
             <div className="absolute u-inset-9 flex flex-col justify-between">
               <Wordmark className="ab-logo u-h-10" />
               <h3 className="ab-head [&_[data-l=zh]]:leading-[1.16] u-text-17 leading-[1.02]">
@@ -421,7 +411,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 8 · 1080 × 1920 — drives (story) */}
-          <Template span={4} title={t("快拍 9:16 · 丢盘", "Story 9:16 · drives")} spec={t("1080 × 1920 · 橙色区域为平台界面，不导出", "1080 × 1920 · orange zones are platform UI, not exported")} w={1080} h={1920} themes={["ink", "signal"]} tags={["social"]} file="ad-1080x1920-drives" note={t(<><b>用途：</b>Stories 与 Reels。所有内容位于平台界面之外；橙色斜线区仅供排版参考，导出时自动去除。</>, <><b>Use:</b> Stories and Reels. Every element stays clear of the platform interface; the orange hatched zones are a layout guide and are removed on export.</>)}>
+          <Template span={4} title={t("快拍 9:16 · 丢盘", "Story 9:16 · drives")} spec={t("1080 × 1920 · 橙色区域为平台界面，不导出", "1080 × 1920 · orange zones are platform UI, not exported")} w={1080} h={1920} themes={["ink", "signal"]} tags={["social"]} file="ad-1080x1920-drives">
             <div className="absolute top-[290px] right-[180px] left-(--m) grid u-gap-7">
               <Wordmark className="ab-logo u-h-5" />
               <h3 className="ab-head [&_[data-l=zh]]:leading-[1.16] u-text-11 leading-[0.98]">
@@ -447,7 +437,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 9 · 1080 × 1080 — S3 */}
-          <Template span={6} title={t("信息流方图 · S3 调用", "Feed square · S3 calls")} spec="1080 × 1080 · LinkedIn / X / Facebook / Instagram" w={1080} h={1080} themes={["paper", "white", "ink"]} tags={["social"]} file="ad-1080-s3" note={t(<><b>用途：</b>迁移与兼容。上层是应用代码里不变的 S3 调用，下层是 RustFS 的分片；分界线即 S3 API。</>, <><b>Use:</b> migration and compatibility. The upper layer is the S3 calls that stay unchanged in application code; the lower layer is RustFS’s shards; the line between them is the S3 API.</>)}>
+          <Template span={6} title={t("信息流方图 · S3 调用", "Feed square · S3 calls")} spec="1080 × 1080 · LinkedIn / X / Facebook / Instagram" w={1080} h={1080} themes={["paper", "white", "ink"]} tags={["social"]} file="ad-1080-s3">
             <div className="ab-frame">
               <Wordmark className="ab-logo u-h-5" />
               <div className="grid justify-items-start u-gap-5">
@@ -473,7 +463,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 10 · 1080 × 1080 — open */}
-          <Template span={6} title={t("信息流方图 · 开源", "Feed square · open")} spec="1080 × 1080 · LinkedIn / X / Facebook / Instagram" w={1080} h={1080} themes={["signal", "ink"]} tags={["social"]} file="ad-1080-open" note={t(<><b>用途：</b>开源许可。空心「2.0」是许可证版本，也是画面唯一的图形；不得加星号或小字。</>, <><b>Use:</b> the open-source licence. The outlined “2.0” is the licence version and the only graphic; no asterisks, no small print.</>)}>
+          <Template span={6} title={t("信息流方图 · 开源", "Feed square · open")} spec="1080 × 1080 · LinkedIn / X / Facebook / Instagram" w={1080} h={1080} themes={["signal", "ink"]} tags={["social"]} file="ad-1080-open" note={t("不得加星号或小字。", "No asterisks, no small print.")}>
             <div className="ab-frame">
               <Wordmark className="ab-logo u-h-5" />
               <h3 className="ab-head [&_[data-l=zh]]:leading-[1.16] u-text-9.5 leading-[1]">
@@ -491,7 +481,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 11 · 1200 × 628 — AI link ad */}
-          <Template span={6} title={t("链接广告 · AI 数据", "Link ad · AI data")} spec="1200 × 628 · LinkedIn / X / Facebook" w={1200} h={628} themes={["paper", "white", "ink"]} tags={["social"]} file="ad-1200x628-ai" note={t(<><b>用途：</b>链接卡片。平台会在图片下方显示标题与网址，图内只保留信息、依据与按钮。</>, <><b>Use:</b> link cards. The platform shows a headline and URL under the image, so the image keeps only the message, proof line and button.</>)}>
+          <Template span={6} title={t("链接广告 · AI 数据", "Link ad · AI data")} spec="1200 × 628 · LinkedIn / X / Facebook" w={1200} h={628} themes={["paper", "white", "ink"]} tags={["social"]} file="ad-1200x628-ai">
             <div className="absolute top-0 right-0 bottom-0 grid w-[44%] content-center bg-ab-panel u-px-7">
               <span className="ab-label u-mb-3 u-text-2.25">s3://training/</span>
               <StripeRows rows={AI_PREFIXES.slice(0, 6)} className="u-gap-x-1.25 u-gap-y-1.25" labelClassName="u-pl-2.5 u-text-2.5" />
@@ -511,7 +501,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 12 · 1920 × 1080 DOOH — hardware */}
-          <Template span={6} title={t("数字屏 16:9 · 自托管", "Digital screen 16:9 · self-hosted")} spec="1920 × 1080 · DOOH" w={1920} h={1080} themes={["ink", "signal"]} tags={["outdoor"]} file="ad-dooh-hardware" note={t(<><b>用途：</b>地铁、机场与楼宇数字屏，以静帧投放。锁是画面唯一的焦点，不使用 Oxide 强调。</>, <><b>Use:</b> metro, airport and lobby screens, run as a still. The lock is the single focal point; Oxide is not used for emphasis.</>)}>
+          <Template span={6} title={t("数字屏 16:9 · 自托管", "Digital screen 16:9 · self-hosted")} spec="1920 × 1080 · DOOH" w={1920} h={1080} themes={["ink", "signal"]} tags={["outdoor"]} file="ad-dooh-hardware" note={t("锁是唯一焦点，不用 Oxide。", "The lock is the only focus; no Oxide.")}>
             <div className="ab-frame right-[48%]">
               <Wordmark className="ab-logo u-h-5" />
               <div>
@@ -539,7 +529,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 13 · 2400 × 800 Billboard — drives */}
-          <Template span={12} title={t("户外大牌 3:1 · 丢盘", "Billboard 3:1 · drives")} spec={t("2400 × 800 · 比例母版", "2400 × 800 · proportion master")} w={2400} h={800} themes={["paper", "ink"]} tags={["outdoor"]} file="ad-billboard-drives" note={t(<><b>用途：</b>户外大牌，行车或步行中 5 秒内读完。信息占左侧一半，右侧六块盘中两块离线；脚注紧邻图形，说明成立条件。</>, <><b>Use:</b> roadside billboards, read in five seconds while moving. The message fills the left half; on the right, two of six drives are offline, with the footnote beside the graphic stating the condition.</>)}>
+          <Template span={12} title={t("户外大牌 3:1 · 丢盘", "Billboard 3:1 · drives")} spec={t("2400 × 800 · 比例母版", "2400 × 800 · proportion master")} w={2400} h={800} themes={["paper", "ink"]} tags={["outdoor"]} file="ad-billboard-drives">
             <div className="ab-frame right-[46%]">
               <Wordmark className="ab-logo u-h-7" />
               <h3 className="ab-display u-text-19 leading-[0.94] tracking-[-0.03em]">
@@ -557,7 +547,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 14 · 1080 × 1350 — hardware */}
-          <Template span={4} title={t("信息流竖图 4:5 · 自托管", "Feed portrait 4:5 · self-hosted")} spec="1080 × 1350 · Instagram / Facebook / LinkedIn" w={1080} h={1350} themes={["ink", "paper"]} tags={["social"]} file="ad-1080x1350-hardware" note={t(<><b>用途：</b>数据主权。机柜边框内是一个完整的纠删集；边框之外不放任何图形。</>, <><b>Use:</b> data sovereignty. A complete erasure set sits inside the rack frame; nothing is drawn outside it.</>)}>
+          <Template span={4} title={t("信息流竖图 4:5 · 自托管", "Feed portrait 4:5 · self-hosted")} spec="1080 × 1350 · Instagram / Facebook / LinkedIn" w={1080} h={1350} themes={["ink", "paper"]} tags={["social"]} file="ad-1080x1350-hardware" note={t("机柜框外不放任何图形。", "Draw nothing outside the rack frame.")}>
             <div className="ab-frame">
               <Wordmark className="ab-logo u-h-5" />
               <div className="relative border-ab-fg u-p-4 [border-width:calc(var(--u)*0.35)]">
@@ -590,7 +580,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 15 · 1200 × 1800 Lightbox — S3 */}
-          <Template span={4} title={t("地铁灯箱 2:3 · S3 调用", "Metro lightbox 2:3 · S3 calls")} spec="1200 × 1800 · 2:3" w={1200} h={1800} themes={["signal", "ink"]} tags={["outdoor"]} file="ad-lightbox-s3" note={t(<><b>用途：</b>地铁站台与通道。画面自上而下是同一个剖面：不变的 S3 调用、S3 API 分界线、底层的分片。</>, <><b>Use:</b> metro platforms and corridors. Top to bottom is one cross-section: the unchanged S3 calls, the S3 API line, then the shards underneath.</>)}>
+          <Template span={4} title={t("地铁灯箱 2:3 · S3 调用", "Metro lightbox 2:3 · S3 calls")} spec="1200 × 1800 · 2:3" w={1200} h={1800} themes={["signal", "ink"]} tags={["outdoor"]} file="ad-lightbox-s3">
             <div className="ab-frame">
               <Wordmark className="ab-logo u-h-5" />
               <h3 className="ab-head [&_[data-l=zh]]:leading-[1.16] u-text-8.5 leading-[1]">
@@ -616,7 +606,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </Template>
 
           {/* 16 · A2 poster — AI */}
-          <Template span={4} title={t("A2 海报 · AI 数据", "A2 poster · AI data")} spec={t("1190 × 1684 pt · A2 · 印刷加 3 mm 出血", "1190 × 1684 pt · A2 · add 3 mm bleed")} w={1190} h={1684} themes={["paper", "white", "ink"]} tags={["outdoor"]} file="ad-a2-ai" note={t(<><b>用途：</b>活动现场与办公场所。分片矩阵占据画面中部，每一行条带标注一类 AI 数据；二维码指向文档首页，印刷尺寸不小于 20 mm。</>, <><b>Use:</b> events and offices. The shard matrix fills the middle, each stripe labelled with a kind of AI data; the QR code links to the documentation home and prints at 20 mm or larger.</>)}>
+          <Template span={4} title={t("A2 海报 · AI 数据", "A2 poster · AI data")} spec={t("1190 × 1684 pt · A2 · 印刷加 3 mm 出血", "1190 × 1684 pt · A2 · add 3 mm bleed")} w={1190} h={1684} themes={["paper", "white", "ink"]} tags={["outdoor"]} file="ad-a2-ai">
             <div className="ab-frame">
               <div className="ab-row">
                 <Wordmark className="ab-logo u-h-5" />
@@ -651,8 +641,8 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         lede={
           <p>
             {t(
-              "动画只用于展示广告，并且只使用品牌动作：写入（分片依次出现）与修复（分片脱落、校验块闪烁、分片重建）。动画在任意时刻被截停，画面都应可读；结束时停在与静态版完全一致的尾帧。",
-              "Animation is for display ads only and uses only the brand moves: write (shards appear in sequence) and heal (a shard drops out, parity flashes, the shard is rebuilt). The ad must read at any moment it is paused, and it ends on a frame identical to the static version.",
+              "只用于展示广告，只用写入与修复两个品牌动作；任意一帧都须可读，并停在与静态版一致的尾帧。",
+              "Display ads only, using only the write and heal moves; every frame must read, and the last matches the static version.",
             )}
           </p>
         }
@@ -660,23 +650,23 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         <div className="grid grid-cols-2 border-t border-l border-border md:grid-cols-4">
           {[
             ["≤ 15 s", t("总时长", "Total duration"), t("含全部循环", "All loops included")],
-            ["≤ 3", t("循环次数", "Loops"), t("之后停在尾帧", "Then it stops on the end frame")],
-            ["≤ 3 Hz", t("闪烁频率", "Flash rate"), t("每秒不超过 3 次", "No more than three flashes a second")],
-            ["≤ 150 KB", t("首次加载", "Initial load"), t("压缩后；其余资源在页面加载后补载", "Compressed; anything else loads after the page")],
+            ["≤ 3", t("循环次数", "Loops"), t("之后停在尾帧", "Then stop on the end frame")],
+            ["≤ 3 Hz", t("闪烁频率", "Flash rate"), ""],
+            ["≤ 150 KB", t("首次加载", "Initial load"), t("压缩后；其余延后加载", "Compressed; the rest loads later")],
           ].map(([v, k, d]) => (
             <div key={v} className="grid content-start gap-1.5 border-r border-b border-border p-5">
               <b className="font-display text-[clamp(28px,3.4vw,40px)] leading-none font-extrabold tracking-[-0.02em] [font-stretch:125%]">{v}</b>
               <span className="mt-2 text-sm font-semibold">{k}</span>
-              <span className="text-[13px] leading-snug text-muted-foreground">{d}</span>
+              {d && <span className="text-[13px] leading-snug text-muted-foreground">{d}</span>}
             </div>
           ))}
         </div>
         <HealBanner />
         <ul className="m-0 grid max-w-[72ch] list-[square] gap-1.5 pl-5 text-[15px] leading-relaxed text-subtle">
-          <li>{t("尾帧须同时包含字标、信息、依据或脚注与按钮，并另行导出为同尺寸静态图，供不支持 HTML5 的版位使用。", "The end frame carries the wordmark, message, proof line or footnote and button, and is also exported as a static image of the same size for placements without HTML5.")}</li>
-          <li>{t("不得使用弹跳、回弹、旋转、缩放冲击或视差；缓动只用 ease-standard 与 ease-emphasized。", "No bounce, overshoot, spin, zoom punches or parallax; easing is ease-standard or ease-emphasized only.")}</li>
-          <li>{t("不得自动播放声音。整个画面为点击区域，使用平台提供的 clickTag。", "No autoplay sound. The whole artboard is the click area, using the platform's clickTag.")}</li>
-          <li>{t("用户开启「减少动态效果」时，直接显示尾帧。字体须转为轮廓或子集化后内嵌，不得加载外部字体。", "With reduced motion on, show the end frame directly. Outline or subset and embed the fonts; never load external fonts.")}</li>
+          <li>{t("尾帧五个部件齐全，并另导出同尺寸静态图作后备。", "The end frame has all five parts and is also exported as a same-size static fallback.")}</li>
+          <li>{t("不用弹跳、旋转、缩放冲击或视差；缓动只用 ease-standard 与 ease-emphasized。", "No bounce, spin, zoom punches or parallax; ease-standard or ease-emphasized only.")}</li>
+          <li>{t("不自动播放声音；整个画面经 clickTag 点击。", "No autoplay sound; the whole artboard clicks through via clickTag.")}</li>
+          <li>{t("减少动态效果时直接显示尾帧；字体转轮廓或子集内嵌，不加载外部字体。", "Reduced motion shows the end frame; outline or subset fonts, never load external ones.")}</li>
         </ul>
       </Section>
 
@@ -685,11 +675,10 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
         id="rules"
         tag="Do & Don't"
         title={t("投放前检查", "Before a campaign goes live")}
-        lede={<p>{t("每则广告上线前，须逐项对照以下规则。", "Check every ad against these rules before it goes live.")}</p>}
       >
         <div className="grid gap-4 md:grid-cols-2">
           {/* 1 · one message */}
-          <DoDont kind="do" on="surface" caption={t("一则广告只讲一条信息，配一行依据。", "One message, one proof line.")}>
+          <DoDont kind="do" on="surface" caption={t("一条信息，一行依据。", "One message, one proof line.")}>
             <Mini w={300} h={250} theme="ink" lang={lang} scale={0.9}>
               <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[30%]" cols={6} rows={18} k={4} m={2} seed={3} dead={[1, 4]} fit="slice" gap={0.22} />
               <div className="absolute top-(--m) right-[calc(30%+var(--u)*6)] bottom-(--m) left-(--m) flex flex-col justify-between">
@@ -704,7 +693,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
               </div>
             </Mini>
           </DoDont>
-          <DoDont kind="dont" on="surface" caption={t("把多条信息与功能清单塞进同一画面，读者一条也记不住。", "Several messages and a feature list on one artboard; the reader keeps none of them.")}>
+          <DoDont kind="dont" on="surface" caption={t("多条信息加功能清单。", "Several messages plus a feature list.")}>
             <Mini w={300} h={250} theme="ink" lang={lang} scale={0.9}>
               <div className="absolute u-inset-6 flex flex-col u-gap-2.5">
                 <Wordmark className="ab-logo u-h-4.5" />
@@ -725,7 +714,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </DoDont>
 
           {/* 2 · footnoted claim */}
-          <DoDont kind="do" on="paper" bodyClassName="place-items-start content-center gap-3" caption={t("有条件的表述加上标，并在同一画面给出脚注。", "A conditional claim carries a superscript and its footnote on the same artboard.")}>
+          <DoDont kind="do" on="paper" bodyClassName="place-items-start content-center gap-3" caption={t("有条件的表述加上标与脚注。", "Conditions get a superscript and footnote.")}>
             <span className="font-display text-[30px] leading-[1.05] font-[750] text-neutral-950 [font-stretch:112%]">
               {t("丢盘，不丢数据", "Lose drives. Keep data.")}
               <sup className="ml-0.5 font-sans text-[12px] font-semibold">1</sup>
@@ -736,24 +725,24 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
               {t(M.drives.proof.zh, M.drives.proof.en)}
             </span>
           </DoDont>
-          <DoDont kind="dont" on="paper" bodyClassName="place-items-start content-center gap-3" caption={t("无来源、无条件的最高级表述。", "An unqualified superlative with no source and no condition.")}>
+          <DoDont kind="dont" on="paper" bodyClassName="place-items-start content-center gap-3" caption={t("无来源、无条件的最高级。", "An unqualified, unsourced superlative.")}>
             <span className="font-display text-[30px] leading-[1.05] font-[750] text-neutral-950 [font-stretch:112%]">{t("最快的 S3 存储。", "The fastest S3 storage.")}</span>
             <span className="text-[12px] leading-snug text-neutral-500">{t("（无脚注）", "(no footnote)")}</span>
           </DoDont>
 
           {/* 3 · CTA verb */}
-          <DoDont kind="do" on="ink" bodyClassName="gap-4" caption={t("按钮以动词开头，说明点击后发生什么。", "The button starts with a verb and says what happens next.")}>
+          <DoDont kind="do" on="ink" bodyClassName="gap-4" caption={t("动词开头，说明点击结果。", "Starts with a verb; says what happens.")}>
             <span className="inline-flex h-11 items-center gap-2.5 bg-blue-500 px-4.5 text-[15px] font-semibold text-white">
               {t("下载 RustFS", "Download RustFS")}
               <Icon name="arrow-right" strokeWidth={2} className="size-4.5" />
             </span>
           </DoDont>
-          <DoDont kind="dont" on="ink" bodyClassName="gap-4" caption={t("「点击这里」不说明结果；圆角与描边也不属于品牌按钮。", "“Click here” says nothing about the result; rounded and outlined buttons are not brand buttons either.")}>
+          <DoDont kind="dont" on="ink" bodyClassName="gap-4" caption={t("「点击这里」、圆角与描边。", "“Click here”, rounded, outlined.")}>
             <span className="inline-flex h-11 items-center rounded-full border-2 border-blue-400 px-6 text-[15px] font-semibold text-blue-300">{t("点击这里 >>", "Click here >>")}</span>
           </DoDont>
 
           {/* 4 · logo present */}
-          <DoDont kind="do" on="surface" caption={t("字标始终出现，与按钮同在画面内。", "The wordmark is always present, alongside the button.")}>
+          <DoDont kind="do" on="surface" caption={t("字标始终出现。", "The wordmark is always present.")}>
             <Mini w={320} h={50} theme="signal" lang={lang} scale={1}>
               <div className="absolute inset-0 flex items-center u-gap-x-20 u-pr-14 u-pl-20">
                 <Wordmark className="ab-logo u-h-19 self-center" />
@@ -765,7 +754,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
               </div>
             </Mini>
           </DoDont>
-          <DoDont kind="dont" on="surface" caption={t("缺少字标，读者不知道广告来自谁。", "No wordmark: the reader cannot tell who the ad is from.")}>
+          <DoDont kind="dont" on="surface" caption={t("缺少字标。", "No wordmark.")}>
             <Mini w={320} h={50} theme="signal" lang={lang} scale={1}>
               <div className="absolute inset-0 flex items-center u-gap-x-20 u-pr-14 u-pl-20">
                 <p className="ab-head [&_[data-l=zh]]:leading-[1.16] min-w-0 flex-1 u-text-25 leading-[1.08]">
@@ -777,7 +766,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </DoDont>
 
           {/* 5 · Oxide focal */}
-          <DoDont kind="do" on="surface" caption={t("Oxide 只标记校验块；按钮与文字不用橙色。", "Oxide marks parity only; the button and text stay out of orange.")}>
+          <DoDont kind="do" on="surface" caption={t("Oxide 只标记校验块。", "Oxide marks parity only.")}>
             <Mini w={300} h={250} theme="paper" lang={lang} scale={0.9}>
               <div className="absolute inset-x-0 top-0 u-h-30 overflow-hidden">
                 <ShardMatrix className="!h-full" cols={24} rows={3} k={4} m={2} seed={5} gap={0.22} fit="slice" mode="tone" />
@@ -791,7 +780,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
               </div>
             </Mini>
           </DoDont>
-          <DoDont kind="dont" on="surface" caption={t("橙色铺满底色、标题与按钮，失去唯一焦点。", "Orange on the background, the headline and the button; there is no single focal point left.")}>
+          <DoDont kind="dont" on="surface" caption={t("橙色铺满，失去焦点。", "Orange everywhere; no focal point.")}>
             <Mini w={300} h={250} theme="paper" lang={lang} scale={0.9}>
               <div className="absolute inset-0 bg-oxide-100" />
               <div className="absolute inset-x-0 top-0 u-h-30 overflow-hidden [--mx-data:#FF5E14] [--mx-parity:#C2410C]">
@@ -810,7 +799,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
           </DoDont>
 
           {/* 6 · tuned small size */}
-          <DoDont kind="do" on="surface" caption={t("小尺寸单独排版：字标、一句信息、一个按钮。", "Small sizes get their own layout: wordmark, one line, one button.")}>
+          <DoDont kind="do" on="surface" caption={t("小尺寸单独排版。", "Small sizes get their own layout.")}>
             <Mini w={320} h={50} theme="ink" lang={lang} scale={1}>
               <div className="absolute inset-0 flex items-center u-gap-x-20 u-pr-14 u-pl-20">
                 <Wordmark className="ab-logo u-h-19 self-center" />
@@ -822,7 +811,7 @@ export default async function AdsPage({ params }: { params: Promise<{ locale: st
               </div>
             </Mini>
           </DoDont>
-          <DoDont kind="dont" on="surface" caption={t("把 300 × 250 的版式直接缩进 320 × 50，文字小到无法阅读。", "A 300 × 250 layout shrunk into 320 × 50; the text becomes unreadable.")}>
+          <DoDont kind="dont" on="surface" caption={t("大版式直接缩小，无法阅读。", "A large layout shrunk until unreadable.")}>
             <div className="relative h-[50px] w-[320px] overflow-hidden bg-neutral-950">
               <div className="absolute top-0 left-[130px]">
                 <Mini w={300} h={250} theme="ink" lang={lang} scale={0.2}>

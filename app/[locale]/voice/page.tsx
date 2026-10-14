@@ -19,10 +19,7 @@ export default async function VoicePage({ params }: { params: Promise<{ locale: 
         label="Guidelines · Voice"
         title={t("语言与文案", "Voice")}
         subtitle={t("Voice", "语言与文案")}
-        lede={t(
-          "RustFS 像一位资深的存储工程师那样说话：先给结论，再给依据；用事实代替形容词；承认边界，也说明下一步。",
-          "RustFS speaks like a senior storage engineer: the conclusion first, then the evidence; facts instead of adjectives; limits stated plainly, along with what comes next.",
-        )}
+        lede={t("先结论，后依据；用事实代替形容词。", "Conclusion first, then evidence; facts instead of adjectives.")}
         meta={[
           { k: t("人称", "Person"), v: t("你 / 我们", "you / we") },
           { k: t("语言", "Languages"), v: "中文 · English" },
@@ -30,7 +27,7 @@ export default async function VoicePage({ params }: { params: Promise<{ locale: 
         ]}
       />
 
-      <Section id="voice" tag="Voice" title={t("品牌口吻", "How RustFS sounds")} lede={<p>{t("四个品牌性格落到文字上，对应以下写法。", "The four brand traits translate into these writing habits.")}</p>}>
+      <Section id="voice" tag="Voice" title={t("品牌口吻", "How RustFS sounds")} lede={<p>{t("品牌性格在文字上的体现。", "The brand traits, in writing.")}</p>}>
         <Table
           head={[t("特质", "Trait"), t("写法", "Habit"), t("推荐", "Write"), t("避免", "Avoid")]}
           rows={[
@@ -42,21 +39,21 @@ export default async function VoicePage({ params }: { params: Promise<{ locale: 
         />
       </Section>
 
-      <Section id="tone" tag="Tone by context" title={t("不同场景的语气", "Tone by context")} lede={<p>{t("口吻不变，语气随场景调整。", "The voice stays constant; the tone shifts with the context.")}</p>}>
+      <Section id="tone" tag="Tone by context" title={t("不同场景的语气", "Tone by context")} lede={<p>{t("口吻不变，语气随场景调整。", "One voice; the tone shifts with context.")}</p>}>
         <Table
           head={[t("场景", "Context"), t("语气", "Tone"), t("要点", "Key points")]}
           rows={[
-            [t("文档", "Documentation"), t("中性、直接", "Neutral, direct"), t("第二人称「你」；每一步可执行；不写营销语句。", "Second person; every step is actionable; no marketing language.")],
-            [t("官网与广告", "Website and ads"), t("自信、克制", "Confident, restrained"), t("一个画面一个信息；需要条件的说法必须带脚注。", "One message per surface; any conditional claim carries a footnote.")],
-            [t("发布说明", "Release notes"), t("清楚、完整", "Clear, complete"), t("按「新增、改进、修复、破坏性变更」分组；破坏性变更放在最前。", "Group as added, improved, fixed and breaking; breaking changes first.")],
-            [t("安全公告", "Security advisories"), t("冷静、准确", "Calm, precise"), t("编号、影响范围、严重程度、修复版本、缓解措施；不淡化也不渲染。", "Identifier, scope, severity, fixed version, mitigation; neither downplay nor dramatise.")],
-            [t("社区与社媒", "Community and social"), t("友好、平视", "Friendly, level"), t("感谢具体的人和贡献；不玩梗、不攻击其他项目。", "Thank specific people and contributions; no memes, no attacks on other projects.")],
-            [t("错误信息", "Error messages"), t("具体、可操作", "Specific, actionable"), t("说明发生了什么、为什么、怎么解决；不道歉，不责备用户。", "Say what happened, why and how to fix it; no apologies, no blame.")],
+            [t("文档", "Documentation"), t("中性、直接", "Neutral, direct"), t("第二人称，步骤可执行", "Second person, actionable steps")],
+            [t("官网与广告", "Website and ads"), t("自信、克制", "Confident, restrained"), t("一个信息，条件写脚注", "One message, footnoted conditions")],
+            [t("发布说明", "Release notes"), t("清楚、完整", "Clear, complete"), t("破坏性变更放最前", "Breaking changes first")],
+            [t("安全公告", "Security advisories"), t("冷静、准确", "Calm, precise"), t("编号、范围、严重程度、修复版本", "ID, scope, severity, fixed version")],
+            [t("社区与社媒", "Community and social"), t("友好、平视", "Friendly, level"), t("感谢具体的人，不玩梗", "Thank specific people; no memes")],
+            [t("错误信息", "Error messages"), t("具体、可操作", "Specific, actionable"), t("说明原因与解决办法，不道歉", "Cause and fix; no apology")],
           ]}
         />
       </Section>
 
-      <Section id="naming" tag="Terminology" title={t("术语表", "Terminology")} lede={<p>{t("以下术语在中英文物料中统一使用。产品名、协议名与功能名保留英文时，首次出现可在括号中附中文说明。", "Use these terms consistently in both languages. Where product, protocol or feature names stay in English, the first mention in Chinese may add a Chinese gloss in parentheses.")}</p>}>
+      <Section id="naming" tag="Terminology" title={t("术语表", "Terminology")} lede={<p>{t("中英文统一使用以下术语。", "Use these terms in both languages.")}</p>}>
         <Table
           head={["中文", "English", t("说明", "Notes")]}
           rows={[
@@ -84,19 +81,19 @@ export default async function VoicePage({ params }: { params: Promise<{ locale: 
         <Table
           head={[t("项目", "Item"), t("规则", "Rule")]}
           rows={[
-            [t("标题", "Headings"), t("英文使用句首大写（Sentence case）；中文标题不加句号。", "English uses sentence case; Chinese headings take no full stop.")],
-            [t("按钮", "Buttons"), t("用动词开头说明结果：下载 RustFS、创建存储桶。不写「点击这里」「确定」。", "Start with a verb that names the result: Download RustFS, Create bucket. Never “Click here” or “OK”.")],
-            [t("数字", "Numbers"), t("遵循字体页的数字与单位规范；同一物料内格式一致。", "Follow the numbers and units rules on the Typography page; one format per piece.")],
-            [t("宣称", "Claims"), t("性能、兼容性与可靠性宣称必须可验证，并注明条件与来源。", "Performance, compatibility and reliability claims must be verifiable, with conditions and a source.")],
-            [t("比较", "Comparisons"), t("只比较可公开验证的事实；不贬低其他项目或其用户。", "Compare only publicly verifiable facts; never disparage other projects or their users.")],
-            [t("预览功能", "Preview features"), t("名称后标注「预览」/ Preview，并链接到支持范围说明。", "Mark the name with Preview and link to the support scope.")],
-            [t("链接文字", "Link text"), t("描述目标内容，如「查看兼容性矩阵」；不写「点击此处」。", "Describe the destination, such as “See the compatibility matrix”; never “click here”.")],
-            [t("包容性", "Inclusive language"), t("使用 allowlist / denylist、primary / replica；中文避免性别化默认称谓。", "Use allowlist / denylist and primary / replica; avoid gendered defaults.")],
+            [t("标题", "Headings"), t("英文句首大写；中文不加句号", "Sentence case; no full stop in Chinese")],
+            [t("按钮", "Buttons"), t("动词开头，说明结果", "Start with a verb that names the result")],
+            [t("数字", "Numbers"), t("见字体页的数字规范", "See the numbers rules on Typography")],
+            [t("宣称", "Claims"), t("须可验证，注明条件与来源", "Verifiable, with conditions and source")],
+            [t("比较", "Comparisons"), t("只比可验证的事实，不贬低他人", "Verifiable facts only; never disparage")],
+            [t("预览功能", "Preview features"), t("标注「预览」", "Label as Preview")],
+            [t("链接文字", "Link text"), t("描述目标，不写「点击此处」", "Describe the target, never “click here”")],
+            [t("包容性", "Inclusive language"), t("allowlist / denylist，primary / replica", "allowlist / denylist, primary / replica")],
           ]}
         />
       </Section>
 
-      <Section id="words" tag="Word list" title={t("用词清单", "Word list")} lede={<p>{t("左列词语没有信息量或无法验证，须替换为右列的具体表述。", "Words on the left carry no information or cannot be verified; replace them with the specific statements on the right.")}</p>}>
+      <Section id="words" tag="Word list" title={t("用词清单", "Word list")} lede={<p>{t("左列无法验证，改用右列的具体表述。", "The left column cannot be verified; write the right.")}</p>}>
         <Table
           head={[t("避免", "Avoid"), t("改为", "Write instead")]}
           rows={[
@@ -126,7 +123,7 @@ export default async function VoicePage({ params }: { params: Promise<{ locale: 
             <p className="text-sm leading-relaxed"><b>{t("哎呀，出错了！", "Oops, something went wrong!")}</b><br />{t("非常抱歉，请稍后再试。", "We're so sorry. Please try again later.")}</p>
           </DoDont>
         </div>
-        <Note>{t("中英文版本须表达相同的意思，但不逐字对应。翻译时先确定要传达的结论，再按目标语言的习惯重写。", "Chinese and English versions must say the same thing without mirroring each other word for word. Fix the conclusion first, then rewrite it the way the target language says it.")}</Note>
+        <Note>{t("中英文意思相同，不逐字对应。", "Same meaning in both languages, never word for word.")}</Note>
       </Section>
 
       <PageFooter slug="voice" />

@@ -50,7 +50,7 @@ export function GithubBanner() {
       <div className="absolute inset-y-0 left-[calc(var(--u)*12)] right-[calc(30%+var(--u)*6)] flex items-center u-gap-10">
         <Wordmark className="ab-logo u-h-16 self-center" />
         <i className="block u-h-40 w-px bg-ab-line" />
-        <H className="u-text-11.5" zhClass="leading-[1.24]" enClass="leading-[1.04]" zh={<>每一个字节，<br />都有着落。</>} en={<>Every byte,<br />accounted for.</>} />
+        <H zhClass="u-text-11 leading-[1.24]" enClass="u-text-9 leading-[1.04]" zh={<>AI 时代的基建，<br />从每一个字节算起。</>} en={<>AI infrastructure,<br />accounted for<br />byte by byte.</>} />
       </div>
     </>
   )
@@ -62,7 +62,7 @@ export function XHeader() {
     <>
       <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[56%]" cols={11} rows={6} k={4} m={2} seed={33} mode="tone" fade="l" fit="slice" gap={0.22} />
       <div className="absolute top-[calc(var(--u)*16)] left-[calc(var(--u)*8)]">
-        <H className="u-text-12" zhClass="leading-[1.22]" enClass="leading-[1.02]" zh={<>每一个字节，<br />都有着落。</>} en={<>Every byte,<br />accounted for.</>} />
+        <H zhClass="u-text-11.5 leading-[1.22]" enClass="u-text-10 leading-[1.02]" zh={<>AI 时代的基建，<br />从每一个字节算起。</>} en={<>AI infrastructure,<br />accounted for<br />byte by byte.</>} />
       </div>
       {/* X draws the avatar over the bottom left: about 134px at 600px header width */}
       <Guide className="bottom-[-167px] left-[40px] size-[334px]" round label={<L zh="头像覆盖区" en="Avatar overlap" />} labelClass="top-[18%] left-1/2 -translate-x-1/2" />
@@ -76,7 +76,7 @@ export function LinkedInCover() {
     <>
       <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[24%]" cols={7} rows={5} k={4} m={2} seed={9} mode="tone" fade="l" fit="slice" gap={0.22} />
       <div className="absolute inset-y-0 left-[25%] right-[calc(24%+var(--u)*8)] flex flex-col justify-center u-gap-5">
-        <H className="u-text-16" zhClass="leading-[1.15]" enClass="leading-none" zh="每一个字节，都有着落。" en="Every byte, accounted for." />
+        <H zhClass="u-text-14 leading-[1.15]" enClass="u-text-11 leading-[1.04]" zh="AI 时代的基建，从每一个字节算起。" en={<>AI infrastructure,<br />accounted for byte by byte.</>} />
         <span className="ab-label u-text-6">
           <L zh="兼容 S3 的对象存储 · Rust 构建 · Apache 2.0" en="S3-compatible object storage · Built in Rust · Apache 2.0" />
         </span>
@@ -97,7 +97,7 @@ export function YouTubeBanner() {
             <Wordmark className="ab-logo u-h-7" />
             <Stripe className="u-text-3" />
           </div>
-          <H className="u-text-6.5" zhClass="leading-[1.2]" enClass="leading-[1.02]" zh={<>每一个字节，<br />都有着落。</>} en={<>Every byte,<br />accounted for.</>} />
+          <H zhClass="u-text-6.5 leading-[1.2]" enClass="u-text-5.5 leading-[1.02]" zh={<>AI 时代的基建，<br />从每一个字节算起。</>} en={<>AI infrastructure,<br />accounted for<br />byte by byte.</>} />
         </div>
       </div>
       <Guide className="inset-0" label={<L zh="电视 · 全图 2560 × 1440" en="TV · full image 2560 × 1440" />} labelClass="top-[3%] left-[1.5%]" />

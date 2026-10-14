@@ -39,7 +39,7 @@ export function EasingDemo() {
   return (
     <div className="grid gap-4">
       <div className="flex items-center justify-between gap-3">
-        <span className="font-mono text-xs text-muted-foreground">{t("时长统一为 720ms，便于比较曲线", "All at 720ms so the curves can be compared")}</span>
+        <span className="font-mono text-xs text-muted-foreground">{t("720ms 对比", "At 720ms")}</span>
         <ReplayButton onClick={() => setRun((r) => r + 1)} label={t("播放", "Play")} />
       </div>
       <div className="grid gap-px border border-border bg-border">
@@ -127,7 +127,7 @@ export function WriteDemo() {
   return (
     <MoveFrame
       title={t("写入 Write", "Write")}
-      body={t("分片按条带逐块出现：每块 60ms、步进式出现，不做淡入。用于页面载入、发布与上传完成。", "Shards appear stripe by stripe, 60ms apart, stepping in rather than fading. Use it for page load, releases and completed uploads.")}
+      body={t("逐块出现，每块 60ms。", "Shards step in, 60ms apart.")}
       spec="steps(2) · 60 ms / shard · 3 stripes"
       onReplay={play}
     >
@@ -164,7 +164,7 @@ export function HealDemo() {
   return (
     <MoveFrame
       title={t("修复 Heal", "Heal")}
-      body={t("一个数据块消失为虚线框，校验块闪亮，缺失的块被重建。用于状态恢复、错误解除与「修复」主题内容。", "A data shard drops to a dashed outline, the parity shards flash and the missing shard is rebuilt. Use it for recovered states, cleared errors and healing topics.")}
+      body={t("缺块被校验块重建。", "A missing shard is rebuilt from parity.")}
       spec="0 → 700 ms missing · 1000 ms rebuild · ease-emphasized"
       onReplay={play}
     >

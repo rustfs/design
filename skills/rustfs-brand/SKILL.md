@@ -5,7 +5,7 @@ description: Apply the official RustFS brand and design system (Signal Blue #006
 
 # RustFS brand
 
-RustFS is a Rust-native, S3-compatible distributed object store (Apache 2.0, self-hosted, erasure coding, bitrot protection, healing). Its identity turns the structure of erasure coding into a visual language: data shards in Signal Blue, a few parity shards in Oxide, everything square, exact and labelled. Brand line: "Every byte, accounted for." / 「每一个字节，都有着落。」
+RustFS is a Rust-native, S3-compatible distributed object store (Apache 2.0, self-hosted, erasure coding, bitrot protection, healing). Its identity turns the structure of erasure coding into a visual language: data shards in Signal Blue, a few parity shards in Oxide, everything square, exact and labelled. Brand line: "AI infrastructure, accounted for byte by byte." / 「AI 时代的基建，从每一个字节算起。」
 
 The full rules live in `references/DESIGN.md` (machine-readable tokens + prose, the Google DESIGN.md format). Read it once per task before designing anything. The other references are loaded only when the task needs them.
 

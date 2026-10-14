@@ -19,7 +19,7 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
 
   const sample: Record<string, string> = {
     "display-2xl": "1.0.1",
-    "display-xl": zh ? "每一个字节" : "Every byte",
+    "display-xl": zh ? "AI 时代的基建" : "Byte by byte",
     "display-lg": zh ? "丢盘，不丢数据" : "Lose drives. Keep data.",
     "display-md": zh ? "兼容 S3 的对象存储" : "S3-compatible object storage",
     "headline-lg": zh ? "纠删码如何保证数据完整" : "How erasure coding keeps data whole",
@@ -62,10 +62,7 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
         label="Guidelines · Typography"
         title={t("字体", "Typography")}
         subtitle={t("Typography", "字体")}
-        lede={t(
-          "RustFS 使用三款开源字体：Archivo 加宽体承担展示文字，延续字标的宽体粗黑结构；Geist 承担正文与界面；Geist Mono 承担标签、数据与代码。中文使用 HarmonyOS Sans SC 或思源黑体。",
-          "RustFS uses three open-source typefaces. Archivo at expanded widths carries display type and echoes the wide, heavy build of the wordmark; Geist carries text and interfaces; Geist Mono carries labels, data and code. Chinese is set in HarmonyOS Sans SC or Source Han Sans SC.",
-        )}
+        lede={t("Archivo 加宽体做展示，Geist 做正文，Geist Mono 做数据；中文用 HarmonyOS Sans SC。", "Archivo Expanded for display, Geist for text, Geist Mono for data; HarmonyOS Sans SC for Chinese.")}
         meta={[
           { k: t("展示", "Display"), v: "Archivo 112–125%" },
           { k: t("正文", "Text"), v: "Geist" },
@@ -74,7 +71,7 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
         ]}
       />
 
-      <Section id="families" tag="Typefaces" title={t("字体家族", "Typefaces")} lede={<p>{t("所有字体均可免费商用。网站通过 next/font 自托管，设计软件中须安装同名字体。", "Every typeface is free for commercial use. Websites self-host them with next/font; design tools must have the same fonts installed.")}</p>}>
+      <Section id="families" tag="Typefaces" title={t("字体家族", "Typefaces")} lede={<p>{t("均可免费商用。", "All free for commercial use.")}</p>}>
         <div className="grid gap-px border border-border bg-border lg:grid-cols-2">
           <Specimen
             name="Archivo"
@@ -108,14 +105,14 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
             role={t("中文 · 标题与正文", "Chinese · headlines and text")}
             meta={[t("替代：思源黑体 Source Han Sans SC", "Alternative: Source Han Sans SC"), t("网页回退：PingFang SC / Microsoft YaHei", "Web fallback: PingFang SC / Microsoft YaHei")]}
             glyph={<span className="font-display font-extrabold">字</span>}
-            line={<span className="font-display font-extrabold">每一个字节，都有着落。</span>}
+            line={<span className="font-display font-extrabold">AI 时代的基建，从每一个字节算起。</span>}
             chars="对象存储 纠删码 校验块 存储桶 修复 复制 生命周期"
             charsClass="font-sans"
           />
         </div>
       </Section>
 
-      <Section id="width" tag="Width" title={t("宽度轴", "The width axis")} lede={<p>{t("Archivo 是可变字体，宽度轴取值 62–125%。品牌只使用两档：展示文字 125%，标题 112%。宽度越大，字号越少，单行字数越少。", "Archivo is a variable font with a width axis from 62% to 125%. The brand uses two settings: 125% for display and 112% for headlines. The wider the setting, the fewer words per line.")}</p>}>
+      <Section id="width" tag="Width" title={t("宽度轴", "The width axis")} lede={<p>{t("展示 125%，标题 112%。", "Display at 125%, headlines at 112%.")}</p>}>
         <div className="grid border-t border-foreground">
           {[
             { w: "100%", zh: "不使用：失去与字标的呼应", en: "Not used: loses the link to the wordmark", muted: true },
@@ -125,7 +122,7 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
             <div key={r.w} className="grid items-baseline gap-x-8 gap-y-2 border-b border-border py-6 md:grid-cols-[120px_1fr_280px]">
               <span className="font-mono text-xs text-muted-foreground">wdth {r.w}</span>
               <span className={cn("truncate font-display text-[clamp(36px,6vw,80px)] leading-none font-extrabold tracking-[-0.02em]", r.muted && "text-faint")} style={{ fontStretch: r.w }}>
-                Every byte
+                Byte by byte
               </span>
               <span className="text-sm text-subtle">{t(r.zh, r.en)}</span>
             </div>
@@ -133,7 +130,7 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
         </div>
       </Section>
 
-      <Section id="scale" tag="Type scale" title={t("字号阶梯", "Type scale")} lede={<p>{t("16 个文字样式覆盖网站、文档与营销物料。每个样式在 Tailwind 中对应一个 type-* 工具类，例如 type-display-xl。移动端展示字号按比例缩小，行高与字距保持不变。", "Sixteen styles cover the websites, documentation and marketing. Each maps to a type-* utility in Tailwind, such as type-display-xl. On small screens display sizes scale down; line height and tracking stay the same.")}</p>}>
+      <Section id="scale" tag="Type scale" title={t("字号阶梯", "Type scale")} lede={<p>{t("每个样式对应一个 type-* 工具类。", "Each style is a type-* utility.")}</p>}>
         <div className="grid border-t border-foreground">
           {typography.map((s) => (
             <div key={s.name} className="grid min-w-0 items-baseline gap-x-8 gap-y-3 border-b border-border py-6 lg:grid-cols-[200px_minmax(0,1fr)]">
@@ -166,16 +163,16 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
         </div>
       </Section>
 
-      <Section id="chinese" tag="Chinese & mixed text" title={t("中文与中英混排", "Chinese and mixed text")} lede={<p>{t("中文与拉丁字母混排时，两种文字须在字重、字号与基线上协调。以下规则适用于所有中文与双语物料。", "When Chinese and Latin text are set together they must agree in weight, size and baseline. These rules apply to all Chinese and bilingual materials.")}</p>}>
+      <Section id="chinese" tag="Chinese & mixed text" title={t("中文与中英混排", "Chinese and mixed text")} lede={<p>{t("适用于所有中文与双语物料。", "For all Chinese and bilingual materials.")}</p>}>
         <Table
           head={[t("项目", "Item"), t("规则", "Rule"), t("示例", "Example")]}
           rows={[
-            [t("空格", "Spacing"), t("中文与英文、数字之间加一个半角空格；中文与标点之间不加空格。", "Put a half-width space between Chinese and Latin letters or numbers; none next to punctuation."), "RustFS 1.0 正式发布"],
-            [t("标点", "Punctuation"), t("中文使用全角标点；引号使用直角引号「」，嵌套使用『』。", "Chinese uses full-width punctuation; quotes are corner brackets 「」, nested 『』."), "「流向 S」符号"],
-            [t("字距", "Tracking"), t("中文标题字距为 0，不使用负字距；正文不调整字距。", "Chinese headlines use zero tracking, never negative; body text is never tracked."), "每一个字节，都有着落。"],
-            [t("行高", "Line height"), t("中文展示文字行高不小于 1.15，正文行高 1.7–1.8。", "Chinese display lines are at least 1.15; body text 1.7–1.8."), "—"],
-            [t("字重", "Weight"), t("中文标题使用 Bold 或 Heavy；不使用浏览器合成的加粗与斜体。", "Chinese headlines use Bold or Heavy; never synthesised bold or italic."), "—"],
-            [t("数字", "Numerals"), t("数字一律使用阿拉伯数字与拉丁字体；版本号、容量与日期不转为中文。", "Numbers always use Arabic numerals in the Latin face; versions, sizes and dates are never written in Chinese."), "15.15M · 2026-10-14"],
+            [t("空格", "Spacing"), t("中英文、数字之间加半角空格", "Half-width space between scripts"), "RustFS 1.0 正式发布"],
+            [t("标点", "Punctuation"), t("全角标点，引号用「」", "Full-width punctuation, 「」 quotes"), "「流向 S」符号"],
+            [t("字距", "Tracking"), t("标题字距为 0，不用负字距", "Zero tracking, never negative"), "从每一个字节算起。"],
+            [t("行高", "Line height"), t("标题 ≥ 1.15，正文 1.7–1.8", "Headlines ≥ 1.15, body 1.7–1.8"), "—"],
+            [t("字重", "Weight"), t("Bold / Heavy，不用合成粗斜体", "Bold / Heavy; no synthetic styles"), "—"],
+            [t("数字", "Numerals"), t("一律阿拉伯数字", "Arabic numerals only"), "15.15M · 2026-10-14"],
           ]}
         />
         <div className="grid gap-4 md:grid-cols-2">
@@ -188,22 +185,22 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
         </div>
       </Section>
 
-      <Section id="numbers" tag="Numbers & units" title={t("数字与单位", "Numbers and units")} lede={<p>{t("数字是 RustFS 最重要的证据。数字的写法须统一、可比较，并在数据列中使用等宽数字。", "Numbers are RustFS's most important evidence. Write them consistently and comparably, and use tabular figures in data columns.")}</p>}>
+      <Section id="numbers" tag="Numbers & units" title={t("数字与单位", "Numbers and units")} lede={<p>{t("数据列使用等宽数字。", "Use tabular figures in data columns.")}</p>}>
         <Table
           mono={[1]}
           head={[t("类型", "Type"), t("写法", "Format"), t("说明", "Notes")]}
           rows={[
-            [t("大数", "Large numbers"), "34,869 · 2.7M+ · 15.15M", t("英文使用千位逗号与 K / M / B；中文可写作「270 万+」，同一物料内保持一种写法。", "Use thousands separators and K / M / B; Chinese may write 270 万+. Keep one style per piece.")],
-            [t("日期", "Dates"), "2026-10-14", t("统一使用 ISO 8601；英文长文可写作 October 14, 2026。", "Use ISO 8601; long-form English may write October 14, 2026.")],
-            [t("版本", "Versions"), "1.0.1 · 1.0.0 GA", t("不加 v 前缀；预发布写作 1.1.0-rc.1。", "No v prefix; pre-releases read 1.1.0-rc.1.")],
-            [t("容量", "Capacity"), "64 MiB · 40 GiB · 1.2 PB", t("二进制容量使用 KiB / MiB / GiB；硬件标称容量沿用 GB / TB。", "Binary sizes use KiB / MiB / GiB; vendor drive capacities keep GB / TB.")],
-            [t("纠删码", "Erasure coding"), "EC 4+2 · EC 12+4", t("数据块在前、校验块在后，加号两侧无空格。", "Data shards first, parity second, no spaces around the plus.")],
-            [t("速率", "Throughput"), "15 Gbps · 1.8 GiB/s", t("网络用 bit，存储吞吐用 byte；数值与单位间加空格。", "Bits for networks, bytes for storage throughput; a space before the unit.")],
+            [t("大数", "Large numbers"), "34,869 · 2.7M+ · 15.15M", t("千位逗号与 K / M / B", "Thousands separators, K / M / B")],
+            [t("日期", "Dates"), "2026-10-14", t("ISO 8601", "ISO 8601")],
+            [t("版本", "Versions"), "1.0.1 · 1.0.0 GA", t("不加 v 前缀", "No v prefix")],
+            [t("容量", "Capacity"), "64 MiB · 40 GiB · 1.2 PB", t("二进制用 KiB / MiB / GiB", "Binary sizes in KiB / MiB / GiB")],
+            [t("纠删码", "Erasure coding"), "EC 4+2 · EC 12+4", t("数据块在前，加号两侧无空格", "Data first, no spaces around +")],
+            [t("速率", "Throughput"), "15 Gbps · 1.8 GiB/s", t("网络用 bit，存储用 byte", "Bits for networks, bytes for storage")],
           ]}
         />
       </Section>
 
-      <Section id="hierarchy" tag="Hierarchy" title={t("层级示范", "Hierarchy in practice")} lede={<p>{t("一个版块通常只用四级：等宽眉题、展示标题、正文与数据。层级靠字号、宽度与颜色区分，不靠下划线、加框或颜色堆叠。", "A block normally uses four levels: a mono eyebrow, a display headline, body text and data. Levels differ in size, width and colour, never through underlines, boxes or stacked colours.")}</p>}>
+      <Section id="hierarchy" tag="Hierarchy" title={t("层级示范", "Hierarchy in practice")} lede={<p>{t("一个版块最多四级：眉题、标题、正文、数据。", "Four levels at most: eyebrow, headline, body, data.")}</p>}>
         <div className="grid gap-10 border border-border p-[clamp(24px,5vw,64px)] md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
           <div className="grid content-start gap-5">
             <span className="type-label-md text-muted-foreground">Engineering · 12 min</span>
@@ -231,14 +228,14 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
             mono={[1]}
             head={[t("角色", "Role"), "font-family", t("说明", "Notes")]}
             rows={[
-              [t("展示", "Display"), `"Archivo", "HarmonyOS Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif`, t("同时设置 font-stretch: 125% 或 112%", "Also set font-stretch: 125% or 112%")],
-              [t("正文", "Text"), `"Geist", "HarmonyOS Sans SC", "Source Han Sans SC", "PingFang SC", system-ui, sans-serif`, t("中文字符自动回退到中文字体", "Chinese characters fall back to the Chinese face")],
-              [t("等宽", "Mono"), `"Geist Mono", "SF Mono", ui-monospace, Menlo, monospace`, t("标签使用大写与 0.08em 字距", "Labels use caps with 0.08em tracking")],
+              [t("展示", "Display"), `"Archivo", "HarmonyOS Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif`, t("配合 font-stretch", "With font-stretch")],
+              [t("正文", "Text"), `"Geist", "HarmonyOS Sans SC", "Source Han Sans SC", "PingFang SC", system-ui, sans-serif`, t("中文自动回退", "Chinese falls back")],
+              [t("等宽", "Mono"), `"Geist Mono", "SF Mono", ui-monospace, Menlo, monospace`, t("标签大写，0.08em", "Caps labels, 0.08em")],
             ]}
           />
         </Sub>
-        <Note>{t("无法安装品牌字体的场合（如第三方平台的纯文本编辑器），英文使用系统无衬线字体，中文使用系统黑体。不得以衬线体、手写体或其它展示字体替代 Archivo。", "Where brand fonts cannot be installed, such as plain-text editors on third-party platforms, use the system sans serif for English and the system Hei face for Chinese. Never replace Archivo with a serif, script or other display face.")}</Note>
-        <Note tone="parity">{t("导出中文物料前，请在本机安装 HarmonyOS Sans SC 或思源黑体。未安装时中文标题会回退到系统字体，苹方最高只有 Semibold，字重明显偏轻。", "Install HarmonyOS Sans SC or Source Han Sans SC before exporting Chinese materials. Without them, Chinese headings fall back to the system face, and PingFang SC stops at Semibold, which reads noticeably lighter.")}</Note>
+        <Note>{t("无法安装品牌字体时，英文用系统无衬线，中文用系统黑体。", "Without brand fonts, use the system sans and Hei faces.")}</Note>
+        <Note tone="parity">{t("导出中文物料前须安装 HarmonyOS Sans SC 或思源黑体。", "Install HarmonyOS Sans SC or Source Han Sans SC before exporting Chinese.")}</Note>
       </Section>
 
       <PageFooter slug="type" />

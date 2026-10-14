@@ -248,11 +248,11 @@ export function PostPrinciple() {
       <blockquote className="m-0 grid u-gap-7">
         <Stripe className="u-text-3.5" />
         <H
-          className="u-text-8.5"
-          zhClass="u-text-7.5 leading-[1.36]"
+          className="u-text-7.5"
+          zhClass="u-text-6.5 leading-[1.36]"
           enClass="leading-[1.1] tracking-[-0.015em]"
-          zh={<><span className="text-ab-muted">Rust 让每一块内存<br />都有主人。</span><br />RustFS 让每一个字节，<br />都有着落。</>}
-          en={<><span className="text-ab-muted">Rust gives every value an owner.</span> RustFS gives every byte an account.</>}
+          zh={<><span className="text-ab-muted">Rust 让每一块内存<br />都有主人。</span><br />RustFS 让 AI 时代的基建，<br />从每一个字节算起。</>}
+          en={<><span className="text-ab-muted">Rust gives every value an owner.</span> RustFS accounts for AI infrastructure byte by byte.</>}
         />
       </blockquote>
       <div className="flex items-center u-gap-3 border-t border-ab-line u-pt-3">
@@ -606,10 +606,10 @@ export function MomentsPoster() {
     <div className="ab-frame">
       <Wordmark className="ab-logo u-h-5.5" />
       <div className="grid u-gap-6">
-        <h3 className="ab-zh m-0 u-text-12.5 leading-[1.2]">
-          每一个字节，
+        <h3 className="ab-zh m-0 u-text-9 leading-[1.22]">
+          AI 时代的基建，
           <br />
-          都有着落。
+          从每一个字节算起。
         </h3>
         <p className="ab-body m-0 u-text-4.25 leading-[1.6]">
           以 Rust 构建的分布式对象存储。

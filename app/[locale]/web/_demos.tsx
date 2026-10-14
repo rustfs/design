@@ -155,7 +155,6 @@ export function SelectDemo() {
           </select>
           <ChevronDown className={SELECT_ICON} />
         </div>
-        <p className={HELP}>{t("选项不超过 7 个时使用下拉选择；更多时使用可搜索的组合框。", "Use a select for up to seven options; use a searchable combobox beyond that.")}</p>
       </div>
       <div className={FIELD}>
         <span className={LABEL} id="ui-range-label">
@@ -181,7 +180,7 @@ export function SelectDemo() {
         <p className={HELP}>
           {t("当前：最近 ", "Showing the last ")}
           {ranges.find((r) => r[0] === range)?.[2]}
-          {t("。分段控件用于 2–5 个互斥选项，选中项为前景色实底。", ". Segmented controls hold 2–5 exclusive options; the selected one is filled with the foreground colour.")}
+          {t("。", ".")}
         </p>
       </div>
     </div>

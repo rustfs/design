@@ -186,10 +186,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
         label="Templates · Video"
         title={t("视频首尾帧", "Video")}
         subtitle={t("Video", "视频首尾帧")}
-        lede={t(
-          "演讲、教程、发布视频与竖屏短视频的片头片尾、画面图形与缩略图。横屏视频以同一个 3.2 秒片头开场，文字位于标题安全区内，动效只用品牌的两个动作：写入与修复。",
-          "Opening and closing frames, on-screen graphics and thumbnails for talks, tutorials, release videos and short-form vertical video. Every landscape video opens with the same 3.2-second sting, text stays inside the title-safe area, and motion uses only the two brand moves: write and heal.",
-        )}
+        lede={t("片头片尾、画面图形与缩略图：文字在标题安全区内，动效只用写入与修复。", "Stings, frames and thumbnails: text stays title-safe, and motion uses only write and heal.")}
         meta={[
           { k: t("模板", "Templates"), v: "14" },
           { k: t("画幅", "Formats"), v: "16:9 / 9:16 / 1:1" },
@@ -203,22 +200,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
         id="sting"
         tag="Logo sting"
         title={t("片头", "The logo sting")}
-        lede={
-          <>
-            <p>
-              {t(
-                "片头依次完成品牌的两个动作：4+2 条带逐块写入，一块数据分片掉线后由校验数据重建；随后字标逐字升起，品牌口号淡入。全长 3.2 秒，无声。",
-                "The sting performs both brand moves in order: a 4+2 stripe writes in shard by shard, then one data shard drops out and is rebuilt from parity. The wordmark then rises letter by letter and the brand line fades up. It runs 3.2 seconds and is silent.",
-              )}
-            </p>
-            <p>
-              {t(
-                "可拖动时间轴逐帧查看；导出 PNG 时自动跳到定格帧。",
-                "Drag the timeline to inspect any frame; Export PNG always captures the poster frame.",
-              )}
-            </p>
-          </>
-        }
+        lede={<p>{t("3.2 秒，无声：先写入，再修复，然后字标升起。", "3.2 seconds, silent: write, then heal, then the wordmark rises.")}</p>}
       >
         <StingPlayer />
 
@@ -228,13 +210,13 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
             mono={[0, 3]}
             head={[t("时间", "Time"), t("元素", "Element"), t("动作", "Action"), t("缓动", "Easing")]}
             rows={[
-              ["0.00–0.12 s", t("画面", "Frame"), t("Ink 底色，3 帧黑场（25 fps）", "Ink field; three frames of lead-in at 25 fps"), "—"],
-              ["0.12–0.58 s", t("条带 D1–D4 · P1–P2", "Stripe D1–D4 · P1–P2"), t("逐块写入，间隔 80 ms；每块以两级阶跃（0 → 50% → 100%）在 60 ms 内出现", "Shards write in 80 ms apart; each appears in a two-step change (0 → 50% → 100%) within 60 ms"), "steps(2)"],
-              ["0.60 s", "D2", t("掉线：实心分片变为虚线框", "Drops out: the solid shard becomes a dashed outline"), t("硬切", "Cut")],
-              ["0.84–0.96 s", t("D2 位置", "D2 slot"), t("校验数据以 Oxide 闪现：25% → 100%", "Parity flashes Oxide: 25% → 100%"), "steps(2)"],
-              ["0.96–1.20 s", "D2", t("由 Oxide 过渡回 Signal Blue，重建完成", "Shifts from Oxide back to Signal Blue; the rebuild is complete"), "ease-standard · 240 ms"],
-              ["1.20–2.02 s", t("字标 R · U · S · T · F · S", "Wordmark R · U · S · T · F · S"), t("各字母自基线升起，超出字标外框的部分被裁切；间隔 80 ms", "Each letter rises from the baseline, clipped by the wordmark's bounding box; 80 ms apart"), "ease-emphasized · 420 ms"],
-              ["2.00–2.42 s", t("品牌口号", "Brand line"), t("透明度 0 → 100%，上移 1.5u", "Opacity 0 → 100% while rising 1.5u"), "ease-standard · 420 ms"],
+              ["0.00–0.12 s", t("画面", "Frame"), t("Ink 底，3 帧黑场（25 fps）", "Ink field, 3 lead-in frames (25 fps)"), "—"],
+              ["0.12–0.58 s", t("条带 D1–D4 · P1–P2", "Stripe D1–D4 · P1–P2"), t("逐块写入，间隔 80 ms；每块 60 ms 内 0 → 50% → 100%", "Write in 80 ms apart; each 0 → 50% → 100% in 60 ms"), "steps(2)"],
+              ["0.60 s", "D2", t("掉线：实心变虚线框", "Drops out: solid to dashed"), t("硬切", "Cut")],
+              ["0.84–0.96 s", t("D2 位置", "D2 slot"), t("Oxide 闪现 25% → 100%", "Oxide flash 25% → 100%"), "steps(2)"],
+              ["0.96–1.20 s", "D2", t("Oxide 回到 Signal Blue，重建完成", "Oxide back to Signal Blue; rebuilt"), "ease-standard · 240 ms"],
+              ["1.20–2.02 s", t("字标 R · U · S · T · F · S", "Wordmark R · U · S · T · F · S"), t("逐字自基线升起，按外框裁切；间隔 80 ms", "Letters rise from the baseline, clipped to the box; 80 ms apart"), "ease-emphasized · 420 ms"],
+              ["2.00–2.42 s", t("品牌口号", "Brand line"), t("透明度 0 → 100%，上移 1.5u", "Opacity 0 → 100%, up 1.5u"), "ease-standard · 420 ms"],
               ["2.42–3.20 s", t("全部", "All"), t("静帧", "Hold"), "—"],
             ]}
           />
@@ -242,34 +224,28 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
 
         <Sub title={t("片尾 5 秒版", "Five-second outro")} aside="5.0 s · 1920 × 1080">
           <Prose>
-            <p>
-              {t(
-                "片尾用于没有平台结束画面的渠道，如 Bilibili、抖音与活动录像。片尾不含修复动作，在口号之后增加网址，并以淡出至 Ink 结束。YouTube 视频使用下方的结束画面，不使用片尾。",
-                "The outro closes videos on channels without a platform end screen, such as Bilibili, Douyin and event recordings. It omits the heal move, adds the URL after the brand line and ends with a fade to Ink. YouTube videos use the end card below instead.",
-              )}
-            </p>
+            <p>{t("用于没有平台结束画面的渠道（Bilibili、抖音、活动录像）；YouTube 改用结束画面。", "For channels without an end screen (Bilibili, Douyin, event recordings); YouTube uses the end card.")}</p>
           </Prose>
           <Table
             className="[&_table]:min-w-[720px] [&_td:first-child]:whitespace-nowrap"
             mono={[0, 3]}
             head={[t("时间", "Time"), t("元素", "Element"), t("动作", "Action"), t("缓动", "Easing")]}
             rows={[
-              ["0.00–0.12 s", t("画面", "Frame"), t("Ink 底色，3 帧黑场", "Ink field; three frames of lead-in"), "—"],
-              ["0.12–0.58 s", t("条带", "Stripe"), t("与片头相同的写入动作", "The same write move as the intro"), "steps(2)"],
-              ["0.60–1.42 s", t("字标", "Wordmark"), t("与片头相同的逐字升起", "The same letter-by-letter rise as the intro"), "ease-emphasized · 420 ms"],
-              ["1.40–1.82 s", t("品牌口号", "Brand line"), t("淡入并上移 1.5u", "Fades up 1.5u"), "ease-standard · 420 ms"],
-              ["1.60–2.02 s", "rustfs.com", t("淡入并上移 1.5u，晚于口号 200 ms", "Fades up 1.5u, 200 ms after the brand line"), "ease-standard · 420 ms"],
+              ["0.00–0.12 s", t("画面", "Frame"), t("Ink 底，3 帧黑场", "Ink field, 3 lead-in frames"), "—"],
+              ["0.12–0.58 s", t("条带", "Stripe"), t("同片头写入", "As the intro"), "steps(2)"],
+              ["0.60–1.42 s", t("字标", "Wordmark"), t("同片头逐字升起", "As the intro"), "ease-emphasized · 420 ms"],
+              ["1.40–1.82 s", t("品牌口号", "Brand line"), t("淡入，上移 1.5u", "Fades up 1.5u"), "ease-standard · 420 ms"],
+              ["1.60–2.02 s", "rustfs.com", t("淡入，上移 1.5u，晚口号 200 ms", "Fades up 1.5u, 200 ms after the line"), "ease-standard · 420 ms"],
               ["2.02–4.28 s", t("全部", "All"), t("静帧", "Hold"), "—"],
               ["4.28–5.00 s", t("全部", "All"), t("淡出至 Ink", "Fade to Ink"), "ease-exit · 720 ms"],
             ]}
           />
         </Sub>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           {[
-            [t("位置", "Placement"), t("片头须为横屏视频的第一个画面，之前不得有任何画面或声音；结束后直接切入正片，不加转场。竖屏短视频不使用片头，首帧即为内容。", "The sting is the first thing in a landscape video, with no picture or sound before it; cut straight to the programme afterwards, with no transition. Vertical shorts have no sting and open on content.")],
-            [t("帧率", "Frame rate"), t("时间以毫秒为准，交付时按项目帧率取整到最近一帧。须使用与项目帧率一致的版本，不得变速、补帧或倒放。", "Times are specified in milliseconds and rounded to the nearest frame at the project frame rate. Use the version that matches the project; never retime, interpolate or reverse it.")],
-            [t("声音", "Sound"), t("片头片尾没有音频标识，默认静音。只有在音乐已获授权时才可配乐，授权文件须随工程归档。", "There is no audio logo; the sting is silent. Music may be added only when it is licensed, and the licence is archived with the project.")],
+            [t("位置", "Placement"), t("横屏视频的第一个画面，之前无任何画面与声音；结束后直切正片。竖屏短视频不用片头。", "The first thing in a landscape video, with nothing before it; hard cut to the programme. Vertical shorts have no sting.")],
+            [t("帧率", "Frame rate"), t("使用与项目帧率一致的版本；不得变速、补帧或倒放。", "Use the version for the project frame rate; never retime, interpolate or reverse it.")],
           ].map(([k, v], i) => (
             <div key={i} className="grid content-start gap-1.5 border-t border-border pt-3 text-sm leading-relaxed text-subtle">
               <b className="font-mono text-[11px] font-medium tracking-[0.06em] text-brand uppercase">{k}</b>
@@ -284,14 +260,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
         id="frames"
         tag="Frames"
         title={t("画面模板", "Frame templates")}
-        lede={
-          <p>
-            {t(
-              "16:9 画面的文字须位于 90% 标题安全区内，图形须位于 93% 动作安全区内。模板的内容边距为左右 10u、上下 7u（1080p 下 108 × 76 px），同时满足两者。选择「显示安全区」可在画板上叠加参考线；虚线框均为平台元素占位，不会导出。",
-              "On 16:9 frames, text must sit inside the 90% title-safe area and graphics inside the 93% action-safe area. The templates use a content frame of 10u left and right and 7u top and bottom (108 × 76 px at 1080p), which satisfies both. Choose Show safe areas to overlay the guides; dashed boxes mark platform elements and are never exported.",
-            )}
-          </p>
-        }
+        lede={<p>{t("文字须在 90% 标题安全区内，图形须在 93% 动作安全区内。", "Text stays inside 90% title safe; graphics inside 93% action safe.")}</p>}
       >
         <SafeAreas>
           <TemplateGrid
@@ -354,7 +323,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               themes={["ink", "paper", "signal"]}
               file="video-title-card"
               tags={["landscape"]}
-              note={t(<><b>用途：</b>演讲与教程的开场标题，接在片头之后，停留 3–5 s。右下角大号数字为集数，须与系列中的实际顺序一致。</>, <><b>Use:</b> the opening title of a talk or tutorial, placed after the sting and held for 3–5 s. The large number bottom right is the episode and must match its real order in the series.</>)}
+              note={t("接在片头之后，停留 3–5 s；集数须与系列实际顺序一致。", "After the sting, held 3–5 s; the episode number matches the real order.")}
             >
               <SafeGuides />
               <div className="ab-display absolute right-[calc(var(--u)*10)] bottom-[calc(var(--m)-var(--u)*0.5)] u-text-40 leading-[0.74] tracking-[-0.05em] text-ab-brand">03</div>
@@ -393,7 +362,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               themes={["ink", "paper", "signal"]}
               file="video-chapter"
               tags={["landscape"]}
-              note={t(<><b>用途：</b>章节之间的过渡，停留 2–3 s。底部 6 个分片表示进度：已完成为 Signal Blue，当前为 Oxide，未开始为空。章节号与总数须真实。</>, <><b>Use:</b> the break between chapters, held for 2–3 s. Six shards along the bottom show progress: done in Signal Blue, current in Oxide, upcoming empty. Chapter numbers and the total must be real.</>)}
+              note={t("停留 2–3 s；章节号与总数须真实。", "Held 2–3 s; chapter numbers and the total must be real.")}
             >
               <SafeGuides />
               <div className={FRAME}>
@@ -434,7 +403,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               file="video-lower-third"
               tags={["landscape"]}
               className="!bg-transparent"
-              note={t(<><b>用途：</b>讲者首次出现时显示 4–6 s。下沿距画面底边 22%，左边距 10u，与字幕区互不重叠。棋盘格表示透明区域，不会导出；带 Alpha 通道的 PNG 在视频工具中导出。</>, <><b>Use:</b> shown for 4–6 s when a speaker first appears. The bottom edge sits 22% above the frame edge with a 10u left margin, clear of the caption zone. The checkerboard marks transparency and is never exported; the PNG with alpha is exported from the video tool.</>)}
+              note={t("讲者首次出现时显示 4–6 s，不与字幕区重叠。", "Shown 4–6 s when a speaker first appears, clear of the captions.")}
             >
               <div aria-hidden="true" className="no-export absolute inset-0 -z-10" style={{ backgroundColor: "#13171E", backgroundImage: "repeating-conic-gradient(#1E232B 0 25%, transparent 0 50%)", backgroundSize: "calc(var(--u) * 6) calc(var(--u) * 6)" }} />
               <SafeGuides />
@@ -464,7 +433,6 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               file="video-captions"
               tags={["landscape"]}
               themes={["paper", "white", "ink"]}
-              note={t(<><b>规格：</b>中文约 48 px，每行不超过 16 字；英文约 38 px，每行不超过 42 个字符；最多两行，居中，底框为 Ink 80%。双语字幕中文在上、英文在下。橙色标注不会导出。</>, <><b>Spec:</b> Chinese at about 48 px, 16 characters per line at most; English at about 38 px, 42 characters at most; two lines at most, centred, on an Ink 80% box. Bilingual captions put Chinese above English. Orange annotations are not exported.</>)}
             >
               <SafeGuides />
               <div className="absolute inset-x-[calc(var(--u)*10)] top-(--m) bottom-[28%] flex flex-col justify-between">
@@ -518,7 +486,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               themes={["ink", "paper"]}
               file="video-terminal"
               tags={["landscape"]}
-              note={t(<><b>用途：</b>命令行教程的全屏录屏。字号不小于 32 px，每屏不超过 14 行；终端下沿距画面底边 18%，为字幕留出空间。只录制官方文档中的命令，不得剪辑或伪造程序输出。</>, <><b>Use:</b> full-screen command-line recordings. Type is at least 32 px with no more than 14 lines on screen; the terminal ends 18% above the bottom edge to leave room for captions. Record only commands from the official documentation, and never edit or fake program output.</>)}
+              note={t("只录官方文档中的命令，不得剪辑或伪造输出。", "Official commands only; never edit or fake program output.")}
             >
               <SafeGuides />
               <div className="absolute inset-x-[calc(var(--u)*10)] top-(--m) flex items-center justify-between u-gap-4">
@@ -569,7 +537,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               themes={["ink", "paper", "signal"]}
               file="video-end-card"
               tags={["landscape"]}
-              note={t(<><b>用途：</b>视频最后 5–20 s，在 YouTube 工作室中把两个视频元素与订阅元素对齐到虚线框。虚线框不会导出。二维码指向 https://rustfs.com。</>, <><b>Use:</b> the last 5–20 s of a video. In YouTube Studio, align the two video elements and the subscribe element to the dashed boxes, which are not exported. The QR code points to https://rustfs.com.</>)}
+              note={t("视频最后 5–20 s；在 YouTube 工作室中按虚线框对齐元素。", "The last 5–20 s; align YouTube Studio elements to the dashed boxes.")}
             >
               <SafeGuides />
               <div className={FRAME}>
@@ -595,7 +563,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
                   </Slot>
                   <div className="grid u-gap-2">
                     <p className="ab-head u-text-4.5">
-                      <L zh="每一个字节，都有着落。" en="Every byte, accounted for." />
+                      <L zh="AI 时代的基建，从每一个字节算起。" en="AI infrastructure, accounted for byte by byte." />
                     </p>
                     <p className="flex flex-wrap u-gap-x-4 u-gap-y-1 ab-url u-text-2.75">
                       <span>rustfs.com</span>
@@ -619,7 +587,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               themes={["ink", "paper"]}
               file="video-live-overlay"
               tags={["landscape"]}
-              note={t(<><b>用途：</b>直播与线上分享。导出 PNG 作为 OBS 最底层，再把幻灯片与摄像头源对齐到虚线框之上。「直播」标签是画面唯一的 Oxide 元素，直播结束后的回放须去掉该标签。</>, <><b>Use:</b> livestreams and online talks. Export the PNG as the bottom layer in OBS, then align the slide and camera sources over the dashed boxes. The Live label is the only Oxide element on screen and is removed from the recording published afterwards.</>)}
+              note={t("作 OBS 最底层；回放须去掉「直播」标签。", "Bottom layer in OBS; remove the Live label from the replay.")}
             >
               <SafeGuides />
               <div className={FRAME}>
@@ -670,35 +638,35 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               </div>
             </Template>
 
-            <Template span={4} title={t("YouTube 缩略图 · 发布", "YouTube thumbnail · release")} spec="1280 × 720" w={1280} h={720} themes={["ink", "paper", "signal"]} tags={["thumb"]} file="yt-thumb-release" note={t(<><b>用途：</b>版本发布视频。版本号是唯一的主体，在 168 × 94 的列表尺寸下仍须可读。</>, <><b>Use:</b> release videos. The version number is the only hero and must still read at the 168 × 94 list size.</>)}>
+            <Template span={4} title={t("YouTube 缩略图 · 发布", "YouTube thumbnail · release")} spec="1280 × 720" w={1280} h={720} themes={["ink", "paper", "signal"]} tags={["thumb"]} file="yt-thumb-release" note={t("版本号为唯一主体，168 × 94 下仍须可读。", "The version number is the only hero, legible at 168 × 94.")}>
               <ThumbRelease />
               <Zone toggle className="right-0 bottom-0 h-[14%] w-[18%]">
                 <L zh="时长标记" en="Duration" />
               </Zone>
             </Template>
 
-            <Template span={4} title={t("YouTube 缩略图 · 教程", "YouTube thumbnail · tutorial")} spec="1280 × 720" w={1280} h={720} themes={["signal", "ink", "paper"]} tags={["thumb"]} file="yt-thumb-tutorial" note={t(<><b>用途：</b>教程视频。标题 2–4 个词，字号不小于 13u；图形使用与主题对应的图标。</>, <><b>Use:</b> tutorials. Two to four words at 13u or larger, with the icon that matches the topic.</>)}>
+            <Template span={4} title={t("YouTube 缩略图 · 教程", "YouTube thumbnail · tutorial")} spec="1280 × 720" w={1280} h={720} themes={["signal", "ink", "paper"]} tags={["thumb"]} file="yt-thumb-tutorial" note={t("标题 2–4 个词，配与主题对应的图标。", "Two to four words, with the icon for the topic.")}>
               <ThumbTutorial />
               <Zone toggle className="right-0 bottom-0 h-[14%] w-[18%]">
                 <L zh="时长标记" en="Duration" />
               </Zone>
             </Template>
 
-            <Template span={4} title={t("YouTube 缩略图 · 演讲", "YouTube thumbnail · talk")} spec="1280 × 720" w={1280} h={720} themes={["paper", "ink", "signal"]} tags={["thumb"]} file="yt-thumb-talk" note={t(<><b>用途：</b>会议演讲。讲者照片须经本人同意，按虚线区域裁切；无照片时保留底色，不得使用图库人像。</>, <><b>Use:</b> conference talks. Speaker photos need the speaker&rsquo;s consent and are cropped to the dashed area; without one, keep the panel plain and never use stock portraits.</>)}>
+            <Template span={4} title={t("YouTube 缩略图 · 演讲", "YouTube thumbnail · talk")} spec="1280 × 720" w={1280} h={720} themes={["paper", "ink", "signal"]} tags={["thumb"]} file="yt-thumb-talk" note={t("讲者照片须经本人同意；无照片时留底色，不用图库人像。", "Speaker photos need consent; without one, keep the panel plain, no stock portraits.")}>
               <ThumbTalk />
               <Zone toggle className="right-0 bottom-0 h-[14%] w-[18%]">
                 <L zh="时长标记" en="Duration" />
               </Zone>
             </Template>
 
-            <Template span={6} title={t("Bilibili 封面", "Bilibili cover")} spec={t("1146 × 717 · 中文", "1146 × 717 · Chinese")} w={1146} h={717} themes={["ink", "signal", "paper"]} langs={["zh"]} tags={["thumb"]} file="bilibili-cover" note={t(<><b>用途：</b>Bilibili 投稿封面。底部约 15% 会被播放量、弹幕数与时长遮挡，该区域不放文字。提及第三方产品时只使用文字，不得使用其标志。</>, <><b>Use:</b> Bilibili uploads. The bottom 15% or so is covered by view count, comment count and duration, so it carries no text. Third-party products are named in text only, never with their logos.</>)}>
+            <Template span={6} title={t("Bilibili 封面", "Bilibili cover")} spec={t("1146 × 717 · 中文", "1146 × 717 · Chinese")} w={1146} h={717} themes={["ink", "signal", "paper"]} langs={["zh"]} tags={["thumb"]} file="bilibili-cover" note={t("底部约 15% 不放文字；第三方产品只写名称，不用其标志。", "No text in the bottom 15%; name third-party products, never show their logos.")}>
               <ThumbBili />
               <Zone toggle className="inset-x-0 bottom-0 h-[15%]">
                 播放量 · 弹幕 · 时长
               </Zone>
             </Template>
 
-            <Template span={3} title={t("竖屏封面", "Vertical cover")} spec={t("1080 × 1920 · 抖音 / Shorts / Reels / 视频号", "1080 × 1920 · Douyin / Shorts / Reels / Channels")} w={1080} h={1920} themes={["ink", "signal", "paper"]} tags={["other"]} file="vertical-cover" note={t(<><b>用途：</b>竖屏短视频封面与首帧。橙色区域为平台界面遮挡区（顶部 14%、底部 20%、右侧 12%），不会导出；文字与主体须位于其外。</>, <><b>Use:</b> the cover and first frame of vertical video. Orange areas are covered by platform UI (top 14%, bottom 20%, right 12%) and are not exported; text and the subject stay outside them.</>)}>
+            <Template span={3} title={t("竖屏封面", "Vertical cover")} spec={t("1080 × 1920 · 抖音 / Shorts / Reels / 视频号", "1080 × 1920 · Douyin / Shorts / Reels / Channels")} w={1080} h={1920} themes={["ink", "signal", "paper"]} tags={["other"]} file="vertical-cover" note={t("兼作首帧；文字与主体须避开橙色遮挡区。", "Also the first frame; text and subject stay out of the orange zones.")}>
               <div className="absolute top-[14%] right-[12%] bottom-[20%] left-(--m) flex flex-col justify-between u-py-4">
                 <div className="grid u-gap-7">
                   <div className="flex items-center justify-between u-gap-3">
@@ -736,7 +704,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               </Zone>
             </Template>
 
-            <Template span={3} title={t("播客 / 音频封面", "Podcast / audio cover")} spec="1500 × 1500 · 1:1" w={1500} h={1500} themes={["signal", "ink", "paper"]} tags={["other"]} file="podcast-cover" note={t(<><b>用途：</b>演讲音频版与播客。以标志符号为主体，在 55 px 的列表尺寸下仍可辨认；节目名不超过两行。</>, <><b>Use:</b> audio editions of talks and podcasts. The symbol leads and stays recognisable at a 55 px list size; the show name runs two lines at most.</>)}>
+            <Template span={3} title={t("播客 / 音频封面", "Podcast / audio cover")} spec="1500 × 1500 · 1:1" w={1500} h={1500} themes={["signal", "ink", "paper"]} tags={["other"]} file="podcast-cover" note={t("标志符号在 55 px 下须可辨；节目名不超过两行。", "The symbol must read at 55 px; the show name runs two lines at most.")}>
               <div className="absolute inset-(--m) flex flex-col items-center justify-between text-center">
                 <span className="ab-label u-text-3">
                   <L zh="播客" en="Podcast" /> · <b>EP 03</b>
@@ -766,7 +734,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
             </Actual>
           </div>
           <Prose>
-            <p>{t("缩略图须在 168 px 宽时仍能读出主标题。主标题不小于 13u（1280 × 720 下 94 px），以 2–4 个词为限；小字只作补充，不承载必要信息。", "Thumbnails must keep the main title legible at 168 px wide. Set it at 13u or larger (94 px on 1280 × 720) and keep it to two to four words; small type is supplementary and never carries essential information.")}</p>
+            <p>{t("168 px 宽时主标题须可读；小字不承载必要信息。", "The main title must read at 168 px; small type never carries essential information.")}</p>
           </Prose>
         </Sub>
       </Section>
@@ -776,7 +744,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
         id="specs"
         tag="Specs"
         title={t("交付规格", "Delivery specs")}
-        lede={<p>{t("以下规格适用于 RustFS 官方发布的全部视频。平台规则可能调整，发布前应在平台预览中确认裁切与遮挡。", "These specs apply to every video RustFS publishes. Platform rules change; check crops and overlays in the platform preview before publishing.")}</p>}
+        lede={<p>{t("平台规则会变，发布前须在平台预览中确认裁切与遮挡。", "Platform rules change; check crops and overlays in the platform preview before publishing.")}</p>}
       >
         <Sub title={t("画幅与帧率", "Formats and frame rates")}>
           <Table
@@ -784,14 +752,14 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
             mono={[1, 2, 3]}
             head={[t("用途", "Use"), t("尺寸", "Size"), t("比例", "Ratio"), t("帧率", "Frame rate"), t("规则", "Rule")]}
             rows={[
-              [t("演讲、教程、发布视频", "Talks, tutorials, release videos"), "1920 × 1080", "16:9", "25 / 30 fps", t("按拍摄地市电频率选择：中国大陆与欧洲 25 fps，北美 30 fps。同一项目只用一个帧率；4K 母版为 3840 × 2160，版式按 u 等比放大。", "Follow the local mains frequency: 25 fps in mainland China and Europe, 30 fps in North America. One frame rate per project; 4K masters are 3840 × 2160 with layouts scaled in u.")],
-              [t("屏幕录制", "Screen recordings"), "1920 × 1080", "16:9", "30 / 60 fps", t("画面有滚动、拖拽或动画时用 60 fps。按成片分辨率录制，不得放大。", "Use 60 fps when the screen scrolls, drags or animates. Record at delivery resolution and never upscale.")],
-              [t("竖屏短视频", "Vertical short video"), "1080 × 1920", "9:16", "30 fps", t("抖音、YouTube Shorts、Instagram Reels、微信视频号通用；遵守竖屏遮挡区。", "One master for Douyin, YouTube Shorts, Instagram Reels and WeChat Channels; respect the vertical UI zones.")],
-              [t("直播", "Livestream"), "1920 × 1080", "16:9", "30 fps", t("叠加层导出为 PNG，置于 OBS 最底层。", "Export the overlay as PNG and place it as the bottom layer in OBS.")],
-              [t("片头、片尾", "Sting, outro"), "1920 × 1080", "16:9", "25 / 30 / 60 fps", t("每个帧率各有一个版本，使用与项目一致的版本。", "One version per frame rate; use the one that matches the project.")],
-              [t("YouTube 缩略图", "YouTube thumbnail"), "1280 × 720", "16:9", "—", t("JPG 或 PNG，不超过 2 MB；168 × 94 下主标题可读。", "JPG or PNG, 2 MB at most; the title reads at 168 × 94.")],
-              [t("Bilibili 封面", "Bilibili cover"), "1146 × 717", "16:10", "—", t("底部约 15% 不放文字。", "No text in the bottom 15% or so.")],
-              [t("播客 / 音频封面", "Podcast / audio cover"), "1500 × 1500", "1:1", "—", t("RGB，JPG 或 PNG；Apple Podcasts 要求 1400–3000 px 的正方形。", "RGB, JPG or PNG; Apple Podcasts requires a square of 1400–3000 px.")],
+              [t("演讲、教程、发布视频", "Talks, tutorials, release videos"), "1920 × 1080", "16:9", "25 / 30 fps", t("中国大陆与欧洲 25 fps，北美 30 fps；一个项目一个帧率；4K 为 3840 × 2160", "25 fps in mainland China and Europe, 30 fps in North America; one rate per project; 4K is 3840 × 2160")],
+              [t("屏幕录制", "Screen recordings"), "1920 × 1080", "16:9", "30 / 60 fps", t("滚动或动画用 60 fps；按成片分辨率录制，不得放大", "60 fps for scrolling or animation; record at delivery size, never upscale")],
+              [t("竖屏短视频", "Vertical short video"), "1080 × 1920", "9:16", "30 fps", t("抖音、Shorts、Reels、视频号共用一版", "One master for Douyin, Shorts, Reels and Channels")],
+              [t("直播", "Livestream"), "1920 × 1080", "16:9", "30 fps", t("叠加层 PNG 置于 OBS 最底层", "Overlay PNG as the bottom OBS layer")],
+              [t("片头、片尾", "Sting, outro"), "1920 × 1080", "16:9", "25 / 30 / 60 fps", t("每个帧率一版，与项目一致", "One version per frame rate, matching the project")],
+              [t("YouTube 缩略图", "YouTube thumbnail"), "1280 × 720", "16:9", "—", t("JPG / PNG，≤ 2 MB", "JPG / PNG, ≤ 2 MB")],
+              [t("Bilibili 封面", "Bilibili cover"), "1146 × 717", "16:10", "—", t("底部约 15% 不放文字", "No text in the bottom 15%")],
+              [t("播客 / 音频封面", "Podcast / audio cover"), "1500 × 1500", "1:1", "—", t("RGB，JPG / PNG；Apple Podcasts 要求 1400–3000 px", "RGB, JPG / PNG; Apple Podcasts needs 1400–3000 px")],
             ]}
           />
         </Sub>
@@ -802,15 +770,15 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
             mono={[1]}
             head={[t("项目", "Item"), t("数值", "Value"), t("规则", "Rule")]}
             rows={[
-              [t("动作安全区", "Action safe"), "93% · 1786 × 1004", t("画面中有意义的图形须位于其内（每边内收 3.5%）。", "Meaningful graphics stay inside it (3.5% in from each edge).")],
-              [t("标题安全区", "Title safe"), "90% · 1728 × 972", t("所有文字须位于其内（每边内收 5%）。", "All text stays inside it (5% in from each edge).")],
-              [t("内容边距", "Content frame"), "10u × 7u · 108 × 76 px", t("模板的文字边距，落在标题安全区之内。", "The text margin used by the templates, inside the title-safe area.")],
-              [t("竖屏遮挡区", "Vertical UI zones"), t("顶 14% · 底 20% · 右 12%", "Top 14% · bottom 20% · right 12%"), t("文字与主体不得进入；主页网格常按 3:4 居中裁切，标题应位于中部。", "No text or subject inside them; profile grids often crop to a centred 3:4, so keep the title mid-frame.")],
-              [t("正文", "Body text"), "≥ 3u · 32 px", t("16:9 画面中的任何句子。", "Any sentence on a 16:9 frame.")],
-              [t("标签", "Labels"), "≥ 2.5u · 27 px", t("等宽大写标签；比文章封面大一级。", "Mono capitals; one step larger than on article covers.")],
-              [t("代码", "Code"), "≥ 3u · 32 px", t("每屏不超过 14 行、60 列。", "No more than 14 lines and 60 columns on screen.")],
-              [t("竖屏文字", "Vertical text"), "≥ 3.5u · 38 px", t("以 1080 × 1920 计；标题不小于 10u，等宽标签不小于 2.5u。", "At 1080 × 1920; titles at 10u or larger, mono labels at 2.5u or larger.")],
-              [t("缩略图标题", "Thumbnail title"), "≥ 13u · 94 px", t("以 1280 × 720 计；在 168 × 94 显示时约 12 px。", "At 1280 × 720; about 12 px when shown at 168 × 94.")],
+              [t("动作安全区", "Action safe"), "93% · 1786 × 1004", t("有意义的图形；每边内收 3.5%", "Meaningful graphics; 3.5% in from each edge")],
+              [t("标题安全区", "Title safe"), "90% · 1728 × 972", t("全部文字；每边内收 5%", "All text; 5% in from each edge")],
+              [t("内容边距", "Content frame"), "10u × 7u · 108 × 76 px", t("模板文字边距，在标题安全区内", "Template text margin, inside title safe")],
+              [t("竖屏遮挡区", "Vertical UI zones"), t("顶 14% · 底 20% · 右 12%", "Top 14% · bottom 20% · right 12%"), t("不放文字与主体；主页按 3:4 居中裁切，标题居中", "No text or subject; profile grids crop to a centred 3:4, so centre the title")],
+              [t("正文", "Body text"), "≥ 3u · 32 px", t("16:9 画面中的任何句子", "Any sentence on 16:9")],
+              [t("标签", "Labels"), "≥ 2.5u · 27 px", t("等宽大写，比文章封面大一级", "Mono caps, one step above article covers")],
+              [t("代码", "Code"), "≥ 3u · 32 px", t("每屏 ≤ 14 行、60 列", "≤ 14 lines, 60 columns per screen")],
+              [t("竖屏文字", "Vertical text"), "≥ 3.5u · 38 px", t("以 1080 × 1920 计；标题 ≥ 10u，标签 ≥ 2.5u", "At 1080 × 1920; titles ≥ 10u, labels ≥ 2.5u")],
+              [t("缩略图标题", "Thumbnail title"), "≥ 13u · 94 px", t("以 1280 × 720 计；168 × 94 下约 12 px", "At 1280 × 720; about 12 px at 168 × 94")],
             ]}
           />
         </Sub>
@@ -820,13 +788,13 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
             className="[&_table]:min-w-[560px] [&_td:first-child]:whitespace-nowrap"
             head={[t("项目", "Item"), t("规则", "Rule")]}
             rows={[
-              [t("行长", "Line length"), t("中文每行不超过 16 字；英文每行不超过 42 个字符；每条最多 2 行。", "Chinese: 16 characters per line at most. English: 42 characters per line at most. Two lines per caption at most.")],
-              [t("字号与字体", "Size and face"), t("中文约 48 px（4.5u），英文约 38 px（3.5u），Geist 与 HarmonyOS Sans，中等字重，白色。", "Chinese at about 48 px (4.5u), English at about 38 px (3.5u), in Geist and HarmonyOS Sans, medium weight, white.")],
-              [t("底框", "Box"), t("Ink 80%，直角，紧贴每行文字。不得以描边、投影或发光代替底框。", "Ink at 80%, square, hugging each line. Never replace the box with outlines, shadows or glows.")],
-              [t("位置", "Position"), t("水平居中，底框下沿距画面底边 7u（76 px）；不与人名条重叠。", "Centred, with the box 7u (76 px) above the bottom edge; never overlapping the lower third.")],
-              [t("双语", "Bilingual"), t("中文在上，英文在下，每种语言各一行。", "Chinese above, English below, one line each.")],
-              [t("标点", "Punctuation"), t("中文句中逗号与句末句号以空格代替，问号、引号与书名号保留；英文使用常规标点与句首大写。", "In Chinese, commas and full stops become spaces while question marks, quotation marks and title marks remain. English uses normal punctuation and sentence case.")],
-              [t("时长与文件", "Timing and files"), t("每条显示 1–7 s。上传 SRT 或 WebVTT（UTF-8）外挂字幕；竖屏短视频将字幕烧录进画面。", "Each caption stays on screen for 1–7 s. Upload SRT or WebVTT (UTF-8) as closed captions; burn captions into vertical shorts.")],
+              [t("行长", "Line length"), t("中文 ≤ 16 字，英文 ≤ 42 字符；每条 ≤ 2 行", "Chinese ≤ 16 characters, English ≤ 42; two lines max")],
+              [t("字号与字体", "Size and face"), t("中文约 48 px（4.5u），英文约 38 px（3.5u）；Geist / HarmonyOS Sans，Medium，白色", "Chinese ~48 px (4.5u), English ~38 px (3.5u); Geist / HarmonyOS Sans, Medium, white")],
+              [t("底框", "Box"), t("Ink 80%，直角，紧贴每行；不得以描边、投影或发光代替", "Ink 80%, square, hugging each line; never outlines, shadows or glows")],
+              [t("位置", "Position"), t("居中，下沿距底 7u（76 px）；不与人名条重叠", "Centred, 7u (76 px) above the bottom; clear of the lower third")],
+              [t("双语", "Bilingual"), t("中文在上，英文在下，各一行", "Chinese above, English below, one line each")],
+              [t("标点", "Punctuation"), t("中文逗号、句号改为空格，保留问号、引号与书名号；英文常规标点、句首大写", "Chinese commas and full stops become spaces; question, quotation and title marks stay. English: normal punctuation, sentence case")],
+              [t("时长与文件", "Timing and files"), t("每条 1–7 s；上传 SRT / WebVTT（UTF-8）；竖屏短视频烧录字幕", "1–7 s each; upload SRT / WebVTT (UTF-8); burn in on vertical shorts")],
             ]}
           />
         </Sub>
@@ -837,20 +805,20 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
             mono={[1]}
             head={[t("项目", "Item"), t("数值", "Value"), t("规则", "Rule")]}
             rows={[
-              [t("音频标识", "Audio logo"), t("无", "None"), t("片头片尾静音。只有在音乐已获授权时才可配乐，授权文件须随工程归档。", "The sting and outro are silent. Music may be added only when licensed, with the licence archived with the project.")],
-              [t("响度", "Loudness"), "−14 LUFS · ≤ −1 dBTP", t("网络发布的积分响度与真峰值；广播交付按 EBU R 128（−23 LUFS）。", "Integrated loudness and true peak for online delivery; broadcast follows EBU R 128 (−23 LUFS).")],
-              [t("色彩空间", "Colour space"), "Rec.709 · SDR", t("导出时写入 BT.709 原色、传输特性与矩阵标记，避免播放器偏色。", "Tag BT.709 primaries, transfer and matrix on export so players do not shift colour.")],
-              [t("品牌色 · 网络", "Brand colour · online"), "#0062FF · #FF5E14", t("网络交付直接使用 sRGB 色值。", "Online delivery uses the sRGB values as they are.")],
-              [t("品牌色 · 广播", "Brand colour · broadcast"), t("合法电平 16–235", "Legal range 16–235"), t("#0062FF 与 #FF5E14 饱和度高，广播交付前须经合法化处理，并在示波器与矢量示波器上确认不越界。不得为保留色值关闭合法化。", "#0062FF and #FF5E14 are highly saturated. Before broadcast delivery, pass them through a broadcast-safe legaliser and confirm on the waveform and vectorscope that nothing exceeds legal levels. Never bypass the legaliser to keep the hex values.")],
+              [t("音频标识", "Audio logo"), t("无", "None"), t("片头片尾静音；配乐须获授权，授权文件随工程归档", "Sting and outro are silent; music only when licensed, licence archived with the project")],
+              [t("响度", "Loudness"), "−14 LUFS · ≤ −1 dBTP", t("网络发布；广播按 EBU R 128（−23 LUFS）", "Online; broadcast follows EBU R 128 (−23 LUFS)")],
+              [t("色彩空间", "Colour space"), "Rec.709 · SDR", t("导出时写入 BT.709 标记，避免偏色", "Tag BT.709 on export to avoid colour shifts")],
+              [t("品牌色 · 网络", "Brand colour · online"), "#0062FF · #FF5E14", t("直接使用 sRGB 色值", "sRGB values as they are")],
+              [t("品牌色 · 广播", "Brand colour · broadcast"), t("合法电平 16–235", "Legal range 16–235"), t("须经合法化并在示波器上确认不越界；不得为保色值绕过", "Legalise and check the scopes; never bypass it to keep the hex values")],
             ]}
           />
         </Sub>
       </Section>
 
       {/* ---------- Do & Don't ---------- */}
-      <Section id="rules" tag="Do & Don't" title={t("发布前检查", "Before you publish")} lede={<p>{t("发布视频前，须逐项对照以下规则。", "Check every video against these rules before publishing.")}</p>}>
+      <Section id="rules" tag="Do & Don't" title={t("发布前检查", "Before you publish")}>
         <div className="grid gap-4 md:grid-cols-2">
-          <DoDont kind="do" on="ink" bodyClassName="p-0 min-h-55" caption={t("片头只用写入与修复两个动作，无声，最终帧完整停留。", "The sting uses only the write and heal moves, is silent and holds its final frame.")}>
+          <DoDont kind="do" on="ink" bodyClassName="p-0 min-h-55" caption={t("只用写入与修复，无声，定格收尾。", "Write and heal only, silent, hold the end.")}>
             <div className="grid justify-items-center gap-3 py-10">
               <span className="flex gap-1.5" aria-hidden="true">
                 {[0, 1, 2, 3, 4, 5].map((i) => (
@@ -858,43 +826,43 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
                 ))}
               </span>
               <Wordmark className="h-7 w-auto text-white" />
-              <span className="font-display text-[13px] leading-none font-semibold text-neutral-300 [font-stretch:112%]">{t("每一个字节，都有着落。", "Every byte, accounted for.")}</span>
+              <span className="font-display text-[13px] leading-none font-semibold text-neutral-300 [font-stretch:112%]">{t("AI 时代的基建，从每一个字节算起。", "AI infrastructure, accounted for byte by byte.")}</span>
             </div>
           </DoDont>
-          <DoDont kind="dont" on="ink" bodyClassName="p-0 min-h-55" caption={t("旋转、弹跳、三维挤出、发光、镜头光晕或音效。", "Spins, bounces, 3D extrusion, glows, lens flares or sound effects.")}>
+          <DoDont kind="dont" on="ink" bodyClassName="p-0 min-h-55" caption={t("旋转、弹跳、三维、发光、光晕或音效。", "Spins, bounces, 3D, glows, flares, sound effects.")}>
             <div className="grid justify-items-center gap-3 py-10">
               <Wordmark className="h-9 w-auto -rotate-12 skew-x-12 text-blue-400 drop-shadow-[0_0_14px_rgba(92,153,255,0.95)]" />
               <span className="font-mono text-xs font-semibold tracking-[0.2em] text-amber-500">WHOOSH!</span>
             </div>
           </DoDont>
 
-          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("文字位于标题安全区内，左对齐，距画面边缘留有余量。", "Text sits inside title safe, aligned left, with room to the frame edge.")}>
+          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("文字在标题安全区内，左对齐。", "Text inside title safe, aligned left.")}>
             <div className="relative m-6 aspect-video w-[min(100%,380px)] bg-neutral-950">
               <span className="absolute inset-[5%] border border-dashed border-oxide-500/80" />
               <Wordmark className="absolute top-[9%] left-[9%] h-2.5 w-auto text-white" />
               <span className="absolute top-[38%] left-[9%] max-w-[60%] font-display text-[22px] leading-[1.05] font-[750] text-white [font-stretch:112%]">{t("登录控制台", "Sign in to the Console")}</span>
             </div>
           </DoDont>
-          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("文字贴边或越出画面；电视与投影的过扫描会切掉边缘。", "Text touching or leaving the frame; TV and projector overscan cuts the edges.")}>
+          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("文字贴边，被过扫描切掉。", "Text at the edge, lost to overscan.")}>
             <div className="relative m-6 aspect-video w-[min(100%,380px)] overflow-hidden bg-neutral-950">
               <span className="absolute inset-[5%] border border-dashed border-oxide-500/80" />
               <span className="absolute top-[1%] -left-[2%] font-display text-[30px] leading-none font-extrabold whitespace-nowrap text-white [font-stretch:125%]">{t("登录 RustFS 控制台", "SIGN IN TO THE CONSOLE")}</span>
             </div>
           </DoDont>
 
-          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("字幕最多两行，每行在字数限制内，Ink 底框。", "Captions run two lines at most, within the line length, on an Ink box.")}>
+          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("最多两行，Ink 底框。", "Two lines max, on an Ink box.")}>
             <div className="relative m-6 grid aspect-video w-[min(100%,380px)] content-end justify-items-center bg-neutral-800 pb-[7%]">
               <span className="bg-neutral-950/80 px-1.5 text-[13px] leading-[1.5] font-medium text-white">每个对象被切成数据块和校验块</span>
               <span className="bg-neutral-950/80 px-1.5 text-[11px] leading-[1.5] text-white">Each object becomes data and parity shards</span>
             </div>
           </DoDont>
-          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("长句塞满三行，字号过小，用描边代替底框。", "A long sentence over three lines, type too small, outlines instead of a box.")}>
+          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("三行长句、字太小、描边代替底框。", "Three long lines, tiny type, outlines.")}>
             <div className="relative m-6 grid aspect-video w-[min(100%,380px)] content-end justify-items-center bg-[repeating-linear-gradient(90deg,#0062FF_0_18px,#E0ECFE_18px_36px)] px-[6%] pb-[3%]">
               <span className="text-center text-[9px] leading-[1.3] font-bold text-yellow-300 [-webkit-text-stroke:0.6px_#000]">{t("纠删码会把每一个对象都切分成若干个数据块以及若干个校验块，然后再把这些块分别写入到纠删集里面不同的磁盘上面去，这样坏掉的盘就可以被重建出来", "Erasure coding takes every single object and splits it into a number of data shards plus a number of parity shards and then writes all of them across the different drives in the erasure set so that failed drives can be rebuilt")}</span>
             </div>
           </DoDont>
 
-          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("竖屏标题与主体避开顶部、底部与右侧的平台界面。", "Vertical titles and subjects avoid the top, bottom and right platform UI.")}>
+          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("标题与主体避开平台界面。", "Title and subject clear of platform UI.")}>
             <div className="relative my-6 aspect-[9/16] h-56 bg-neutral-950">
               <span className="absolute inset-x-0 top-0 h-[14%] bg-oxide-500/15 outline outline-1 -outline-offset-1 outline-dashed outline-oxide-500/70" />
               <span className="absolute inset-x-0 bottom-0 h-[20%] bg-oxide-500/15 outline outline-1 -outline-offset-1 outline-dashed outline-oxide-500/70" />
@@ -907,7 +875,7 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
               </span>
             </div>
           </DoDont>
-          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("标题压在互动按钮与底部说明文字之下。", "The title sits under the action buttons and the bottom caption.")}>
+          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("标题压在按钮与说明之下。", "Title under the buttons and caption.")}>
             <div className="relative my-6 aspect-[9/16] h-56 bg-neutral-950">
               <span className="absolute inset-x-0 top-0 h-[14%] bg-oxide-500/15 outline outline-1 -outline-offset-1 outline-dashed outline-oxide-500/70" />
               <span className="absolute inset-x-0 bottom-0 h-[20%] bg-oxide-500/15 outline outline-1 -outline-offset-1 outline-dashed outline-oxide-500/70" />
@@ -921,14 +889,14 @@ export default async function VideoPage({ params }: { params: Promise<{ locale: 
             </div>
           </DoDont>
 
-          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("缩略图只用 2–4 个大字与一个图形，168 px 宽时仍可读。", "Thumbnails use two to four large words and one graphic, legible at 168 px wide.")}>
+          <DoDont kind="do" on="surface" bodyClassName="p-0 min-h-55" caption={t("2–4 个大字加一个图形。", "Two to four big words, one graphic.")}>
             <div className="m-6 grid gap-3">
               <Actual w={1280} h={720} theme="ink" label="168 × 94">
                 <ThumbRelease />
               </Actual>
             </div>
           </DoDont>
-          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("堆满小字、箭头、红圈与夸张口号；缩小后什么也读不出。", "Crowded small type, arrows, red circles and hype; nothing reads when it shrinks.")}>
+          <DoDont kind="dont" on="surface" bodyClassName="p-0 min-h-55" caption={t("小字、箭头、红圈与夸张口号。", "Small type, arrows, red circles, hype.")}>
             <div className="relative m-6 aspect-video w-[168px] overflow-hidden bg-red-500">
               <span className="absolute top-1 left-1.5 max-w-[70%] text-[6px] leading-[1.15] font-bold text-white">{t("史上最快对象存储？？性能暴涨 1000% 全网首发 必看！！", "FASTEST STORAGE EVER?? 1000% FASTER — YOU WON'T BELIEVE THIS!!")}</span>
               <span className="absolute right-3 bottom-2 size-8 rounded-full border-2 border-yellow-300" />

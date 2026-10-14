@@ -148,10 +148,7 @@ export function Deck() {
         spec={t("1920 × 1080 · 开场 · Ink", "1920 × 1080 · Opening · Ink")}
         themes={["ink", "paper"]}
         file="slide-01-cover"
-        note={t(
-          <><b>用途：</b>演讲开场。标题分两级：产品与版本为主标题，演讲主题为副标题。演讲者、活动与日期置于底部信息栏，分片矩阵贴右侧出血。</>,
-          <><b>Use:</b> the opening slide. The title has two levels: product and version, then the subject of the talk. Speaker, event and date sit in the bottom bar; the shard matrix bleeds off the right edge.</>,
-        )}
+        note={t("主标题为产品与版本，副标题为演讲主题。", "Product and version as the title; the talk’s subject as the subtitle.")}
       >
         <ShardMatrix className="absolute inset-y-0 right-0 !h-full !w-[38%]" cols={10} rows={15} k={8} m={2} seed={5} mode="tone" fade="bl" gap={0.2} fit="slice" />
         <div className="ab-frame right-[calc(38%+var(--m))]">
@@ -181,10 +178,7 @@ export function Deck() {
         spec={t("1920 × 1080 · 开场 · Signal", "1920 × 1080 · Opening · Signal")}
         themes={["signal", "ink"]}
         file="slide-02-cover-alt"
-        note={t(
-          <><b>用途：</b>产品发布、合作活动等需要整屏品牌色的开场。底边矩阵带出血，信息栏位于矩阵带上方。</>,
-          <><b>Use:</b> openings that call for a full brand-colour field, such as launches and partner events. The matrix band bleeds off the bottom edge with the information bar above it.</>,
-        )}
+        note={t("用于发布会、合作活动等需要整屏品牌色的开场。", "For launches and partner events that need a full brand-colour field.")}
       >
         <div className="ab-frame bottom-[calc(var(--u)*9+var(--m))]">
           <div className="ab-row">
@@ -223,10 +217,7 @@ export function Deck() {
         spec="1920 × 1080 · Paper"
         themes={["paper", "white", "ink"]}
         file="slide-03-agenda"
-        note={t(
-          <><b>用途：</b>列出演讲的组成部分，不超过 5 项。编号与章节页一致，右侧页码为该部分的实际页码范围。</>,
-          <><b>Use:</b> the parts of the talk, five at most. Numbers match the section dividers; the page range on the right is the real range of that part.</>,
-        )}
+        note={t("不超过 5 项；编号与章节页一致，页码为实际范围。", "Five parts at most; numbers match the dividers and page ranges are real.")}
       >
         <Chrome n={3} section={<L zh="议程" en="Agenda" />} />
         <Stage>
@@ -267,10 +258,7 @@ export function Deck() {
         spec="1920 × 1080 · Signal"
         themes={["signal", "ink", "paper"]}
         file="slide-04-section"
-        note={t(
-          <><b>用途：</b>每个部分的第一页。编号与议程一致；底部矩阵带按部分分段，当前部分为实心，其余为空心。</>,
-          <><b>Use:</b> the first slide of each part. The number matches the agenda; the matrix band is split by part, with the current part solid and the rest outlined.</>,
-        )}
+        note={t("编号与议程一致；矩阵带中当前部分为实心。", "Numbers match the agenda; the current part is solid in the band.")}
       >
         <Chrome n={4} section={<Part i={1} />} />
         <Stage className="grid-rows-[minmax(0,1fr)_auto]">
@@ -307,10 +295,7 @@ export function Deck() {
         spec="1920 × 1080 · Ink"
         themes={["ink", "signal", "paper"]}
         file="slide-05-statement"
-        note={t(
-          <><b>用途：</b>整页只放一句话：品牌主张、一个结论或一个问题。中文不超过 2 行，不加图形与要点。</>,
-          <><b>Use:</b> one sentence on its own: the brand line, a conclusion or a question. Two lines at most, with no graphic and no bullets.</>,
-        )}
+        note={t("整页一句话，不超过 2 行，不加图形与要点。", "One sentence, two lines at most, no graphic or bullets.")}
       >
         <Chrome n={5} section={<Part i={1} />} />
         <div className="absolute inset-x-(--m) top-1/2 -translate-y-1/2">
@@ -318,17 +303,17 @@ export function Deck() {
           <h3 className="m-0 u-mt-7">
             <L
               zh={
-                <span className="ab-zh block u-text-16 leading-[1.14] tracking-[0.02em]">
-                  每一个字节，
+                <span className="ab-zh block u-text-13 leading-[1.16] tracking-[0.02em]">
+                  AI 时代的基建，
                   <br />
-                  <em className="text-ab-brand not-italic">都有着落。</em>
+                  <em className="text-ab-brand not-italic">从每一个字节算起。</em>
                 </span>
               }
               en={
-                <span className="ab-display block u-text-15 leading-[0.96] tracking-[-0.035em]">
-                  Every byte,
+                <span className="ab-display block u-text-9.5 leading-[0.98] tracking-[-0.035em]">
+                  AI infrastructure,
                   <br />
-                  <em className="text-ab-brand not-italic">accounted for.</em>
+                  <em className="text-ab-brand not-italic">accounted for byte by byte.</em>
                 </span>
               }
             />
@@ -344,10 +329,7 @@ export function Deck() {
         spec="1920 × 1080 · White"
         themes={["white", "paper", "ink"]}
         file="slide-06-bullets"
-        note={t(
-          <><b>用途：</b>最常用的内容页。要点占左侧 7 栏，不超过 6 条，每条不超过 2 行；右侧 5 栏放说明要点的图，不放装饰。</>,
-          <><b>Use:</b> the workhorse content slide. Bullets take the left seven columns, six at most and two lines each; the right five columns hold a visual that explains them, never decoration.</>,
-        )}
+        note={t("要点占 7 栏、不超过 6 条；右侧 5 栏的图须解释要点，不作装饰。", "Bullets in seven columns, six at most; the five-column visual explains, never decorates.")}
       >
         <Chrome n={6} section={<Part i={1} />} />
         <Stage className={ROWS}>
@@ -399,10 +381,7 @@ export function Deck() {
         spec="1920 × 1080 · Paper"
         themes={["paper", "white", "ink"]}
         file="slide-07-two-columns"
-        note={t(
-          <><b>用途：</b>对照两组内容：问题与方法、现状与目标。两栏各 6 栏宽，逐行对应；右栏以 Signal Blue 底标示结论。</>,
-          <><b>Use:</b> two sets side by side: problem and approach, today and target. Each column is six grid columns wide and the rows correspond; the right column carries the conclusion on Signal Blue.</>,
-        )}
+        note={t("两栏逐行对应；结论放在右栏 Signal Blue 底上。", "Rows correspond; the conclusion sits on Signal Blue at the right.")}
       >
         <Chrome n={7} section={<Part i={1} />} />
         <Stage className={ROWS}>
@@ -455,10 +434,7 @@ export function Deck() {
         spec="1920 × 1080 · Ink"
         themes={["ink", "paper", "white"]}
         file="slide-08-features"
-        note={t(
-          <><b>用途：</b>并列三项能力。图标取自品牌图标集，统一 1.5 线宽比例；每项一个名称、一段说明、一个状态示意。</>,
-          <><b>Use:</b> three capabilities side by side. Icons come from the brand set at a consistent stroke; each item has a name, one paragraph and one state diagram.</>,
-        )}
+        note={t("图标取自品牌图标集，线宽统一。", "Icons come from the brand set at one stroke weight.")}
       >
         <Chrome n={8} section={<Part i={2} />} />
         <Stage className={ROWS}>
@@ -496,10 +472,7 @@ export function Deck() {
         spec="1920 × 1080 · Signal"
         themes={["signal", "ink", "paper"]}
         file="slide-09-numbers"
-        note={t(
-          <><b>用途：</b>以数字说明规模。一个主数字配三个次要数字；每个数字带单位或量词，页底注明来源与统计日期，演讲前按来源重新核对。</>,
-          <><b>Use:</b> scale, told with numbers. One lead figure and three supporting ones; every figure carries a unit, and the source and date sit at the foot. Re-check against the source before each talk.</>,
-        )}
+        note={t("每个数字带单位并注明来源与日期，演讲前按来源重新核对。", "Every figure has a unit, source and date; re-check before each talk.")}
       >
         <Chrome n={9} section={<Part i={2} />} />
         <Stage className={ROWS3}>
@@ -540,10 +513,7 @@ export function Deck() {
         spec="1920 × 1080 · White"
         themes={["white", "paper", "ink"]}
         file="slide-10-chart"
-        note={t(
-          <><b>用途：</b>柱状图。数值轴从 0 开始并按比例绘制；RustFS 使用 Signal Blue，对照系列使用中性灰；单位写在轴标题中。示例数据须保留「示例数据」标记，正式数据须注明测试条件与日期。</>,
-          <><b>Use:</b> bar charts. The value axis starts at zero and is drawn to scale; RustFS is Signal Blue and the comparison series is neutral grey; the unit is in the axis title. Sample data keeps its Sample data label; real data states the test conditions and date.</>,
-        )}
+        note={t("数值轴从 0 开始；示例数据须保留「示例数据」标记。", "The value axis starts at zero; sample data keeps its Sample data label.")}
       >
         <Chrome n={10} section={<Part i={2} />} />
         <Stage className={ROWS3}>
@@ -587,10 +557,7 @@ export function Deck() {
         spec="1920 × 1080 · Paper"
         themes={["paper", "white", "ink"]}
         file="slide-11-architecture"
-        note={t(
-          <><b>用途：</b>系统结构。数据流自左向右；方框、1px 线与箭头构成全部图形，纠删集以分片矩阵绘制并标明 k + m。</>,
-          <><b>Use:</b> system structure. Data flows left to right; boxes, 1px lines and arrows make up the whole drawing, and the erasure set is drawn as a shard matrix labelled with k + m.</>,
-        )}
+        note={t("数据流自左向右；只用方框、1px 线与箭头。", "Data flows left to right, drawn only with boxes, 1px lines and arrows.")}
       >
         <Chrome n={11} section={<Part i={3} />} />
         <Stage className={ROWS}>
@@ -665,10 +632,7 @@ export function Deck() {
         spec="1920 × 1080 · Ink"
         themes={["ink", "paper"]}
         file="slide-12-code"
-        note={t(
-          <><b>用途：</b>命令与代码。终端字号不小于 28 px，一屏不超过 12 行；只使用官方文档中存在的命令，以注释说明结果，不得虚构程序输出。</>,
-          <><b>Use:</b> commands and code. Terminal type is 28 px or larger, twelve lines at most; only commands from the official documentation, with results given as comments and no invented output.</>,
-        )}
+        note={t("只用官方文档中的命令，不得虚构输出；不超过 12 行。", "Official commands only, no invented output; twelve lines at most.")}
       >
         <Chrome n={12} section={<Part i={3} />} />
         <Stage className={ROWS}>
@@ -728,10 +692,7 @@ export function Deck() {
         spec="1920 × 1080 · White"
         themes={["white", "paper", "ink"]}
         file="slide-13-comparison"
-        note={t(
-          <><b>用途：</b>选型对照。只比较可核实的类别，用语中立；不点名、不贬低其他产品。具体产品的信息以其官方文档为准。</>,
-          <><b>Use:</b> evaluations. Compare only categories that can be verified, in neutral wording; never name or disparage another product. For any specific product, its official documentation is the reference.</>,
-        )}
+        note={t("只比可核实的类别，不点名、不贬低其他产品。", "Verifiable categories only; never name or disparage another product.")}
       >
         <Chrome n={13} section={<Part i={3} />} />
         <Stage className={ROWS3}>
@@ -780,10 +741,7 @@ export function Deck() {
         spec="1920 × 1080 · Signal"
         themes={["signal", "ink", "paper"]}
         file="slide-14-principle"
-        note={t(
-          <><b>用途：</b>引语页。引文只取自 RustFS 设计原则、官方文档或经本人书面确认的发言，并注明出处；不得虚构人物或引语。</>,
-          <><b>Use:</b> quotations. Quote only the RustFS design principles, the official documentation or remarks the speaker has approved in writing, always with attribution; never invent a person or a quote.</>,
-        )}
+        note={t("引文仅取自设计原则、官方文档或经书面确认的发言。", "Quote only the design principles, official docs or remarks approved in writing.")}
       >
         <Chrome n={14} section={<Part i={4} />} />
         <Stage className="grid-rows-[auto_minmax(0,1fr)_auto]">
@@ -830,10 +788,7 @@ export function Deck() {
         spec="1920 × 1080 · Ink"
         themes={["ink", "paper", "white"]}
         file="slide-15-timeline"
-        note={t(
-          <><b>用途：</b>里程碑。日期使用 YYYY-MM-DD；只列已发生的事件，尚未确定日期的项目不写日期。唯一的 Oxide 节点标记最重要的里程碑。</>,
-          <><b>Use:</b> milestones. Dates are YYYY-MM-DD; list only what has happened, and leave undated items undated. The single Oxide marker flags the milestone that matters most.</>,
-        )}
+        note={t("只列已发生的事件；唯一的 Oxide 节点标记最重要的里程碑。", "Past events only; the single Oxide marker flags the milestone that matters most.")}
       >
         <Chrome n={15} section={<Part i={4} />} />
         <Stage className={ROWS}>
@@ -878,10 +833,7 @@ export function Deck() {
         spec="1920 × 1080 · White"
         themes={["white", "paper", "ink"]}
         file="slide-16-team"
-        note={t(
-          <><b>用途：</b>演讲者或团队介绍。照片为 1:1 方形裁切，统一取景与色调；姓名、职位与账号须经本人确认后填写。</>,
-          <><b>Use:</b> speakers or the team. Photos are square crops with consistent framing and tone; names, roles and handles are filled in only after each person has approved them.</>,
-        )}
+        note={t("照片 1:1 裁切；姓名、职位与账号须经本人确认。", "Square photos; names, roles and handles approved by each person.")}
       >
         <Chrome n={16} section={<Part i={4} />} />
         <Stage className={ROWS}>
@@ -914,10 +866,7 @@ export function Deck() {
         spec="1920 × 1080 · Paper"
         themes={["paper", "white", "ink"]}
         file="slide-17-image"
-        note={t(
-          <><b>用途：</b>产品截图或现场照片。截图须来自真实界面，置于带地址栏的直角框内；说明文字位于右侧 4 栏，底部对齐。</>,
-          <><b>Use:</b> product screenshots or event photos. Screenshots come from the real interface and sit in a square-cornered frame with an address bar; the caption takes the right four columns, aligned to the bottom.</>,
-        )}
+        note={t("截图须来自真实界面，置于带地址栏的直角框内。", "Screenshots come from the real interface, in a square frame with an address bar.")}
       >
         <Chrome n={17} section={<Part i={4} />} />
         <Stage>
@@ -959,10 +908,7 @@ export function Deck() {
         spec={t("1920 × 1080 · 结束 · Ink", "1920 × 1080 · Closing · Ink")}
         themes={["ink", "signal", "paper"]}
         file="slide-18-closing"
-        note={t(
-          <><b>用途：</b>演讲结束。二维码指向 rustfs.com，置于白色底块上以保证识别；链接只列官方地址。最后一页不显示页码。</>,
-          <><b>Use:</b> the end of the talk. The QR code points to rustfs.com and sits on a white tile so it scans reliably; links are official addresses only. The last slide carries no slide number.</>,
-        )}
+        note={t("二维码置于白底上；链接只列官方地址，不显示页码。", "QR code on a white tile; official links only; no slide number.")}
       >
         {/* right panel: three columns plus the margin, bleeding off the edge */}
         <div className="absolute inset-y-0 right-0 flex w-[calc((100%-var(--m)*2+var(--u)*2.25)/4+var(--m))] flex-col justify-between bg-ab-data py-(--m) pr-(--m) u-pl-2.25 text-ab-on-data">

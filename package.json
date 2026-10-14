@@ -12,7 +12,9 @@
     "typecheck": "tsc --noEmit",
     "tokens": "node scripts/build-tokens.mjs",
     "lint:design": "npx @google/design.md lint DESIGN.md",
-    "skill": "node scripts/build-tokens.mjs && python3 scripts/package-skill.py"
+    "skill": "node scripts/build-tokens.mjs && python3 scripts/package-skill.py",
+    "deploy": "pnpm build && wrangler deploy",
+    "preview": "pnpm build && wrangler dev"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",
@@ -39,7 +41,8 @@
     "eslint-config-next": "16.2.11",
     "shadcn": "4.14.1",
     "tailwindcss": "4.3.3",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "wrangler": "4.114.0"
   },
   "packageManager": "pnpm@10.27.0"
 }

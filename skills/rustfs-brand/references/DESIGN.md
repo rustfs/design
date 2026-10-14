@@ -322,7 +322,7 @@ The full, illustrated guidelines are published at the RustFS design site (`/en/`
 
 ## Overview
 
-RustFS is a distributed object storage system built in Rust: S3-compatible, Apache 2.0 licensed, self-hosted, with erasure coding, bitrot protection and healing. The brand line is "Every byte, accounted for." (Chinese: 「每一个字节，都有着落。」).
+RustFS is a distributed object storage system built in Rust: S3-compatible, Apache 2.0 licensed, self-hosted, with erasure coding, bitrot protection and healing. The brand line is "AI infrastructure, accounted for byte by byte." (Chinese: 「AI 时代的基建，从每一个字节算起。」).
 
 The audience is platform, SRE and AI-infrastructure engineers who hand RustFS the data they cannot lose. The interface and every marketing surface must feel **exact, candid, engineered and open**: like a carefully set system diagram, never like hype. Personality limits: exact but not cold, candid but not alarmist, engineered but not jargon-heavy, open but not sloppy.
 

@@ -36,14 +36,14 @@ export default async function DownloadsPage({ params }: { params: Promise<{ loca
         label="Resources · Downloads"
         title={t("资源下载", "Downloads")}
         subtitle={t("Downloads", "资源下载")}
-        lede={t("标志、应用图标、设计令牌与 agent 资源的官方文件。使用前请阅读标志规范与下方的使用条款。", "Official files for the logo, app icons, design tokens and agent resources. Read the logo guidelines and the terms of use below before using them.")}
+        lede={t("官方文件。使用前请阅读使用条款。", "Official files. Read the terms of use first.")}
         meta={[
           { k: t("格式", "Formats"), v: "SVG · PNG · ICO · CSS · JSON" },
           { k: t("版本", "Version"), v: "1.0 · 2026-10-14" },
         ]}
       />
 
-      <Section id="logo" tag="Logo" title={t("标志与图标", "Logo and icons")} lede={<p>{t("优先使用 SVG。PNG 用于不支持矢量的场合，字标宽 1440px，符号 512px，应用图标 1024px。", "Use SVG wherever possible. PNGs are provided for tools without vector support: the wordmark at 1440px wide, the symbol at 512px and the app icon at 1024px.")}</p>}>
+      <Section id="logo" tag="Logo" title={t("标志与图标", "Logo and icons")} lede={<p>{t("优先使用 SVG。", "Prefer SVG.")}</p>}>
         <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {logos.map((a) => (
             <figure key={a.name} className="m-0 grid content-start bg-background">
@@ -88,7 +88,7 @@ export default async function DownloadsPage({ params }: { params: Promise<{ loca
         </div>
       </Section>
 
-      <Section id="fonts" tag="Fonts" title={t("字体", "Fonts")} lede={<p>{t("品牌字体均可免费商用，请从官方渠道获取。", "All brand fonts are free for commercial use. Get them from their official sources.")}</p>}>
+      <Section id="fonts" tag="Fonts" title={t("字体", "Fonts")} lede={<p>{t("均可免费商用。", "All free for commercial use.")}</p>}>
         <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["Archivo", "fonts.google.com/specimen/Archivo", "https://fonts.google.com/specimen/Archivo", "SIL OFL 1.1"],
@@ -106,19 +106,19 @@ export default async function DownloadsPage({ params }: { params: Promise<{ loca
             </a>
           ))}
         </div>
-        <p className="text-sm text-muted-foreground">{t("HarmonyOS Sans SC 可从华为开发者联盟官方网站获取，使用前请阅读其许可协议。", "HarmonyOS Sans SC is available from the official HUAWEI Developers website; read its licence before use.")}</p>
+        <p className="text-sm text-muted-foreground">{t("HarmonyOS Sans SC 请从华为开发者联盟获取。", "Get HarmonyOS Sans SC from HUAWEI Developers.")}</p>
       </Section>
 
       <Section id="terms" tag="Terms of use" title={t("使用条款", "Terms of use")}>
         <Prose>
           <ul>
-            <li>{t("RustFS 名称与标志可用于指代 RustFS 项目及其产品，例如文章、教程、集成说明与兼容性声明。", "The RustFS name and logo may be used to refer to the RustFS project and its products, for example in articles, tutorials, integration guides and compatibility statements.")}</li>
-            <li>{t("不得以暗示 RustFS 认可、赞助或与之存在合作关系的方式使用标志，除非已获得书面授权。", "The logo must not be used in a way that implies endorsement, sponsorship or partnership by RustFS without written permission.")}</li>
-            <li>{t("不得修改标志，不得将其用于其他产品、服务或组织的名称与标志之中。", "The logo must not be modified or incorporated into the name or logo of another product, service or organisation.")}</li>
-            <li>{t("RustFS 软件以 Apache License 2.0 授权；该许可不包含商标的使用权。", "RustFS software is licensed under the Apache License 2.0; that licence does not grant rights to the trademarks.")}</li>
+            <li>{t("可用于指代 RustFS 项目及产品。", "May be used to refer to RustFS and its products.")}</li>
+            <li>{t("未经书面授权，不得暗示认可或合作。", "Never imply endorsement or partnership without written permission.")}</li>
+            <li>{t("不得修改标志或将其用于其他标识。", "Never modify the logo or use it in other marks.")}</li>
+            <li>{t("Apache 2.0 许可不含商标使用权。", "The Apache 2.0 licence grants no trademark rights.")}</li>
           </ul>
         </Prose>
-        <Note>{t("合作、活动与商业使用的授权请联系 RustFS 团队，联系方式见 rustfs.com。", "For partnership, event or commercial use, contact the RustFS team through rustfs.com.")}</Note>
+        <Note>{t("其他授权请通过 rustfs.com 联系。", "For other uses, contact RustFS via rustfs.com.")}</Note>
       </Section>
 
       <PageFooter slug="downloads" />

@@ -161,7 +161,7 @@ export function StingFrame({ variant, t }: { variant: Variant; t: number }) {
             <Wordmark className="h-full w-auto text-ab-logo" />
           </div>
           <p className="u-mt-6 font-display u-text-3.75 leading-[1.2] font-semibold tracking-[-0.005em] text-ab-fg-2 [font-stretch:112%]" style={rise(f.line)}>
-            <L zh="每一个字节，都有着落。" en="Every byte, accounted for." />
+            <L zh="AI 时代的基建，从每一个字节算起。" en="AI infrastructure, accounted for byte by byte." />
           </p>
           {variant === "outro" && (
             <p className="ab-url u-mt-3 u-text-2.75 text-ab-brand" style={rise(f.url)}>

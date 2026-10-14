@@ -43,7 +43,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before changing a page or adding a templ
 
 ## Deployment
 
-`pnpm build` writes a static site to `out/`. `wrangler.jsonc` serves it with Cloudflare Workers static assets; any static host works.
+`pnpm run deploy` builds the static site to `out/` and publishes it to Cloudflare Workers static assets at https://design.rustfs.com (custom domain in `wrangler.jsonc`). Run `pnpm exec wrangler login` once first. Any static host can serve `out/` as well.
 
 ## Trademarks
 

@@ -1,12 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import { Stripe } from "@/components/brand/stripe"
 import { Wordmark } from "@/components/brand/logo"
 import { Icon } from "@/components/brand/icon"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { NAV, SITE } from "@/lib/nav"
 import { cn } from "@/lib/utils"
 import { useLocale, useT } from "./locale-provider"
@@ -18,68 +19,76 @@ function useRoute() {
   return { slug }
 }
 
-function ThemeSwitch() {
+const ICON_BTN = "grid size-8 shrink-0 place-items-center text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:bg-surface-2 hover:text-foreground data-[state=open]:bg-surface-2 data-[state=open]:text-foreground"
+const MENU = "w-40 border border-border shadow-overlay ring-0"
+
+/** Theme menu: the trigger shows the current mode. */
+function ThemeMenu() {
   const { theme, setTheme } = useTheme()
+  const t = useT()
   const [mounted, setMounted] = useState(false)
   // next-themes only knows the stored theme after hydration
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])
-  const current = mounted ? theme : undefined
-  const opts = [
-    { id: "system", label: "SYSTEM" },
-    { id: "light", label: "LIGHT" },
-    { id: "dark", label: "DARK" },
+  const current = (mounted ? theme : "system") ?? "system"
+  const items = [
+    { id: "system", icon: "monitor" as const, label: t("跟随系统", "System") },
+    { id: "light", icon: "sun" as const, label: t("浅色", "Light") },
+    { id: "dark", icon: "moon" as const, label: t("深色", "Dark") },
   ]
+  const active = items.find((i) => i.id === current) ?? items[0]
   return (
-    <div className="grid grid-cols-3 border border-border" role="group" aria-label="Theme">
-      {opts.map((o, i) => (
-        <button
-          key={o.id}
-          type="button"
-          onClick={() => setTheme(o.id)}
-          aria-pressed={current === o.id}
-          className={cn(
-            "py-2 font-mono text-[11px] leading-none tracking-[0.04em] text-muted-foreground transition-colors hover:text-foreground",
-            i > 0 && "border-l border-border",
-            current === o.id && "bg-foreground text-background hover:text-background",
-          )}
-        >
-          {o.label}
-        </button>
-      ))}
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger className={ICON_BTN} aria-label={t("主题", "Theme")} title={t("主题", "Theme")}>
+        <Icon name={active.icon} className="size-4" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className={MENU}>
+        <DropdownMenuRadioGroup value={current} onValueChange={setTheme}>
+          {items.map((i) => (
+            <DropdownMenuRadioItem key={i.id} value={i.id}>
+              <Icon name={i.icon} className="size-4" />
+              {i.label}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
-function LangSwitch() {
+/** Language menu: switches to the same page in the chosen language. */
+function LangMenu() {
   const locale = useLocale()
+  const t = useT()
+  const router = useRouter()
   const { slug } = useRoute()
-  const to = (l: string) => (slug ? `/${l}/${slug}/` : `/${l}/`)
+  const go = (l: string) => {
+    if (l === locale) return
+    try {
+      localStorage.setItem("rfs-lang", l)
+    } catch {}
+    router.push(slug ? `/${l}/${slug}/` : `/${l}/`)
+  }
   return (
-    <div className="grid grid-cols-2 border border-border" role="group" aria-label="Language">
-      {[
-        { id: "zh", label: "中文" },
-        { id: "en", label: "English" },
-      ].map((o, i) => (
-        <Link
-          key={o.id}
-          href={to(o.id)}
-          hrefLang={o.id === "zh" ? "zh-CN" : "en"}
-          aria-current={locale === o.id ? "true" : undefined}
-          onClick={() => {
-            try {
-              localStorage.setItem("rfs-lang", o.id)
-            } catch {}
-          }}
-          className={cn(
-            "py-2 text-center text-xs leading-none text-muted-foreground transition-colors hover:text-foreground",
-            i > 0 && "border-l border-border",
-            locale === o.id && "bg-foreground text-background hover:text-background",
-          )}
-        >
-          {o.label}
-        </Link>
-      ))}
+    <DropdownMenu>
+      <DropdownMenuTrigger className={ICON_BTN} aria-label={t("语言", "Language")} title={t("语言", "Language")}>
+        <Icon name="globe" className="size-4" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className={MENU}>
+        <DropdownMenuRadioGroup value={locale} onValueChange={go}>
+          <DropdownMenuRadioItem value="zh" lang="zh-CN">中文</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="en" lang="en">English</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+function Controls() {
+  return (
+    <div className="flex items-center gap-0.5">
+      <LangMenu />
+      <ThemeMenu />
     </div>
   )
 }
@@ -119,22 +128,25 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   )
 }
 
-function SideContent({ onNavigate }: { onNavigate?: () => void }) {
+function SideContent({ onNavigate, showControls = true }: { onNavigate?: () => void; showControls?: boolean }) {
   const locale = useLocale()
   return (
     <>
-      <Link href={`/${locale}/`} onClick={onNavigate} className="grid gap-2.5 text-foreground" aria-label="RustFS Design System">
-        <Wordmark className="h-5 text-brand" />
-        <span className="flex items-center gap-2 font-mono text-[11px] leading-none tracking-[0.08em] text-muted-foreground uppercase">
+      <div className="grid gap-2.5">
+        <div className="flex items-center justify-between gap-3">
+          <Link href={`/${locale}/`} onClick={onNavigate} className="text-foreground" aria-label="RustFS Design System">
+            <Wordmark className="h-5 text-brand" />
+          </Link>
+          {showControls && <Controls />}
+        </div>
+        <span className="flex items-center gap-2 font-mono text-[11px] leading-none tracking-[0.08em] whitespace-nowrap text-muted-foreground uppercase">
           <b className="font-medium text-foreground">Design System</b>
           <Stripe className="text-[7px]" />
           <span>v{SITE.version}</span>
         </span>
-      </Link>
+      </div>
       <NavList onNavigate={onNavigate} />
       <div className="mt-auto grid gap-3 border-t border-border pt-4">
-        <LangSwitch />
-        <ThemeSwitch />
         <p className="font-mono text-[11px] leading-relaxed text-faint">
           s3://rustfs-brand/ · {SITE.updated}
           <br />
@@ -161,9 +173,12 @@ export function Sidebar() {
         <Link href={`/${locale}/`} aria-label="RustFS Design System">
           <Wordmark className="h-4 text-brand" />
         </Link>
-        <button type="button" onClick={() => setOpen(true)} aria-label={t("打开目录", "Open contents")} aria-expanded={open} className="grid size-9 place-items-center border border-border">
-          <Icon name="menu" className="size-[18px]" />
-        </button>
+        <div className="flex items-center gap-1.5">
+          <Controls />
+          <button type="button" onClick={() => setOpen(true)} aria-label={t("打开目录", "Open contents")} aria-expanded={open} className={cn(ICON_BTN, "ml-1 border border-border")}>
+            <Icon name="menu" className="size-4" />
+          </button>
+        </div>
       </header>
       <aside className="sticky top-0 hidden h-screen flex-col gap-6 overflow-y-auto border-r border-border bg-background pt-7 pr-5 pb-5 pl-6 [scrollbar-width:thin] lg:flex">
         <SideContent />
@@ -173,7 +188,7 @@ export function Sidebar() {
           <button type="button" onClick={() => setOpen(false)} aria-label={t("关闭目录", "Close contents")} className="absolute top-[calc(env(safe-area-inset-top,0px)+16px)] right-4 grid size-9 place-items-center border border-border">
             <Icon name="close" className="size-[18px]" />
           </button>
-          <SideContent onNavigate={() => setOpen(false)} />
+          <SideContent onNavigate={() => setOpen(false)} showControls={false} />
         </div>
       )}
     </>
