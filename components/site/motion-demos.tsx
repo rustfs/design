@@ -21,7 +21,7 @@ function useReduced() {
 function ReplayButton({ onClick, label }: { onClick: () => void; label?: string }) {
   const t = useT()
   return (
-    <button type="button" onClick={onClick} className="inline-flex h-7 items-center gap-1.5 border border-strong bg-background px-2.5 text-xs font-medium transition-colors hover:bg-surface">
+    <button type="button" onClick={onClick} className="inline-flex h-7 min-h-11 min-w-11 items-center justify-center gap-1.5 border border-strong bg-background px-2.5 text-xs font-medium transition-colors hover:bg-surface sm:min-h-7 sm:min-w-0 pointer-coarse:min-h-11 pointer-coarse:min-w-11">
       <Icon name="replay" className="size-3.5" />
       {label ?? t("重播", "Replay")}
     </button>
@@ -131,12 +131,12 @@ export function WriteDemo() {
       spec="steps(2) · 60 ms / shard · 3 stripes"
       onReplay={play}
     >
-      <div className="grid grid-cols-6 gap-1.5">
+      <div className="grid w-full max-w-[234px] grid-cols-6 gap-1.5">
         {Array.from({ length: 18 }, (_, i) => {
           const row = Math.floor(i / 6)
           const col = i % 6
           const parity = (((col - row) % 6) + 6) % 6 >= 4
-          return <span key={i} className={cn("size-[clamp(22px,4vw,34px)] transition-opacity duration-[60ms] [transition-timing-function:steps(2)]", parity ? "bg-oxide-500" : "bg-blue-500", i < n ? "opacity-100" : "opacity-0")} />
+          return <span key={i} className={cn("aspect-square w-full transition-opacity duration-[60ms] [transition-timing-function:steps(2)]", parity ? "bg-oxide-500" : "bg-blue-500", i < n ? "opacity-100" : "opacity-0")} />
         })}
       </div>
     </MoveFrame>
@@ -168,12 +168,12 @@ export function HealDemo() {
       spec="0 → 700 ms missing · 1000 ms rebuild · ease-emphasized"
       onReplay={play}
     >
-      <div className="flex gap-2">
+      <div className="grid w-full max-w-[328px] grid-cols-6 gap-2">
         {cells.map((c, i) => (
           <span
             key={i}
             className={cn(
-              "size-[clamp(30px,5.5vw,48px)] transition-[background-color,box-shadow,transform] duration-(--duration-slow) ease-emphasized",
+              "aspect-square w-full transition-[background-color,box-shadow,transform] duration-(--duration-slow) ease-emphasized",
               c === "d" && "bg-blue-500",
               c === "p" && "bg-oxide-500",
               c === "o" && "scale-110 bg-oxide-400",
@@ -189,7 +189,7 @@ export function HealDemo() {
 
 function MoveFrame({ title, body, spec, onReplay, children }: { title: React.ReactNode; body: React.ReactNode; spec: string; onReplay: () => void; children: React.ReactNode }) {
   return (
-    <figure className="m-0 grid border border-border">
+    <figure className="m-0 grid min-w-0 grid-cols-[minmax(0,1fr)] grid-rows-[240px_1fr] border border-border">
       <div className="relative grid min-h-60 place-items-center bg-neutral-950 p-8">
         {children}
         <div className="absolute top-3 right-3">

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type { Metadata } from "next"
 import { Icon } from "@/components/brand/icon"
 import { WriteWordmark } from "@/components/brand/write-wordmark"
@@ -17,15 +18,15 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
     <>
       {/* Hero: an erasure set drawn to scale — 16 drives, parity rotating per stripe */}
       <section className="relative overflow-hidden border-b border-border bg-neutral-950 text-white [--mx-data:#0062FF] [--mx-empty:rgba(255,255,255,0.14)] [--mx-parity:#FF5E14]" aria-label="RustFS Design System">
-        <div className="container-page grid min-h-[min(680px,86vh)] grid-cols-1 gap-x-10 gap-y-7 pt-[clamp(28px,4vw,48px)] pb-[clamp(28px,3.5vw,40px)] md:grid-cols-2 md:grid-rows-[auto_1fr]">
+        <div className="container-page grid min-h-[min(640px,86dvh)] grid-cols-1 gap-x-10 gap-y-7 pt-[clamp(28px,4vw,48px)] pb-[clamp(28px,3.5vw,40px)] md:min-h-[min(86dvh,clamp(480px,45vw,640px))] md:grid-cols-2 md:grid-rows-[auto_1fr]">
           <div className="flex flex-wrap justify-between gap-4 font-mono text-xs leading-tight tracking-[0.06em] text-neutral-400 uppercase md:col-span-2">
             <span>
               <b className="font-medium text-white">RustFS Design System</b> · {t("官方设计指南", "Official design guidelines")} v1.0
             </span>
             <span>s3://rustfs-brand/ · 2026-10-14</span>
           </div>
-          <LiveMatrix className="relative min-h-55 md:col-start-2 md:row-start-2 md:min-h-80 [&>svg]:absolute [&>svg]:inset-0" cols={16} rows={14} k={12} m={4} seed={11} mode="tone" fade="bl" gap={0.22} fit="right" missing={2} write heal />
-          <div className="@container relative z-10 grid gap-7 self-end md:col-start-1 md:row-start-2">
+          <LiveMatrix className="relative order-3 min-h-55 md:order-none md:col-start-2 md:row-start-2 md:min-h-80 [&>svg]:absolute [&>svg]:inset-0" cols={16} rows={14} k={12} m={4} seed={11} mode="tone" fade="bl" gap={0.22} fit="right" missing={2} write heal />
+          <div className="@container relative z-10 order-2 grid gap-7 self-end md:order-none md:col-start-1 md:row-start-2">
             <WriteWordmark className="h-auto w-full max-w-[560px] text-white" />
             <h1 className="font-display text-[clamp(26px,8.8cqi,52px)] leading-[1.16] font-extrabold">
               {locale === "zh" ? (
@@ -33,12 +34,19 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
                   AI 时代的基建，
                   <br />
                   从每一个字节算起。
-                  <span className="mt-[0.5em] block text-[0.5em] leading-[1.2] tracking-[-0.01em] text-blue-400 [font-stretch:125%]">AI infrastructure,<br />accounted for byte by byte.</span>
+                  <span className="mt-[0.5em] block text-[max(14px,0.5em)] leading-[1.2] tracking-[-0.01em] text-blue-400 [font-stretch:125%]">AI infrastructure,<br />accounted for byte by byte.</span>
                 </>
               ) : (
                 <span className="block leading-[1.04] tracking-[-0.02em] [font-stretch:125%]">AI infrastructure,<br />accounted for<br />byte by byte.</span>
               )}
             </h1>
+            <nav aria-label={t("常用资源", "Quick access")} className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-sm font-medium sm:gap-x-5">
+              <Link href={href(locale, "downloads")} className="group inline-flex min-h-12 items-center gap-3 bg-white px-4 text-neutral-950 transition-colors hover:bg-blue-100">{t("下载标志", "Get the logos")}<Icon name="download" className="size-4 transition-transform group-hover:translate-y-0.5" /></Link>
+              <span className="inline-flex items-center gap-4 sm:gap-5">
+                <Link href={href(locale, "covers")} className="inline-flex min-h-11 items-center border-b border-white/35 text-white transition-colors hover:border-white">{t("选用模板", "Use a template")}</Link>
+                <Link href={href(locale, "tokens")} className="inline-flex min-h-11 items-center border-b border-white/35 text-white transition-colors hover:border-white">{t("接入 Tokens", "Get tokens")}</Link>
+              </span>
+            </nav>
           </div>
         </div>
       </section>
@@ -49,9 +57,9 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
           tag="Brand core"
           title={t("品牌核心", "The brand in one line")}
         >
-          <div className="grid items-start gap-x-14 gap-y-10 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+          <div className="grid items-start gap-x-14 gap-y-10 xl:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
             <div className="grid gap-7">
-              <p className="font-display text-[clamp(28px,3.5vw,48px)] leading-[1.18] font-extrabold">
+              <p className="font-display text-[clamp(24px,2.6vw,36px)] leading-[1.18] font-extrabold">
                 {locale === "zh" ? (
                   <>
                     Rust 让每一块内存都有主人。
@@ -134,7 +142,7 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
             >
               <div className="grid w-full max-w-90 gap-1.5">
                 <span className="text-[13px] text-faint line-through decoration-parity">Blazing-fast, world-class</span>
-                <span className="font-display text-[clamp(34px,4vw,48px)] leading-none font-extrabold tracking-[-0.02em] num [font-stretch:125%]">15,154,618</span>
+                <span className="font-display text-[clamp(28px,14cqi,48px)] leading-none font-extrabold tracking-[-0.02em] num [font-stretch:125%]">15,154,618</span>
                 <span className="flex justify-between border-t border-strong pt-2 font-mono text-[11px] tracking-[0.08em] text-muted-foreground uppercase">
                   <span>Docker pulls</span>
                   <span>2026-10-14</span>
@@ -164,11 +172,11 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
               sub={t("Square, flat, predictable", "方正、平直、可预期")}
               body={t("直角、1px 线，无投影与光晕；动效步进，不回弹。", "Square corners and 1px rules, no shadows or glows; motion steps, never bounces.")}
             >
-              <div className="flex items-end gap-3.5">
-                <span className="inline-flex items-center gap-2 bg-brand px-4 py-3 text-[13px] font-medium text-white">
+              <div className="flex flex-wrap items-end justify-center gap-3.5">
+                <span className="inline-flex shrink-0 items-center gap-2 bg-brand px-4 py-3 text-[13px] font-medium whitespace-nowrap text-white">
                   {t("下载 RustFS", "Download RustFS")} <Icon name="arrow-right" className="size-4" />
                 </span>
-                <span className="w-38 border border-strong bg-background px-3.5 py-3 font-mono text-xs leading-snug text-muted-foreground">
+                <span className="w-38 shrink-0 border border-strong bg-background px-3.5 py-3 font-mono text-xs leading-snug text-muted-foreground">
                   {t("实例", "Instances")}
                   <b className="mt-1 block font-sans text-[22px] leading-tight font-semibold text-foreground num">2,700,000+</b>
                 </span>
@@ -228,24 +236,24 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
         >
           <div className="grid gap-4">
             <h3 className="font-mono text-[11px] font-medium tracking-[0.08em] text-muted-foreground uppercase">{t("指南 Guidelines", "Guidelines")}</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               <CardLink href={href(locale, "logo")} k="logo/" title={t("标志", "Logo")}>{t("字标、符号与组合", "Wordmark, symbol, lockups")}</CardLink>
               <CardLink href={href(locale, "color")} k="color/" title={t("色彩", "Color")}>{t("色阶、状态色与对比度", "Scales, status, contrast")}</CardLink>
               <CardLink href={href(locale, "type")} k="type/" title={t("字体", "Typography")}>{t("字体、字号与中英混排", "Faces, scale, mixed scripts")}</CardLink>
               <CardLink href={href(locale, "graphics")} k="graphics/" title={t("图形语言", "Graphics")}>{t("条带、矩阵与网格", "Stripe, matrix, grid")}</CardLink>
               <CardLink href={href(locale, "icons")} k="icons/" title={t("图标", "Icons")}>{t("24px 直角线性图标", "24px square-ended icons")}</CardLink>
               <CardLink href={href(locale, "dataviz")} k="dataviz/" title={t("数据可视化", "Data visualisation")}>{t("图表与指标卡", "Charts and metrics")}</CardLink>
+              <CardLink href={href(locale, "web")} k="web/" title={t("网站与组件", "Web & UI")}>{t("组件与页面区块", "Components and sections")}</CardLink>
               <CardLink href={href(locale, "motion")} k="motion/" title={t("动效", "Motion")}>{t("缓动、时长与品牌动作", "Easing, timing, brand moves")}</CardLink>
               <CardLink href={href(locale, "voice")} k="voice/" title={t("语言与文案", "Voice")}>{t("语气、术语与用词", "Tone, terms, word list")}</CardLink>
             </div>
           </div>
           <div className="grid gap-4">
             <h3 className="font-mono text-[11px] font-medium tracking-[0.08em] text-muted-foreground uppercase">{t("模板 Templates", "Templates")}</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               <CardLink href={href(locale, "ads")} k="ads/" title={t("广告投放", "Advertising")}>{t("展示、信息流与户外", "Display, feed, outdoor")}</CardLink>
               <CardLink href={href(locale, "covers")} k="covers/" title={t("文章封面", "Article covers")}>{t("OG、公众号与社区", "OG, WeChat, communities")}</CardLink>
               <CardLink href={href(locale, "slides")} k="slides/" title={t("演示文稿", "Slides")}>{t("16:9 母版与版式", "16:9 master and layouts")}</CardLink>
-              <CardLink href={href(locale, "web")} k="web/" title={t("网站与组件", "Web & UI")}>{t("组件与页面区块", "Components and sections")}</CardLink>
               <CardLink href={href(locale, "video")} k="video/" title={t("视频首尾帧", "Video")}>{t("片头、片尾与缩略图", "Openers, end cards, thumbnails")}</CardLink>
               <CardLink href={href(locale, "social")} k="social/" title={t("社交媒体", "Social")}>{t("头像、横幅与帖子", "Avatars, banners, posts")}</CardLink>
               <CardLink href={href(locale, "print")} k="print/" title={t("印刷与活动", "Print & events")}>{t("物料、周边与展台", "Stationery, merch, booths")}</CardLink>
@@ -274,7 +282,7 @@ export default async function Overview({ params }: { params: Promise<{ locale: s
 function Principle({ title, sub, body, children }: { title: React.ReactNode; sub: React.ReactNode; body: React.ReactNode; children: React.ReactNode }) {
   return (
     <article className="grid min-w-0 grid-rows-[200px_auto] border border-border">
-      <div className="relative grid place-items-center overflow-hidden border-b border-border bg-surface p-6">{children}</div>
+      <div className="@container relative grid place-items-center overflow-hidden border-b border-border bg-surface p-6">{children}</div>
       <div className="grid gap-2 p-5.5">
         <h3 className="flex flex-wrap items-baseline gap-2.5 text-[21px] font-semibold tracking-[-0.01em]">
           {title} <small className="font-mono text-xs font-normal text-muted-foreground">{sub}</small>

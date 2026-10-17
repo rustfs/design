@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs"
+import { join } from "node:path"
 import type { Metadata } from "next"
 import { Icon } from "@/components/brand/icon"
 import { AppIcon, BrandSymbol, Wordmark } from "@/components/brand/logo"
@@ -43,19 +45,32 @@ export default async function DownloadsPage({ params }: { params: Promise<{ loca
         ]}
       />
 
+      <div className="flex flex-wrap items-center justify-between gap-5 border border-border bg-surface p-5 sm:p-6">
+        <div className="grid gap-1"><h2 className="text-lg font-semibold">{t("品牌素材包", "Brand asset pack")}</h2><p className="text-sm text-muted-foreground">{t("全部标志变体、应用图标、设计令牌与使用规范。", "Every logo variant, app icons, design tokens and guidelines.")}</p></div>
+        <a href="/downloads/rustfs-brand-assets.zip" download className="inline-flex min-h-12 shrink-0 items-center gap-2 bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"><Icon name="download" className="size-4" />{t("下载素材包", "Download the pack")}<span className="font-mono text-xs opacity-80">ZIP</span></a>
+      </div>
+
       <Section id="logo" tag="Logo" title={t("标志与图标", "Logo and icons")} lede={<p>{t("优先使用 SVG。", "Prefer SVG.")}</p>}>
         <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {logos.map((a) => (
+          {logos.map((a) => {
+            const sizes = a.files.filter((file) => file.href.endsWith(".png")).map((file) => {
+              const png = readFileSync(join(process.cwd(), "public", file.href))
+              return `${png.readUInt32BE(16)} × ${png.readUInt32BE(20)}`
+            }).join(" / ")
+            const transparent = a.name.startsWith("Wordmark") || a.name.startsWith("Symbol")
+            return (
             <figure key={a.name} className="m-0 grid content-start bg-background">
               <div className={cn("grid aspect-[16/9] place-items-center", a.bg)}>{a.preview}</div>
               <figcaption className="grid gap-3 border-t border-border p-4">
                 <div className="grid gap-0.5">
                   <b className="text-sm font-semibold">{a.name}</b>
                   <span className="text-xs text-muted-foreground">{t(a.zh, a.en)}</span>
+                  <span className="mt-1 font-mono text-[11px] leading-relaxed text-muted-foreground">PNG · {sizes} px</span>
+                  <span className="text-xs text-muted-foreground">{transparent ? t("透明背景", "Transparent background") : t("实色背景", "Solid background")}</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {a.files.map((f) => (
-                    <a key={f.href} href={f.href} download className="inline-flex h-7 items-center gap-1.5 border border-strong px-2.5 font-mono text-[11px] transition-colors hover:border-foreground hover:bg-surface">
+                    <a key={f.href} href={f.href} download aria-label={t(`下载 ${a.name} ${f.label}`, `Download ${a.name} ${f.label}`)} className="inline-flex h-11 items-center gap-1.5 border border-strong px-2.5 font-mono text-[11px] transition-colors hover:border-foreground hover:bg-surface">
                       <Icon name="download" className="size-3.5" />
                       {f.label}
                     </a>
@@ -63,7 +78,8 @@ export default async function DownloadsPage({ params }: { params: Promise<{ loca
                 </div>
               </figcaption>
             </figure>
-          ))}
+            )
+          })}
         </div>
       </Section>
 

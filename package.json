@@ -7,11 +7,12 @@
   "description": "RustFS brand and design system site",
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run tokens && next build",
+    "build": "pnpm run tokens && pnpm run assets && next build",
     "start": "npx serve out",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "tokens": "node scripts/build-tokens.mjs",
+    "assets": "python3 scripts/package-brand.py && python3 scripts/package-skill.py",
     "lint:design": "npx @google/design.md lint DESIGN.md",
     "skill": "node scripts/build-tokens.mjs && python3 scripts/package-skill.py",
     "deploy": "pnpm build && wrangler deploy",

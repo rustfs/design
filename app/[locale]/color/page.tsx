@@ -107,19 +107,19 @@ export default async function ColorPage({ params }: { params: Promise<{ locale: 
       />
 
       <Section id="brand" tag="Brand colours" title={t("品牌色", "Brand colours")} lede={<p>{t("点击色值即可复制；CMYK 须以打样为准。", "Click a value to copy it; confirm CMYK on a proof.")}</p>}>
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
-          {brand.map((c, i) => (
-            <div key={c.name} className={cn("grid min-w-0 grid-rows-[minmax(220px,1fr)_auto] bg-background", i === 0 && "sm:col-span-2 lg:col-span-1")}>
-              <CopyChip value={c.hex} className="relative grid content-between p-5 outline-none" style={{ background: c.hex, color: onColor(c.hex) }}>
+        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 xl:grid-cols-[2fr_1fr_1fr_1fr]">
+          {brand.map((c) => (
+            <div key={c.name} className="grid min-w-0 grid-cols-[minmax(0,1fr)] grid-rows-[240px_1fr] bg-background">
+              <CopyChip value={c.hex} className="relative grid min-w-0 content-between p-5" style={{ background: c.hex, color: onColor(c.hex) }}>
                 <span className="font-mono text-[11px] tracking-[0.08em] uppercase opacity-80">{c.token}</span>
                 <span className="grid gap-1">
                   <span className="font-display text-[clamp(26px,2.6vw,36px)] leading-none font-extrabold tracking-[-0.01em] [font-stretch:112%]">{c.name}</span>
                   <span className="font-mono text-sm">{c.hex}</span>
                 </span>
               </CopyChip>
-              <div className="grid gap-3 p-5 text-sm leading-relaxed">
-                <p className="text-subtle">{t(c.zh, c.en)}</p>
-                <dl className="m-0 grid grid-cols-[64px_1fr] gap-x-3 gap-y-1 font-mono text-xs">
+              <div className="grid min-w-0 content-start gap-3 p-5 text-sm leading-relaxed">
+                <p className="min-h-12 text-subtle">{t(c.zh, c.en)}</p>
+                <dl className="m-0 grid grid-cols-[44px_minmax(0,1fr)] gap-x-3 gap-y-1 font-mono text-xs [&_dd]:wrap-anywhere">
                   <dt className="text-muted-foreground">RGB</dt>
                   <dd className="m-0">{rgbString(c.hex)}</dd>
                   <dt className="text-muted-foreground">OKLCH</dt>

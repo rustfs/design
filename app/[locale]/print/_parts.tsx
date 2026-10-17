@@ -69,16 +69,16 @@ export function InkCard({ name, sub, swatch, value, cmyk, note }: { name: ReactN
       <div className="relative aspect-[16/9] min-h-24 shadow-[inset_0_0_0_1px_var(--border)]" style={{ background: swatch }}>
         {cmyk === null && <span className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0_9px,rgba(11,14,20,0.07)_9px_10px)]" aria-hidden="true" />}
       </div>
-      <div className="grid content-start gap-3 border-t border-border p-4">
-        <div className="grid gap-0.5">
+      <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] content-start gap-3 border-t border-border p-4">
+        <div className="grid min-w-0 gap-0.5">
           <b className="text-[15px] leading-snug font-semibold">{name}</b>
           <span className="font-mono text-xs leading-snug text-muted-foreground">{sub}</span>
         </div>
-        <div className="font-mono text-[13px] leading-none font-medium text-foreground">{value}</div>
+        <div className="font-mono text-[13px] leading-snug font-medium text-foreground">{value}</div>
         {cmyk && (
           <div className="grid gap-1.5" aria-hidden="true">
             {(["C", "M", "Y", "K"] as const).map((ch, i) => (
-              <div key={ch} className="grid grid-cols-[14px_1fr_26px] items-center gap-2 font-mono text-[11px] leading-none text-muted-foreground">
+              <div key={ch} className="grid grid-cols-[14px_minmax(0,1fr)_26px] items-center gap-2 font-mono text-[11px] leading-none text-muted-foreground">
                 <span>{ch}</span>
                 <span className="relative h-1.5 bg-surface-2">
                   <i className="absolute inset-y-0 left-0 bg-foreground" style={{ width: `${cmyk[i]}%` }} />

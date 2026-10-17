@@ -121,7 +121,7 @@ export default async function WebPage({ params }: { params: Promise<{ locale: st
       <MotionStyles />
       <PageHeader
         path="s3://rustfs-brand/web/"
-        label={t("Templates · 网站与组件", "Templates · Web & UI")}
+        label={t("Guidelines · 网站与组件", "Guidelines · Web & UI")}
         title={t("网站与组件", "Web & UI")}
         subtitle={t("Web & UI", "网站与组件")}
         lede={t(

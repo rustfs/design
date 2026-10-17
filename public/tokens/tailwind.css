@@ -258,7 +258,7 @@
   --parity-foreground: var(--color-neutral-950);
   --parity-text: var(--color-oxide-700);
   --subtle: var(--color-neutral-700);
-  --faint: var(--color-neutral-500);
+  --faint: var(--color-neutral-600);
   --strong: var(--color-neutral-300);
   --surface: var(--color-neutral-50);
   --surface-2: var(--color-neutral-100);
@@ -311,7 +311,7 @@
   --parity-foreground: var(--color-neutral-950);
   --parity-text: var(--color-oxide-400);
   --subtle: var(--color-neutral-300);
-  --faint: var(--color-neutral-500);
+  --faint: var(--color-neutral-400);
   --strong: var(--color-neutral-700);
   --surface: var(--color-neutral-900);
   --surface-2: var(--color-neutral-850);

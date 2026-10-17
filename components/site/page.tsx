@@ -1,14 +1,24 @@
 import Link from "next/link"
-import type { ReactNode } from "react"
+import { Children, Fragment, isValidElement, type ReactNode } from "react"
 import { Icon } from "@/components/brand/icon"
 import type { IconName } from "@/lib/icons"
 import { getLocale, t } from "@/lib/i18n"
 import { NAV } from "@/lib/nav"
 import { cn } from "@/lib/utils"
+import { OnThisPage, type PageAnchor } from "./on-this-page"
 
-/** Page column: max 1240px, fluid gutter, large rhythm between sections. */
+function pageAnchors(children: ReactNode): PageAnchor[] {
+  return Children.toArray(children).flatMap((child) => {
+    if (!isValidElement<{ id?: string; title?: ReactNode; children?: ReactNode }>(child)) return []
+    const { id, title, children: nested } = child.props
+    return [...(id && typeof title === "string" ? [{ id, title }] : []), ...pageAnchors(nested)]
+  })
+}
+
+/** Documentation column: max 1240px, fluid gutters and compact section rhythm. */
 export function Page({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn("container-page grid gap-[clamp(72px,9vw,128px)] pt-[clamp(32px,5vw,64px)] pb-30 *:min-w-0", className)}>{children}</div>
+  const anchors = pageAnchors(children)
+  return <div className={cn("container-page grid gap-[clamp(48px,6vw,80px)] pt-[clamp(28px,4vw,48px)] pb-24 *:min-w-0", className)}>{Children.map(children, (child) => <Fragment>{child}{isValidElement(child) && child.type === PageHeader && anchors.length > 1 && <OnThisPage items={anchors} />}</Fragment>)}</div>
 }
 
 /** Mono eyebrow with the page's key path. */
@@ -25,11 +35,11 @@ export function PageHeader({ path, label, title, subtitle, lede, meta }: { path:
   return (
     <header className="grid gap-5 pt-2">
       <Eyebrow path={path}>{label}</Eyebrow>
-      <h1 className="font-display text-[clamp(44px,7.4vw,104px)] leading-[0.96] font-extrabold tracking-[-0.02em] [font-stretch:125%]">
+      <h1 className={cn("font-display text-[clamp(36px,5vw,64px)] leading-[1.08] font-extrabold tracking-[-0.02em] [font-stretch:125%]", getLocale() === "zh" && "leading-[1.18] tracking-normal")}>
         {title}
-        {subtitle && <span className="mt-[0.3em] block text-[0.42em] font-bold tracking-[-0.01em] text-faint">{subtitle}</span>}
+        {subtitle && String(subtitle).toLowerCase() !== String(title).toLowerCase() && <span className="mt-3 block font-sans text-lg leading-normal font-normal tracking-normal text-muted-foreground [font-stretch:100%]">{subtitle}</span>}
       </h1>
-      {lede && <div className="max-w-[40em] text-[clamp(17px,1.6vw,20px)] leading-[1.7] text-subtle">{lede}</div>}
+      {lede && <div className="max-w-[62ch] text-[clamp(16px,1.4vw,18px)] leading-[1.7] text-subtle">{lede}</div>}
       {meta && (
         <div className="flex flex-wrap gap-x-7 gap-y-2 border-t border-border pt-4 font-mono text-xs text-muted-foreground">
           {meta.map((m, i) => (
@@ -46,11 +56,11 @@ export function PageHeader({ path, label, title, subtitle, lede, meta }: { path:
 /** Section: heading on the left, lede on the right, specimens full width below. */
 export function Section({ id, tag, title, lede, children, className }: { id?: string; tag: ReactNode; title: ReactNode; lede?: ReactNode; children?: ReactNode; className?: string }) {
   return (
-    <section id={id} className={cn("grid scroll-mt-6 gap-9", className)}>
+    <section id={id} tabIndex={id ? -1 : undefined} className={cn("grid scroll-mt-16 gap-7", className)}>
       <div className="grid gap-x-12 gap-y-4 border-t border-foreground pt-5 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-        <h2 className="grid gap-2.5 font-display text-[clamp(28px,3.2vw,40px)] leading-[1.08] font-[750] tracking-[-0.01em] [font-stretch:112%]">
+        <h2 className={cn("grid gap-2.5 font-display text-[clamp(28px,3.2vw,40px)] leading-[1.08] font-[750] tracking-[-0.01em] [font-stretch:112%]", getLocale() === "zh" && "leading-[1.18] tracking-normal")}>
           <span className="font-mono text-[11px] leading-none font-medium tracking-[0.08em] text-faint uppercase [font-stretch:100%]">{tag}</span>
-          {title}
+          {id ? <a href={`#${id}`} className="group flex items-center gap-3 text-foreground">{title}<Icon name="webhook" className="size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" /></a> : title}
         </h2>
         {lede && <div className="grid gap-3 text-[17px] leading-[1.7] text-subtle">{lede}</div>}
       </div>

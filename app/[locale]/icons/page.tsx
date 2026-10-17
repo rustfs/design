@@ -78,7 +78,7 @@ export default async function IconsPage({ params }: { params: Promise<{ locale: 
         </div>
       </Section>
 
-      <Section id="set" tag="Icon set" title={t("图标集", "Icon set")} lede={<p>{t("点击复制用法。", "Click to copy.")}</p>}>
+      <Section id="set" tag="Icon set" title={t("图标集", "Icon set")} lede={<p>{t("选择图标，复制代码或下载 SVG。", "Choose an icon to copy its code or download the SVG.")}</p>}>
         <IconBrowser />
       </Section>
 

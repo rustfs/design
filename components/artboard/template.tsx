@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react"
 import { toast } from "sonner"
 import { Icon } from "@/components/brand/icon"
 import { useLocale, useT } from "@/components/site/locale-provider"
@@ -8,6 +8,8 @@ import type { Locale } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
 import { exportArtboard, ExportPreview } from "./export"
 import { present } from "./present"
+import { collectTextFields, hasPendingDraft, readDraft, removeDraft, restoreTextFields, saveDraft, type DraftValues, type TextField } from "./draft"
+import { TemplateEditor } from "./editor"
 
 export type SurfaceTheme = "ink" | "paper" | "white" | "signal"
 
@@ -21,14 +23,14 @@ export function TemplateGrid({ filters, children, className }: { filters?: { id:
   return (
     <FilterContext.Provider value={active}>
       {filters && filters.length > 0 && (
-        <div className="sticky top-[calc(env(safe-area-inset-top,0px)+61px)] z-20 -mb-4 flex flex-wrap gap-1.5 border-b border-border bg-background py-3 lg:top-[env(safe-area-inset-top,0px)]" role="group">
+        <div className="sticky top-[calc(env(safe-area-inset-top,0px)+118px)] z-20 -mb-4 flex flex-wrap gap-1.5 border-b border-border bg-background py-3 lg:top-12" role="group">
           {filters.map((f) => (
             <button
               key={f.id}
               type="button"
               onClick={() => setActive(f.id)}
               aria-pressed={active === f.id}
-              className={cn("h-7.5 border border-strong px-2.5 text-xs font-medium transition-colors hover:bg-surface", active === f.id && "border-foreground bg-foreground text-background hover:bg-foreground")}
+              className={cn("min-h-11 border border-strong px-2.5 text-xs font-medium transition-colors hover:bg-surface", active === f.id && "border-foreground bg-foreground text-background hover:bg-foreground")}
             >
               {f.label}
             </button>
@@ -84,8 +86,15 @@ export function Template({ title, spec, w, h, themes = ["ink"], langs = ["zh", "
   const abRef = useRef<HTMLDivElement>(null)
   const [theme, setTheme] = useState<SurfaceTheme>(themes[0])
   const [lang, setLang] = useState<Locale>(langs.includes(locale) ? locale : langs[0])
-  const [editing, setEditing] = useState(false)
-  const [preview, setPreview] = useState<{ url: string; name: string } | null>(null)
+  const [editor, setEditor] = useState<{ source: HTMLElement; fields: TextField[] } | null>(null)
+  const [preview, setPreview] = useState<{ url: string; name: string; width: number; height: number } | null>(null)
+  const [exporting, setExporting] = useState(false)
+  const fields = useRef<TextField[]>([])
+  const values = useRef<DraftValues>({})
+  const [saveState, setSaveState] = useState<"default" | "saved" | "error">("default")
+  const [unsaved, setUnsaved] = useState(false)
+  const draftKey = `rfs-draft-v1:${file}:${lang}`
+  const saveLabel = saveState === "error" ? t("无法保存到本机，请导出后再离开", "Local storage is unavailable. Export before leaving.") : saveState === "saved" ? t("草稿已保存到本机", "Draft saved on this device") : t("修改会自动保存到本机", "Changes save on this device")
 
   useEffect(() => {
     const fit = fitRef.current
@@ -98,36 +107,50 @@ export function Template({ title, spec, w, h, themes = ["ink"], langs = ["zh", "
     return () => ro.disconnect()
   }, [w])
 
-  const setEditable = useCallback((on: boolean) => {
-    const ab = abRef.current
-    if (!ab) return
-    ab.querySelectorAll<HTMLElement>("*").forEach((el) => {
-      if (el.closest("svg")) return
-      const hasText = Array.from(el.childNodes).some((n) => n.nodeType === Node.TEXT_NODE && n.textContent?.trim())
-      if (!hasText) return
-      if (on) {
-        el.setAttribute("contenteditable", "true")
-        el.setAttribute("spellcheck", "false")
-      } else {
-        el.removeAttribute("contenteditable")
-        el.removeAttribute("spellcheck")
-      }
-    })
-  }, [])
+  useEffect(() => {
+    const board = abRef.current
+    if (!board) return
+    if (!fields.current.length) fields.current = collectTextFields(board)
+    let state: "default" | "saved" | "error" = "default"
+    try {
+      values.current = restoreTextFields(fields.current, readDraft(draftKey))
+      if (Object.keys(values.current).length) state = "saved"
+      if (hasPendingDraft(draftKey)) state = "error"
+    } catch {
+      values.current = restoreTextFields(fields.current, null)
+      state = "error"
+    }
+    // Restore external localStorage state after hydration and language changes.
+    setSaveState(state)
+    setUnsaved(hasPendingDraft(draftKey))
+  }, [draftKey])
 
-  const toggleEdit = () => {
-    const on = !editing
-    setEditing(on)
-    setEditable(on)
-    if (on) toast(t("点击画板里的文字直接修改", "Click any text on the artboard to edit it"))
+  const changeText = (index: number, value: string) => {
+    const field = fields.current[index]
+    field.node.data = value
+    if (value === field.original) delete values.current[index]
+    else values.current[index] = { original: field.original, value }
+    const saved = saveDraft(draftKey, values.current)
+    setSaveState(saved ? "saved" : "error")
+    setUnsaved(!saved)
+  }
+
+  const resetText = () => {
+    try {
+      removeDraft(draftKey)
+      values.current = restoreTextFields(fields.current, null)
+      setSaveState("default")
+      setUnsaved(false)
+      return true
+    } catch {
+      toast.error(t("无法清除本机草稿，请检查浏览器存储设置。", "Could not clear the draft. Check browser storage settings."))
+      return false
+    }
   }
 
   const doExport = async () => {
-    if (!abRef.current) return
-    if (editing) {
-      setEditing(false)
-      setEditable(false)
-    }
+    if (!abRef.current || exporting) return
+    setExporting(true)
     const id = toast.loading(t("正在渲染 PNG…", "Rendering PNG…"))
     // Live artboards (the video sting) listen for this and settle on their final frame first.
     abRef.current.dispatchEvent(new CustomEvent("rfs:before-export"))
@@ -138,6 +161,8 @@ export function Template({ title, spec, w, h, themes = ["ink"], langs = ["zh", "
       toast.dismiss(id)
     } catch (e) {
       toast.error(t("导出失败：", "Export failed: ") + (e instanceof Error ? e.message : String(e)), { id })
+    } finally {
+      setExporting(false)
     }
   }
 
@@ -173,18 +198,22 @@ export function Template({ title, spec, w, h, themes = ["ink"], langs = ["zh", "
               <SegButton pressed={lang === "zh"} onClick={() => setLang("zh")}>中</SegButton>
             </Seg>
           )}
-          <ToolButton onClick={toggleEdit} pressed={editing} icon="edit" label={t("编辑文字", "Edit text")} />
-          <ToolButton onClick={doExport} icon="download" label={t("导出 PNG", "Export PNG")} />
-          {presentGroup && <ToolButton onClick={doPresent} icon="play" label={t("演示", "Present")} />}
+          <span className="inline-flex flex-wrap gap-1.5">
+            <ToolButton onClick={() => { if (abRef.current) setEditor({ source: abRef.current, fields: fields.current }) }} pressed={!!editor} icon="edit" label={t("编辑文字", "Edit text")} />
+            <ToolButton onClick={doExport} disabled={exporting} icon="download" label={exporting ? t("渲染中…", "Rendering…") : t("导出 PNG", "Export PNG")} />
+            {presentGroup && <ToolButton onClick={doPresent} icon="play" label={t("演示", "Present")} />}
+          </span>
         </div>
       </div>
-      <div ref={fitRef} className="ab-fit" data-editing={editing} style={{ aspectRatio: `${w} / ${h}` }}>
+      <div ref={fitRef} className="ab-fit" style={{ aspectRatio: `${w} / ${h}` }}>
         <div ref={abRef} className={cn("ab", `t-${theme}`, className)} data-w={w} data-h={h} data-file={file} data-lang={lang} style={{ "--w": `${w}px`, "--h": `${h}px`, ...style } as CSSProperties}>
           {children}
         </div>
       </div>
       {note && <figcaption className="max-w-[72ch] text-[13px] leading-relaxed text-muted-foreground [&_b]:font-semibold [&_b]:text-subtle">{note}</figcaption>}
-      {preview && <ExportPreview url={preview.url} name={preview.name} onClose={() => setPreview(null)} />}
+      {(saveState === "saved" || unsaved) && <p className="text-xs text-muted-foreground" role="status">{saveLabel}</p>}
+      {editor && <TemplateEditor title={typeof title === "string" ? title : file} source={editor.source} fields={editor.fields} w={w} h={h} onChange={changeText} onReset={resetText} onClose={() => setEditor(null)} status={saveLabel} />}
+      {preview && <ExportPreview {...preview} onClose={() => setPreview(null)} />}
     </figure>
   )
 }
@@ -199,17 +228,17 @@ function Seg({ label, children }: { label: string; children: ReactNode }) {
 
 function SegButton({ pressed, onClick, title, children }: { pressed: boolean; onClick: () => void; title?: string; children: ReactNode }) {
   return (
-    <button type="button" title={title} aria-pressed={pressed} onClick={onClick} className={cn("inline-flex h-6.5 items-center gap-1.5 px-2 font-mono text-[11px] leading-none text-muted-foreground transition-colors not-first:border-l not-first:border-strong hover:text-foreground", pressed && "bg-surface-2 text-foreground")}>
+    <button type="button" title={title} aria-label={title} aria-pressed={pressed} onClick={onClick} className={cn("inline-flex h-11 min-w-11 items-center justify-center gap-1.5 px-2 font-mono text-[11px] leading-none text-muted-foreground transition-colors not-first:border-l not-first:border-strong hover:text-foreground sm:h-9 pointer-coarse:min-h-11", pressed && "bg-surface-2 text-foreground")}>
       {children}
     </button>
   )
 }
 
-function ToolButton({ onClick, pressed, icon, label }: { onClick: () => void; pressed?: boolean; icon: "edit" | "download" | "play"; label: string }) {
+function ToolButton({ onClick, pressed, icon, label, disabled }: { onClick: () => void; pressed?: boolean; disabled?: boolean; icon: "edit" | "download" | "play"; label: string }) {
   return (
-    <button type="button" onClick={onClick} aria-pressed={pressed} aria-label={label} title={label} className={cn("inline-flex h-7 items-center gap-1.5 border border-strong bg-background px-2 text-xs leading-none font-medium transition-colors hover:bg-surface @[440px]:px-2.5", pressed && "border-foreground bg-foreground text-background hover:bg-foreground")}>
+    <button type="button" onClick={onClick} disabled={disabled} aria-pressed={pressed} aria-label={label} title={label} className={cn("inline-flex h-11 items-center gap-1.5 border border-strong bg-background px-2 text-xs leading-none font-medium transition-colors hover:bg-surface disabled:cursor-wait disabled:opacity-50 sm:h-9 pointer-coarse:min-h-11 @[440px]:px-2.5", pressed && "border-foreground bg-foreground text-background hover:bg-foreground")}>
       <Icon name={icon} className="size-3.5" />
-      <span className="hidden @[440px]:inline">{label}</span>
+      <span>{label}</span>
     </button>
   )
 }

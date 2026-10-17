@@ -123,7 +123,7 @@ export function HealBanner() {
   ]
 
   return (
-    <div className="grid items-start gap-x-10 gap-y-6 md:grid-cols-[minmax(0,600px)_minmax(0,1fr)]">
+    <div className="grid items-start gap-x-10 gap-y-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
       <figure className="m-0 grid min-w-0 gap-3">
         <div ref={fitRef} className="relative w-full overflow-hidden bg-surface outline outline-1 -outline-offset-1 outline-border" style={{ aspectRatio: "300 / 250" }}>
           <div ref={abRef} className="ab t-ink" data-lang={locale} style={{ "--w": "300px", "--h": "250px" } as CSSProperties} aria-label={t("动画横幅示例：丢盘，不丢数据。", "Animated banner sample: Lose drives. Keep data.")} role="img">
@@ -177,7 +177,7 @@ export function HealBanner() {
         </div>
         <figcaption className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs leading-normal text-muted-foreground">
           <span>300 × 250 · HTML5 · {t("播放 1 次，约 5.3 秒", "1 play, about 5.3 s")}</span>
-          <button type="button" onClick={play} className="inline-flex h-7 items-center gap-1.5 border border-strong bg-background px-2.5 font-sans text-xs leading-none font-medium text-foreground transition-colors hover:bg-surface">
+          <button type="button" onClick={play} className="inline-flex h-11 items-center gap-1.5 border border-strong bg-background px-2.5 font-sans text-xs leading-none font-medium text-foreground transition-colors hover:bg-surface sm:h-7 pointer-coarse:min-h-11">
             <Icon name="replay" className="size-3.5" />
             {t("重播", "Replay")}
           </button>
