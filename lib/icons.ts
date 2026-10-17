@@ -72,6 +72,22 @@ export const ICONS = {
 
 export type IconName = keyof typeof ICONS
 
+export const ICON_LABELS: Record<IconName, string> = {
+  bucket: "存储桶 桶", object: "对象 文件", prefix: "前缀 文件夹 目录", shard: "分片 数据块", stripe: "条带", "erasure-set": "纠删码 集合 EC",
+  drive: "磁盘 硬盘", node: "节点 服务器", cluster: "集群", pool: "存储池", heal: "修复 自愈 重建", shield: "安全 保护", replicate: "复制 同步", site: "站点 地域",
+  versions: "版本 历史", lock: "锁 加密", key: "密钥 钥匙", vault: "保险库 保密", user: "用户 账号", policy: "策略 权限", lifecycle: "生命周期 过期", tier: "分层 层级",
+  quota: "配额 限额", event: "事件 通知", webhook: "回调 链接", audit: "审计 日志", metrics: "指标 统计", api: "接口 代码", console: "控制台", terminal: "终端 命令",
+  container: "容器", gauge: "仪表盘 性能", branch: "分支", migrate: "迁移", select: "查询 筛选", table: "表格", download: "下载 保存", upload: "上传", "arrow-right": "右箭头 下一步",
+  "arrow-up-right": "右上箭头 跳转", check: "确认 完成 对勾", close: "关闭 取消", plus: "增加 添加", copy: "复制 拷贝", external: "外链 外部链接", menu: "菜单 目录", edit: "编辑 修改",
+  image: "图片 图像", play: "播放 开始", pause: "暂停", replay: "重播 刷新 恢复", sun: "浅色 太阳 白天", moon: "深色 月亮 夜间", monitor: "显示器 系统 主题", globe: "全球 语言 地球",
+  mail: "邮件 信箱", calendar: "日历 日期", pin: "位置 定位", chip: "芯片 处理器", layers: "图层 层叠", bolt: "闪电 加速", info: "信息 说明", "chevron-down": "向下 展开", search: "搜索 查找", minus: "减少 删除", alert: "警告 提醒",
+}
+
+export function iconSVG(name: IconName) {
+  const icon: IconDef = ICONS[name]
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">${icon.d ? `<path d="${icon.d}"/>` : ""}${icon.dash ? `<path d="${icon.dash}" stroke-dasharray="2 2"/>` : ""}${icon.f ? `<path d="${icon.f}" fill="currentColor" stroke="none"/>` : ""}</svg>`
+}
+
 export const ICON_GROUPS: { id: string; zh: string; en: string; names: IconName[] }[] = [
   { id: "storage", zh: "存储结构", en: "Storage", names: ["bucket", "object", "prefix", "shard", "stripe", "erasure-set", "drive", "node", "cluster", "pool", "heal", "versions", "tier", "lifecycle", "quota", "table", "select"] },
   { id: "data", zh: "数据流与运维", en: "Data & operations", names: ["replicate", "site", "migrate", "upload", "download", "event", "webhook", "metrics", "gauge", "audit", "layers", "chip"] },

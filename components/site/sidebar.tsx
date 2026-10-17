@@ -3,11 +3,12 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Stripe } from "@/components/brand/stripe"
 import { Wordmark } from "@/components/brand/logo"
 import { Icon } from "@/components/brand/icon"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Modal } from "./modal"
 import { NAV, SITE } from "@/lib/nav"
 import { cn } from "@/lib/utils"
 import { useLocale, useT } from "./locale-provider"
@@ -19,13 +20,14 @@ function useRoute() {
   return { slug }
 }
 
-const ICON_BTN = "grid size-8 shrink-0 place-items-center text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:bg-surface-2 hover:text-foreground data-[state=open]:bg-surface-2 data-[state=open]:text-foreground"
+const ICON_BTN = "grid size-11 shrink-0 lg:size-8 place-items-center text-muted-foreground transition-colors duration-(--duration-fast) ease-standard hover:bg-surface-2 hover:text-foreground data-[state=open]:bg-surface-2 data-[state=open]:text-foreground"
 const MENU = "w-40 border border-border shadow-overlay ring-0"
 
 /** Theme menu: the trigger shows the current mode. */
 function ThemeMenu() {
   const { theme, setTheme } = useTheme()
   const t = useT()
+  const trigger = useRef<HTMLButtonElement>(null)
   const [mounted, setMounted] = useState(false)
   // next-themes only knows the stored theme after hydration
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -39,10 +41,10 @@ function ThemeMenu() {
   const active = items.find((i) => i.id === current) ?? items[0]
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={ICON_BTN} aria-label={t("主题", "Theme")} title={t("主题", "Theme")}>
+      <DropdownMenuTrigger ref={trigger} className={ICON_BTN} aria-label={t("主题", "Theme")} title={t("主题", "Theme")}>
         <Icon name={active.icon} className="size-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className={MENU}>
+      <DropdownMenuContent align="end" className={MENU} onCloseAutoFocus={(event) => { event.preventDefault(); trigger.current?.focus({ preventScroll: true }) }}>
         <DropdownMenuRadioGroup value={current} onValueChange={setTheme}>
           {items.map((i) => (
             <DropdownMenuRadioItem key={i.id} value={i.id}>
@@ -61,6 +63,7 @@ function LangMenu() {
   const locale = useLocale()
   const t = useT()
   const router = useRouter()
+  const trigger = useRef<HTMLButtonElement>(null)
   const { slug } = useRoute()
   const go = (l: string) => {
     if (l === locale) return
@@ -71,10 +74,10 @@ function LangMenu() {
   }
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className={ICON_BTN} aria-label={t("语言", "Language")} title={t("语言", "Language")}>
+      <DropdownMenuTrigger ref={trigger} className={ICON_BTN} aria-label={t("语言", "Language")} title={t("语言", "Language")}>
         <Icon name="globe" className="size-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className={MENU}>
+      <DropdownMenuContent align="end" className={MENU} onCloseAutoFocus={(event) => { event.preventDefault(); trigger.current?.focus({ preventScroll: true }) }}>
         <DropdownMenuRadioGroup value={locale} onValueChange={go}>
           <DropdownMenuRadioItem value="en" lang="en">English</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="zh" lang="zh-CN">中文</DropdownMenuRadioItem>
@@ -96,9 +99,17 @@ function Controls() {
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const locale = useLocale()
   const { slug } = useRoute()
+  const [query, setQuery] = useState("")
+  const groups = NAV.map((group) => ({ ...group, items: group.items.filter((item) => `${item.zh} ${item.en} ${item.slug}`.toLowerCase().includes(query.trim().toLowerCase())) })).filter((group) => group.items.length)
   return (
     <nav className="grid gap-5" aria-label={locale === "zh" ? "目录" : "Contents"}>
-      {NAV.map((g) => (
+      <label className="relative">
+        <span className="sr-only">{locale === "zh" ? "查找页面" : "Find a page"}</span>
+        <Icon name="search" className="pointer-events-none absolute top-3.5 left-3 size-4 text-muted-foreground" />
+        <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={locale === "zh" ? "查找页面…" : "Find a page…"} className="h-11 w-full border border-border bg-surface pr-3 pl-9 text-sm placeholder:text-muted-foreground" />
+      </label>
+      {!groups.length && <div className="grid gap-2 text-sm text-muted-foreground"><p>{locale === "zh" ? "没有匹配的页面" : "No matching pages"}</p><button type="button" className="min-h-11 text-left text-link" onClick={() => setQuery("")}>{locale === "zh" ? "清空搜索" : "Clear search"}</button></div>}
+      {groups.map((g) => (
         <div key={g.en} className="grid gap-0.5">
           <div className="pb-2 font-mono text-[11px] leading-none tracking-[0.08em] text-faint uppercase">
             {locale === "zh" ? `${g.zh} ${g.en}` : g.en}
@@ -109,10 +120,10 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
               <Link
                 key={it.slug}
                 href={it.slug ? `/${locale}/${it.slug}/` : `/${locale}/`}
-                onClick={onNavigate}
+                onClick={() => { setQuery(""); onNavigate?.() }}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "group -ml-1 grid grid-cols-[10px_1fr_auto] items-center gap-2.5 py-[5px] pr-2 pl-1 text-sm leading-tight text-subtle transition-colors hover:bg-surface hover:text-foreground",
+                  "group -ml-1 grid grid-cols-[10px_1fr_auto] items-center gap-2.5 py-3 lg:py-[5px] pr-2 pl-1 text-sm leading-tight text-subtle transition-colors hover:bg-surface hover:text-foreground",
                   active && "font-semibold text-foreground",
                 )}
               >
@@ -162,11 +173,11 @@ export function Sidebar() {
   const locale = useLocale()
   const t = useT()
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : ""
-    return () => {
-      document.body.style.overflow = ""
-    }
-  }, [open])
+    const desktop = window.matchMedia("(min-width: 1024px)")
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false) }
+    desktop.addEventListener("change", closeOnDesktop)
+    return () => desktop.removeEventListener("change", closeOnDesktop)
+  }, [])
   return (
     <>
       <header className="sticky top-[env(safe-area-inset-top,0px)] z-40 flex items-center justify-between gap-3 border-b border-border bg-background px-4 py-3 lg:hidden">
@@ -180,16 +191,16 @@ export function Sidebar() {
           </button>
         </div>
       </header>
-      <aside className="sticky top-0 hidden h-screen flex-col gap-6 overflow-y-auto border-r border-border bg-background pt-7 pr-5 pb-5 pl-6 [scrollbar-width:thin] lg:flex">
+      <aside className="sticky top-0 hidden h-dvh flex-col gap-6 overflow-y-auto border-r border-border bg-background pt-7 pr-5 pb-5 pl-6 [scrollbar-width:thin] lg:flex">
         <SideContent />
       </aside>
       {open && (
-        <div className="fixed inset-0 z-50 flex flex-col gap-7 overflow-y-auto bg-background px-5 pt-[calc(env(safe-area-inset-top,0px)+20px)] pb-[calc(env(safe-area-inset-bottom,0px)+20px)] lg:hidden" role="dialog" aria-modal="true" aria-label={t("目录", "Contents")}>
-          <button type="button" onClick={() => setOpen(false)} aria-label={t("关闭目录", "Close contents")} className="absolute top-[calc(env(safe-area-inset-top,0px)+16px)] right-4 grid size-9 place-items-center border border-border">
+        <Modal title={t("目录", "Contents")} onClose={() => setOpen(false)} className="inset-0 top-0 left-0 flex h-dvh max-h-none w-full max-w-none translate-x-0 translate-y-0 flex-col gap-7 overflow-y-auto border-0 px-5 pt-[calc(env(safe-area-inset-top,0px)+24px)] pb-[calc(env(safe-area-inset-bottom,0px)+24px)]">
+          <button type="button" onClick={() => setOpen(false)} aria-label={t("关闭目录", "Close contents")} className="absolute top-[calc(env(safe-area-inset-top,0px)+16px)] right-4 grid size-11 place-items-center border border-border">
             <Icon name="close" className="size-[18px]" />
           </button>
           <SideContent onNavigate={() => setOpen(false)} showControls={false} />
-        </div>
+        </Modal>
       )}
     </>
   )

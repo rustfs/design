@@ -173,10 +173,6 @@
     pointer-events: none;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 14%, transparent);
   }
-  .ab-fit[data-editing="true"] {
-    outline: 2px solid var(--brand);
-    outline-offset: 2px;
-  }
   .ab {
     --u: calc(min(var(--w), var(--h)) / 100);
     --m: calc(var(--u) * 7);
@@ -199,13 +195,10 @@
     line-height: 1.4;
     text-align: left;
   }
-  .ab [contenteditable="true"] {
-    outline: 1px dashed color-mix(in srgb, var(--ab-brand) 60%, transparent);
-    outline-offset: 4px;
-    cursor: text;
-  }
-  .ab [contenteditable="true"]:focus {
-    outline-style: solid;
+  .editor-preview * {
+    animation: none !important;
+    transition: none !important;
+    pointer-events: none;
   }
   .ab[data-lang="zh"] [data-l="en"],
   .ab[data-lang="en"] [data-l="zh"] {

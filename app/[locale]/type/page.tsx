@@ -245,13 +245,13 @@ export default async function TypePage({ params }: { params: Promise<{ locale: s
 
 function Specimen({ name, role, meta, glyph, line, chars, charsClass }: { name: string; role: React.ReactNode; meta: React.ReactNode[]; glyph: React.ReactNode; line: React.ReactNode; chars: string; charsClass: string }) {
   return (
-    <div className="grid min-w-0 gap-6 bg-background p-[clamp(20px,3vw,36px)]">
-      <div className="flex items-start justify-between gap-4">
-        <div className="grid gap-1">
+    <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-6 bg-background p-[clamp(20px,3vw,36px)]">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="grid min-w-0 gap-1">
           <h3 className="text-xl font-semibold">{name}</h3>
           <span className="font-mono text-xs text-muted-foreground">{role}</span>
         </div>
-        <ul className="m-0 grid list-none justify-items-end gap-0.5 p-0 text-right font-mono text-[11px] text-faint">
+        <ul className="m-0 grid list-none gap-0.5 p-0 font-mono text-[11px] text-faint sm:ml-auto sm:justify-items-end sm:text-right">
           {meta.map((m, i) => (
             <li key={i}>{m}</li>
           ))}

@@ -136,7 +136,7 @@ export default async function PrintPage({ params }: { params: Promise<{ locale: 
         </TemplateGrid>
 
         <Sub title={t("印刷色彩", "Colour in print")} aside={t("参考值 · 须以打样确认", "Reference values · confirm on a proof")}>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-5">
             <InkCard
               name="Signal Blue"
               sub="#0062FF"

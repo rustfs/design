@@ -57,14 +57,14 @@ function AvatarSizes() {
           <div key={i} className={cn("grid content-start gap-6 p-[clamp(20px,3vw,32px)]", b.cls, i > 0 && "border-t border-border sm:border-t-0 sm:border-l")}>
             <span className="font-mono text-[11px] leading-none tracking-[0.06em] uppercase">{b.name}</span>
             {[true, false].map((round) => (
-              <div key={String(round)} className="flex items-end gap-5">
+              <div key={String(round)} className="flex flex-wrap items-end gap-x-5 gap-y-3">
                 {[96, 48, 32].map((s) => (
                   <div key={s} className="grid justify-items-center gap-2">
                     <AvatarImg size={s} round={round} />
                     <span className="font-mono text-[11px] leading-none">{s}</span>
                   </div>
                 ))}
-                <span className="ml-auto self-center font-mono text-[11px] leading-none tracking-[0.06em] uppercase">{round ? t("圆形", "Circle") : t("方形", "Square")}</span>
+                <span className="order-first basis-full font-mono text-[11px] leading-none tracking-[0.06em] uppercase">{round ? t("圆形", "Circle") : t("方形", "Square")}</span>
               </div>
             ))}
           </div>
@@ -258,8 +258,8 @@ export default async function SocialPage({ params }: { params: Promise<{ locale:
           ]}
         />
 
-        <figure className="m-0 grid gap-3">
-          <div className="flex flex-wrap items-end gap-x-6 gap-y-6 border border-border bg-surface p-[clamp(16px,2.5vw,28px)]">
+        <figure className="m-0 grid min-w-0 gap-3">
+          <div className="flex min-w-0 flex-wrap items-end gap-x-6 gap-y-6 overflow-x-auto border border-border bg-surface p-[clamp(16px,2.5vw,28px)]">
             <Mini w={1080} h={1080} width={320} theme="ink" lang={lang} label={t("320px · 方形帖子", "320px · square post")}>
               <PostRelease />
             </Mini>
@@ -351,7 +351,7 @@ export default async function SocialPage({ params }: { params: Promise<{ locale:
       >
         <div className="grid items-start gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           <figure className="m-0 grid min-w-0 border border-border lg:sticky lg:top-6">
-            <div className="grid gap-4 p-[clamp(16px,2.5vw,24px)]">
+            <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 p-[clamp(16px,2.5vw,24px)]">
               <div className="flex items-center gap-3">
                 <AvatarImg size={40} round />
                 <div className="grid leading-tight">
@@ -364,9 +364,11 @@ export default async function SocialPage({ params }: { params: Promise<{ locale:
                 <p className="m-0 break-all"><Num n={2} /><span className="text-link">https://github.com/rustfs/rustfs/releases</span></p>
                 <p className="m-0"><Num n={3} /><span className="text-link">{t("#RustFS #对象存储", "#RustFS #ObjectStorage")}</span></p>
               </div>
-              <Mini w={1080} h={1080} width={300} theme="ink" lang={lang}>
-                <PostRelease />
-              </Mini>
+              <div className="overflow-x-auto">
+                <Mini w={1080} h={1080} width={300} theme="ink" lang={lang}>
+                  <PostRelease />
+                </Mini>
+              </div>
               <div className="grid gap-2 border border-dashed border-strong p-3">
                 <span className="flex items-center font-mono text-[11px] leading-none tracking-[0.06em] text-muted-foreground uppercase">
                   <Num n={4} />

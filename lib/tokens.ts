@@ -587,8 +587,8 @@ export const semantic = {
   },
   {
     "name": "faint",
-    "ref": "{color.neutral.500}",
-    "hex": "#757C88"
+    "ref": "{color.neutral.600}",
+    "hex": "#5A616D"
   },
   {
     "name": "strong",
@@ -839,8 +839,8 @@ export const semantic = {
   },
   {
     "name": "faint",
-    "ref": "{color.neutral.500}",
-    "hex": "#757C88"
+    "ref": "{color.neutral.400}",
+    "hex": "#9AA0AC"
   },
   {
     "name": "strong",

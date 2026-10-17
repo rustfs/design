@@ -1,11 +1,13 @@
 import type { ReactNode } from "react"
 import { CodeBlock } from "@/components/site/code-block"
+import { Icon } from "@/components/brand/icon"
+import { t } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
 
 /** One component: live specimen on top, code and rules underneath. */
 export function Specimen({ id, n, title, aside, children, code, codeTitle, rules, previewClassName }: { id: string; n: string; title: ReactNode; aside?: ReactNode; children: ReactNode; code: string; codeTitle: ReactNode; rules: ReactNode[]; previewClassName?: string }) {
   return (
-    <article id={id} className="grid min-w-0 scroll-mt-6 gap-4">
+    <article id={id} tabIndex={-1} className="grid min-w-0 scroll-mt-16 gap-4">
       <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-foreground pt-4">
         <h3 className="flex items-baseline gap-3 font-display text-[clamp(22px,2.2vw,28px)] leading-[1.15] font-[750] tracking-[-0.01em] [font-stretch:112%]">
           <span className="font-mono text-xs font-medium tracking-normal text-brand [font-stretch:100%]">{n}</span>
@@ -15,7 +17,10 @@ export function Specimen({ id, n, title, aside, children, code, codeTitle, rules
       </header>
       <div className={cn("grid min-w-0 grid-cols-[minmax(0,1fr)] border border-border bg-background", previewClassName)}>{children}</div>
       <Rules items={rules} className="gap-x-10 py-1 md:grid-cols-2" />
-      <CodeBlock title={codeTitle} code={code} maxHeight={420} />
+      <details className="group min-w-0 border border-border">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-medium hover:bg-surface [&::-webkit-details-marker]:hidden"><span className="group-open:hidden">{t("查看代码", "View code")}</span><span className="hidden group-open:inline">{t("收起代码", "Hide code")}</span><Icon name="chevron-down" className="size-4 transition-transform group-open:rotate-180" /></summary>
+        <CodeBlock title={codeTitle} code={code} maxHeight={420} />
+      </details>
     </article>
   )
 }
